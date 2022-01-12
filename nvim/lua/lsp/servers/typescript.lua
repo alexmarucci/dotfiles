@@ -1,5 +1,5 @@
 local on_attach = require('lsp.on_attach')
-local opts = { silent = true }
+local opts = { noremap = true, silent = true }
 
 return {
   on_attach = function(client)

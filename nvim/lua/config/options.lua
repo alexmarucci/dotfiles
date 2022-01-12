@@ -33,6 +33,9 @@ opt.showbreak = '+++'
 opt.conceallevel = 0 -- Show `` in markdown files
 opt.smartcase = true
 
+-- Interactive shell (recognises aliases)
+opt.shellcmdflag='-ic'
+
 -- Numbers
 opt.number = true
 opt.relativenumber = true
