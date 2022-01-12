@@ -1,0 +1,49 @@
+extends typescript
+
+# Component
+snippet rfc
+	interface Props {
+	    ${5}
+	} 
+	\
+	export function ${1:ComponentName}(${2:props}: Props): JSX.Element {
+	  ${3:state}
+
+	  return ${4}
+	};
+
+# Hooks
+snippet uss useState
+	const [${1:state}, set${2}] = useState(${3:initialState});
+
+snippet use useEffect
+	useEffect(() => {
+		${1}
+	});
+
+snippet usred useReducer
+	const [${1:state}, ${2:dispatch}] = useReducer(${3:reducer});
+
+snippet usref useRef
+	const ${1:refContainer} = useRef(${2:initialValue});
+
+snippet usctx useContext
+	const ${1:value} = useContext(${2:MyContext});
+
+snippet uscb useCallback
+	const ${1:memoizedCallback} = useCallback(
+	() => {
+		${2}(${3})
+	},
+	[$3]
+	);
+
+snippet usmem useMemo
+	const ${1:memoizedCallback} = useMemo(() => ${2}(${3}), [$3]);
+
+snippet usih useImperativeHandle
+	useImperativeHandle(${1:ref}, ${2:createHandle});
+
+snippet usdb useDebugValue
+	useDebugValue(${1:value});
+
