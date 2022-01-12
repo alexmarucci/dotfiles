@@ -1,0 +1,25 @@
+{
+  "title": "Left control + [ to Escape key",
+  "rules": [
+    {
+      "description": "Left control + [ to Escape key",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "open_bracket",
+            "modifiers": {
+              "mandatory": ["left_control"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "escape"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
