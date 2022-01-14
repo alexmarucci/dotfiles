@@ -110,9 +110,10 @@ map('n', '<Leader>so', [[:lua require('spectre').show_options()<CR>]], opts)
 map('n', '<Leader>spf', [[:lua require('spectre').open_file_search()<CR>]], opts)
 map('v', '<Leader>sp', [[:lua require('spectre').open_visual()<CR>]], opts)
 
-map('n', '<Leader>e', [[:NvimTreeToggle<CR>]], opts)
-map('n', '<Leader>r', [[:NvimTreeRefresh<CR>]], opts)
--- map('n', '<Leader>f', [[:NvimTreeFindFile<CR>]], opts)
+map('n', '<Leader>e', [[:DrexDrawerToggle<CR>]], opts)
+map('n', '<Leader>ee', [[:DrexDrawerFindFileAndFocus<CR>]], opts)
+-- map('n', '<Leader>e', [[:NvimTreeToggle<CR>]], opts)
+-- map('n', '<Leader>ee', [[:NvimTreeFindFile<CR>]], opts)
 
 map('n', '∆', ':MoveLine(1)<CR>', opts)
 map('n', '˚', ':MoveLine(-1)<CR>', opts)

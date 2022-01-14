@@ -55,11 +55,6 @@ if (not vim.g.vscode) then
       end,
     })
 
-    use({
-      'github/copilot.vim',
-      event = 'InsertEnter',
-    })
-
     -- LSP
     use({ 'tami5/lspsaga.nvim', event = 'BufRead' })
     use({ 'ray-x/lsp_signature.nvim', event = 'BufRead' })
@@ -364,7 +359,26 @@ if (not vim.g.vscode) then
         'kyazdani42/nvim-web-devicons' } -- optional for icons
     }
 
-    use {'neoclide/coc.nvim', branch = 'release'}
+    use {
+      'theblob42/drex.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function() 
+        require('drex.config').configure({
+          keybindings = {
+            ['n'] = {
+               -- switch root directory
+              ['<C-l>'] = false,
+              ['<C-h>'] = false,
+              ['o'] = '<cmd>lua require("drex").open_directory()<CR>',
+              ['O'] = '<cmd>lua require("drex").open_parent_directory()<CR>',
+            }}
+          })
+
+        vim.cmd('autocmd FileType drex setlocal nobuflisted')
+      end,
+    }
+
+    -- use {'neoclide/coc.nvim', branch = 'release'}
 
     use ({ 'leafgarland/typescript-vim' })
     use ({ 'peitalin/vim-jsx-typescript' })
