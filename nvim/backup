@@ -156,7 +156,7 @@ if (not vim.g.vscode) then
         reload.lua_reload_dirs = {}
         reload.post_reload_hook = function()
           vim.cmd('source ' .. plugin_dir)
-          vim.cmd('colorscheme tokyonight')
+          vim.cmd('colorscheme vscode')
         end
       end,
     })
@@ -236,13 +236,7 @@ if (not vim.g.vscode) then
 
     use({ 'nvim-treesitter/playground', cmd = 'TSPlayground' })
 
-    use {
-      'nvim-treesitter/nvim-treesitter',
-      run = ':TSUpdate',
-      config = function()
-        require('plugins.nvim-treesitter')
-      end,
-    }
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
     use({ 'p00f/nvim-ts-rainbow', event = 'BufRead', after = 'nvim-treesitter' })
 
@@ -365,46 +359,21 @@ if (not vim.g.vscode) then
         'kyazdani42/nvim-web-devicons' } -- optional for icons
     }
 
-    -- use {
-    --   'projekt0n/github-nvim-theme',
-    --   config = function()
-    --     require("github-theme").setup({
-    --       theme_style = "dark",
-    --       function_style = "italic",
-    --       sidebars = {"qf", "vista_kind", "terminal", "packer"},
-    --
-    --       -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-    --       colors = {hint = "orange", error = "#ff0000"},
-    --
-    --       -- -- Overwrite the highlight groups
-    --       -- overrides = function(c)
-    --       --   return {
-    --       --     htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
-    --       --     DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
-    --       --     -- this will remove the highlight groups
-    --       --     TSField = {},
-    --       --   }
-    --       -- end
-    --     })
-    --   end,
-    -- }
-
+    -- Try Drex
     use {
       'theblob42/drex.nvim',
-      requires = 'kyazdani42/nvim-web-devicons',
+      requires = 'kyazdani42/nvim-web-devicons', -- optional
       config = function() 
         require('drex.config').configure({
           keybindings = {
             ['n'] = {
+              -- always use visual mode linewise for better visibility
+              ['v'] = 'V',
                -- switch root directory
-              ['<C-l>'] = false,
-              ['<C-h>'] = false,
-              ['o'] = '<cmd>lua require("drex").open_directory()<CR>',
-              ['O'] = '<cmd>lua require("drex").open_parent_directory()<CR>',
+            ['<C-l>'] = '<cmd>lua require("drex").open_directory()<CR>',
+            ['<C-h>'] = '<cmd>lua require("drex").open_parent_directory()<CR>',
             }}
           })
-
-        vim.cmd('autocmd FileType drex setlocal nobuflisted')
       end,
     }
 
@@ -425,10 +394,10 @@ if (not vim.g.vscode) then
         require('neogen').setup({ enabled = true })
       end,
     })
-  end, {
+
     config = {
       -- Move to lua dir so impatient.nvim can cache it
       compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
     },
-  })
+  end
 end

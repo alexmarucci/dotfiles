@@ -38,7 +38,7 @@ opt.shellcmdflag='-ic'
 
 -- Numbers
 opt.number = true
-opt.relativenumber = true
+opt.relativenumber = false
 opt.numberwidth = 2
 
 -- for indentline
@@ -100,12 +100,15 @@ vim.g.vscode_style = "dark"
 vim.g.vscode_italic_comment = 1
 vim.cmd[[colorscheme vscode]]
 
+-- vim.cmd[[colorscheme github_dark]]
+
 
 -- g.nvim_tree_ignore = { '.git', '.cache' }
 g.nvim_tree_quit_on_open = 0
 g.nvim_tree_indent_markers = 1
 -- g.nvim_tree_hide_dotfiles = 0
 g.nvim_tree_git_hl = 1
+-- g.t_Co = 256
 g.nvim_tree_root_folder_modifier = ':t'
 g.nvim_tree_allow_resize = 1
 g.nvim_tree_git_hl = 1
