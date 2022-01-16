@@ -16,7 +16,7 @@ local luaCheckConfig = {
   },
 }
 
-null_ls.config({
+null_ls.setup({
   debug = true,
   sources = {
     null_ls.builtins.formatting.prettierd,
