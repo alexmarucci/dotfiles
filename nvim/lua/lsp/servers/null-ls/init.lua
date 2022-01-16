@@ -40,7 +40,8 @@ require('lspconfig')['null-ls'].setup({
     client.resolved_capabilities.document_formatting = true
     -- Format on save
     if client.resolved_capabilities.document_formatting then
-      vim.cmd("autocmd BufWritePre <buffer> call CocAction('format')")
+      -- vim.cmd("autocmd BufWritePre <buffer> call CocAction('format')")
+      -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)")
     end
 
     on_attach(client)

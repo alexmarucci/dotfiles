@@ -32,7 +32,8 @@ return {
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', [[:lua vim.lsp.buf.definition()<CR>]], opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', [[:lua vim.lsp.buf.references()<CR>]], opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:call CocActionAsync("format")<cr>]], opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:call CocActionAsync("format")<cr>]], opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>]], opts)
 
     -- no default maps, so you may want to define some here
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs', ':TSLspOrganize<CR>', opts)
