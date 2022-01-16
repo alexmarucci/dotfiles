@@ -101,7 +101,7 @@ map('n', '<Leader>tt', [[:ToggleTerm<CR>]], opts)
 -- map('n', '<leader>h', [[:HopLine<cr>]], opts)
 
 map('n', '<S-t>', [[<Cmd>tabnew<CR>]], opts)
-map('n', '<S-x>', [[<Cmd>bdelete<CR>]], opts)
+map('n', '<S-x>', [[<Cmd>Bdelete<CR>]], opts)
 map('n', '<leader>bn', [[<Cmd>BufferLineCycleNext<CR>]], opts)
 map('n', '<leader>bp', [[<Cmd>BufferLineCyclePrev<CR>]], opts)
 

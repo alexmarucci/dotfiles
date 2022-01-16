@@ -409,6 +409,7 @@ if (not vim.g.vscode) then
     }
 
     -- use {'neoclide/coc.nvim', branch = 'release'}
+    use 'famiu/bufdelete.nvim'
 
     use ({ 'leafgarland/typescript-vim' })
     use ({ 'peitalin/vim-jsx-typescript' })
@@ -416,6 +417,13 @@ if (not vim.g.vscode) then
     use ({ 'charliesbot/night-owl.vim' })
     use 'folke/tokyonight.nvim'
     use 'Mofiqul/vscode.nvim'
+
+    -- use({
+    --   'karb94/neoscroll.nvim',
+    --   config = function()
+    --     require('neoscroll').setup()
+    --   end,
+    -- })
 
     use({
       'danymat/neogen',
