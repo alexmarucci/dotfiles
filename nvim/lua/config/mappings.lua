@@ -181,7 +181,7 @@ vim.api.nvim_set_keymap("n", "<leader>nv", ":lua require('package-info').change_
 -- Git diff shortcut
 map('n', '<leader>gs', '<cmd>Git<cr>', opts);
 map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
-map('n', '<leader>gj', '<cmd>diffget //4<cr>', opts);
+map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
 
 
 -- test :/; swap
