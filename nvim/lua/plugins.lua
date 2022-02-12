@@ -156,12 +156,10 @@ if (not vim.g.vscode) then
         reload.lua_reload_dirs = {}
         reload.post_reload_hook = function()
           vim.cmd('source ' .. plugin_dir)
-          vim.cmd('colorscheme tokyonight')
+          vim.cmd('colorscheme vscode')
         end
       end,
     })
-    use({ 'sindrets/diffview.nvim' })
-    use({ 'nanotee/zoxide.vim', cmd = { 'z', 'Zi', 'Z' } })
     use({ 'simrat39/symbols-outline.nvim', cmd = 'SymbolsOutline' })
     use({
       'numToStr/Comment.nvim',
@@ -196,12 +194,12 @@ if (not vim.g.vscode) then
 
     use({ 'fedepujol/move.nvim', cmd = { 'MoveLine', 'MoveBlock' } })
 
-    use({
-      'goolord/alpha-nvim',
-      config = function()
-        require('plugins.dashboard')
-      end,
-    })
+    -- use({
+    --   'goolord/alpha-nvim',
+    --   config = function()
+    --     require('plugins.dashboard')
+    --   end,
+    -- })
 
     use({
       'windwp/nvim-spectre',
@@ -213,20 +211,12 @@ if (not vim.g.vscode) then
 
     use({
       'nvim-telescope/telescope.nvim',
-      cmd = 'Telescope',
-      after = 'plenary.nvim',
+      require = 'plenary.nvim',
       config = function()
         require('plugins.telescope')
       end,
     })
-
-    use({
-      run = ':TSUpdate',
-      event = 'BufRead',
-      config = function()
-        require('plugins.nvim-treesitter')
-      end,
-    })
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     use({
       'nvim-treesitter/nvim-treesitter-refactor',
@@ -274,8 +264,8 @@ if (not vim.g.vscode) then
         'cmp-rg',
       },
       requires = {
-        { 'L3MON4D3/LuaSnip', event = 'InsertCharPre' },
-        { 'saadparwaiz1/cmp_luasnip', event = 'InsertCharPre' },
+        'L3MON4D3/LuaSnip',
+        'saadparwaiz1/cmp_luasnip',
         { 'hrsh7th/cmp-buffer', event = 'InsertCharPre' },
         { 'hrsh7th/cmp-path', event = 'InsertCharPre' },
         { 'f3fora/cmp-spell', event = 'InsertCharPre' },
@@ -321,15 +311,6 @@ if (not vim.g.vscode) then
     })
 
     use({
-      'folke/todo-comments.nvim',
-      event = 'BufRead',
-      after = 'plenary.nvim',
-      config = function()
-        require('todo-comments').setup({})
-      end,
-    })
-
-    use({
       'folke/which-key.nvim',
       config = function()
         require('which-key').setup()
@@ -350,13 +331,6 @@ if (not vim.g.vscode) then
       end,
     })
 
-    use({
-      'AckslD/nvim-neoclip.lua',
-      event = 'BufRead',
-      config = function()
-        require('neoclip').setup()
-      end,
-    })
     use({ 'nathom/filetype.nvim' })
 
     use { 'ibhagwan/fzf-lua',
@@ -364,30 +338,6 @@ if (not vim.g.vscode) then
         'vijaymarupudi/nvim-fzf',
         'kyazdani42/nvim-web-devicons' } -- optional for icons
     }
-
-    -- use {
-    --   'projekt0n/github-nvim-theme',
-    --   config = function()
-    --     require("github-theme").setup({
-    --       theme_style = "dark",
-    --       function_style = "italic",
-    --       sidebars = {"qf", "vista_kind", "terminal", "packer"},
-    --
-    --       -- Change the "hint" color to the "orange" color, and make the "error" color bright red
-    --       colors = {hint = "orange", error = "#ff0000"},
-    --
-    --       -- -- Overwrite the highlight groups
-    --       -- overrides = function(c)
-    --       --   return {
-    --       --     htmlTag = {fg = c.red, bg = "#282c34", sp = c.hint, style = "underline"},
-    --       --     DiagnosticHint = {link = "LspDiagnosticsDefaultHint"},
-    --       --     -- this will remove the highlight groups
-    --       --     TSField = {},
-    --       --   }
-    --       -- end
-    --     })
-    --   end,
-    -- }
 
     use {
       'theblob42/drex.nvim',
@@ -408,11 +358,8 @@ if (not vim.g.vscode) then
       end,
     }
 
-    -- use {'neoclide/coc.nvim', branch = 'release'}
     use 'famiu/bufdelete.nvim'
 
-    use ({ 'leafgarland/typescript-vim' })
-    use ({ 'peitalin/vim-jsx-typescript' })
     use ({ 'styled-components/vim-styled-components', branch = 'main' })
     use ({ 'charliesbot/night-owl.vim' })
     use 'folke/tokyonight.nvim'
@@ -424,6 +371,10 @@ if (not vim.g.vscode) then
         require('neoscroll').setup()
       end,
     })
+
+    -- Experimental 
+    use 'ggandor/lightspeed.nvim'
+    use({ "catppuccin/nvim", as = "catppuccin" })
 
     use({
       'danymat/neogen',

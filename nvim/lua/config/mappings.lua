@@ -6,7 +6,8 @@ g.mapleader = ' '
 local opts = { noremap = true, silent = true }
 
 -- general
-map('n', '<Leader>bs', [[/<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>]])
+-- don't know what the below does yet
+-- map('n', '<Leader>bs', [[/<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>]])
 map('v', 'X', [["_d]])
 
 -- save
@@ -102,8 +103,7 @@ map('n', '<Leader>tt', [[:ToggleTerm<CR>]], opts)
 
 map('n', '<S-t>', [[<Cmd>tabnew<CR>]], opts)
 map('n', '<S-x>', [[<Cmd>Bdelete<CR>]], opts)
-map('n', '<leader>bn', [[<Cmd>BufferLineCycleNext<CR>]], opts)
-map('n', '<leader>bp', [[<Cmd>BufferLineCyclePrev<CR>]], opts)
+map('n', '<leader>b', [[<Cmd>BufferLinePick<CR>]], opts)
 
 map('n', '<Leader>sp', [[:lua require('spectre').open()<CR>]], opts)
 map('n', '<Leader>so', [[:lua require('spectre').show_options()<CR>]], opts)
@@ -182,6 +182,7 @@ vim.api.nvim_set_keymap("n", "<leader>nv", ":lua require('package-info').change_
 map('n', '<leader>gs', '<cmd>Git<cr>', opts);
 map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
 map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
+map('i', '[[', '<Esc>', opts);
 
 
 -- test :/; swap

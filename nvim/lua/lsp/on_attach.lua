@@ -6,10 +6,10 @@ local on_attach = function(client)
 
   buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  buf_map('n', '<leader>dd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_map('n', '<leader>df', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_map('n', '<leader>dt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_map('n', '<leader>dr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_map('n', '<leader>dd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  buf_map('n', '<leader>df', '<cmd>Telescope lsp_implementations<CR>', opts)
+  buf_map('n', '<leader>dt', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+  buf_map('n', '<leader>dr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_map('n', '<leader>drn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
   buf_map('n', '<leader>pd', '<cmd>Lspsaga preview_definition<CR>', opts)
   buf_map('n', '<leader>sh', '<cmd>Lspsaga signature_help<CR>', opts)
@@ -17,13 +17,13 @@ local on_attach = function(client)
   buf_map('n', '<leader>cs', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
   buf_map(
     'n',
-    '<leader>dn',
+    '<leader>dj',
     [[<cmd>lua require('lspsaga.diagnostic').navigate('next')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
     opts
   )
   buf_map(
     'n',
-    '<leader>dp',
+    '<leader>dk',
     [[<cmd>lua require('lspsaga.diagnostic').navigate('prev')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
     opts
   )

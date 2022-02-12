@@ -1,10 +1,21 @@
 local present, cmp = pcall(require, 'cmp')
 local present2, lspkind = pcall(require, 'lspkind')
+    --   luasnip.lsp_expand(args.body)
 local present3, luasnip = pcall(require, 'luasnip')
-local present4, luasnipVscode = pcall(require, 'luasnip/loaders/from_vscode')
+local types = require('cmp.types')
 
--- require("luasnip.loaders.from_snipmate").load({})
-require("luasnip.loaders.from_snipmate").lazy_load() -- Lazy loading
+-- local present4, luasnipVscode = pcall(require, 'luasnip.loaders/from_vscode')
+
+-- local present5, luasnipMate = pcall(require, 'luasnip.loaders.from_snipmate')
+
+if not (present or present2 or present3) then
+  return
+end
+
+-- if present5 then
+--   luasnipMate.load()
+-- end
+-- require("luasnip.loaders.from_snipmate").lazy_load() -- Lazy loading
 
 -- Use ts and js snippets in tsx
 luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
@@ -12,11 +23,11 @@ luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
 -- Use tsx and js snippets in ts
 luasnip.filetype_extend("typescript", {"typescriptreact", "javascript"})
 
-if not (present or present2 or present3) then
-  return
-end
-
 cmp.setup({
+  preselect = types.cmp.PreselectMode.None,
+  experimental = {ghost_text = true, native_menu = false},
+  confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false},
+
   completion = { completeopt = 'menu,menuone,noinsert' },
   formatting = {
     format = lspkind.cmp_format({
@@ -32,8 +43,11 @@ cmp.setup({
   },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
+    -- expand = function(args)
+    --   luasnip.lsp_expand(args.body)
+    -- end,
   },
   mapping = {
     ['<C-e>'] = cmp.mapping.close(),
@@ -68,7 +82,8 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -77,13 +92,13 @@ cmp.setup({
     { name = 'luasnip', option = { use_show_condition = false } },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'treesitter' },
+    -- { name = 'treesitter' },
     -- { name = 'rg' },
   },
 })
 
-if not present3 then
-  return
-end
+-- if not present4 then
+--   return
+-- end
 
-luasnipVscode.lazy_load()
+-- luasnipVscode.lazy_load()

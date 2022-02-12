@@ -29,9 +29,10 @@ return {
     -- required to fix code action ranges and filter diagnostics
     ts_utils.setup_client(client)
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', [[:lua vim.lsp.buf.definition()<CR>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', [[:lua vim.lsp.buf.references()<CR>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:call CocActionAsync("format")<cr>]], opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>]], opts)
 
