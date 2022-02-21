@@ -8,6 +8,7 @@ g['copilot_assume_mapped'] = true
 
 g.did_load_filetypes = true
 
+opt.undofile = true
 opt.completeopt = 'menu,menuone,noselect'
 opt.termguicolors = true
 opt.wrap = true

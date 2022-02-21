@@ -6,15 +6,15 @@ local types = require('cmp.types')
 
 -- local present4, luasnipVscode = pcall(require, 'luasnip.loaders/from_vscode')
 
--- local present5, luasnipMate = pcall(require, 'luasnip.loaders.from_snipmate')
+local present5, luasnipMate = pcall(require, 'luasnip.loaders.from_snipmate')
 
 if not (present or present2 or present3) then
   return
 end
 
--- if present5 then
---   luasnipMate.load()
--- end
+if present5 then
+  luasnipMate.load()
+end
 -- require("luasnip.loaders.from_snipmate").lazy_load() -- Lazy loading
 
 -- Use ts and js snippets in tsx
@@ -97,8 +97,7 @@ cmp.setup({
   },
 })
 
--- if not present4 then
---   return
+-- if present4 then
+--  luasnipVscode.lazy_load()
 -- end
-
--- luasnipVscode.lazy_load()
+--

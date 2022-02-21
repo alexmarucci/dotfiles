@@ -194,12 +194,12 @@ if (not vim.g.vscode) then
 
     use({ 'fedepujol/move.nvim', cmd = { 'MoveLine', 'MoveBlock' } })
 
-    -- use({
-    --   'goolord/alpha-nvim',
-    --   config = function()
-    --     require('plugins.dashboard')
-    --   end,
-    -- })
+    use({
+      'goolord/alpha-nvim',
+      config = function()
+        require('plugins.dashboard')
+      end,
+    })
 
     use({
       'windwp/nvim-spectre',
@@ -375,6 +375,21 @@ if (not vim.g.vscode) then
     -- Experimental 
     use 'ggandor/lightspeed.nvim'
     use({ "catppuccin/nvim", as = "catppuccin" })
+    use({
+      'TaDaa/vimade',
+      cmd = 'BufRead',
+      config = function()
+        require('vimade').setup()
+      end
+    })
+
+    use {
+  "folke/zen-mode.nvim",
+  cmd = 'ZenMode',
+  config = function()
+    require("zen-mode").setup {}
+  end
+}
 
     use({
       'danymat/neogen',
