@@ -1,0 +1,14 @@
+killProcessOnPort() {
+  if [[ $1 -eq 0 ]]; then
+        echo " [x] Usage: killProcessOnPort :port";
+  else
+    kill -9 $(lsof -t -i :$1) 2> /dev/null || echo " - No process is running on port "$1
+  fi;
+}
+
+# Create or attach tmux session
+work() {
+  tmux new-session -A -s $1
+}
+
+
