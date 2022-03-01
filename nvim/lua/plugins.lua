@@ -161,10 +161,11 @@ if (not vim.g.vscode) then
       end,
     })
     use({ 'simrat39/symbols-outline.nvim', cmd = 'SymbolsOutline' })
+    use({'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' })
     use({
       'numToStr/Comment.nvim',
       config = function()
-        require('Comment').setup()
+        require('plugins.Comment')
       end,
       event = 'BufRead',
     })

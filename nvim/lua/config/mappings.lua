@@ -162,7 +162,7 @@ map(
 -- Format
 map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
 map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>')
-map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep()<cr>')
+map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep({ search_dirs = {".", ".github"}})<cr>')
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").grep_string()<cr>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
 map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>')
@@ -184,6 +184,10 @@ map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
 map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
 map('i', '[[', '<Esc>', opts);
 
+
+-- in mormal mode map swap 2 to @
+map('n', '2', '@', opts);
+map('n', '@', '2', opts);
 
 -- test :/; swap
 map('n', ':', ';', opts);

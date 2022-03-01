@@ -35,18 +35,18 @@ null_ls.setup({
   },
 })
 
--- if lsp_config['null-ls'] then
---   lsp_config['null-ls'].setup({
---     capabilities = vim.lsp.protocol.make_client_capabilities(),
---     on_attach = function(client)
---       client.resolved_capabilities.document_formatting = true
+if lsp_config['null-ls'] then
+  lsp_config['null-ls'].setup({
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+    on_attach = function(client)
+      client.resolved_capabilities.document_formatting = true
 --       -- Format on save
 --       if client.resolved_capabilities.document_formatting then
 --         -- vim.cmd("autocmd BufWritePre <buffer> call CocAction('format')")
 --         -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)")
 --       end
---
---       on_attach(client)
---     end,
---   })
--- end
+
+      on_attach(client)
+    end,
+  })
+end
