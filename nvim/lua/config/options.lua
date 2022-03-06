@@ -8,6 +8,9 @@ g['copilot_assume_mapped'] = true
 
 g.did_load_filetypes = true
 
+g.targets_aiAI = 'aiAI'
+g.targets_mapped_aiAI = g.targets_aiAI
+
 opt.undofile = true
 opt.completeopt = 'menu,menuone,noselect'
 opt.termguicolors = true
@@ -104,10 +107,7 @@ vim.cmd[[colorscheme vscode]]
 -- vim.cmd[[colorscheme github_dark]]
 
 
--- g.nvim_tree_ignore = { '.git', '.cache' }
-g.nvim_tree_quit_on_open = 0
 g.nvim_tree_indent_markers = 1
--- g.nvim_tree_hide_dotfiles = 0
 g.nvim_tree_git_hl = 1
 -- g.t_Co = 256
 g.nvim_tree_root_folder_modifier = ':t'

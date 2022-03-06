@@ -169,9 +169,6 @@ if (not vim.g.vscode) then
       end,
       event = 'BufRead',
     })
-    use({ 'tpope/vim-surround', event = 'BufRead' })
-    use({ 'wellle/targets.vim', event = 'BufRead' })
-    use({ 'tpope/vim-repeat', keys = '.' })
     use({ 'AndrewRadev/dsf.vim', event = 'BufRead' })
     -- use({ 'chaoren/vim-wordmotion', event = 'BufRead' })
     use({ 'tweekmonster/startuptime.vim', cmd = 'StartupTime' })
@@ -185,8 +182,6 @@ if (not vim.g.vscode) then
       end,
     })
     use({
-      'phaazon/hop.nvim',
-      cmd = { 'HopWord', 'HopLine', 'HopChar1', 'HopChar2', 'HopPattern' },
       as = 'hop',
       config = function()
         require('plugins.hop')
@@ -361,7 +356,7 @@ if (not vim.g.vscode) then
 
     use 'famiu/bufdelete.nvim'
 
-    use ({ 'styled-components/vim-styled-components', branch = 'main' })
+    -- use ({ 'styled-components/vim-styled-components', branch = 'main' })
     use ({ 'charliesbot/night-owl.vim' })
     use 'folke/tokyonight.nvim'
     use 'Mofiqul/vscode.nvim'
@@ -384,13 +379,17 @@ if (not vim.g.vscode) then
       end
     })
 
+    -- use({ 'tpope/vim-surround', event = 'BufRead' after = 'vim-repeat'})
+    use({ 'wellle/targets.vim' })
+    use({ 'tpope/vim-repeat', keys = '.' })
+
     use {
-  "folke/zen-mode.nvim",
-  cmd = 'ZenMode',
-  config = function()
-    require("zen-mode").setup {}
-  end
-}
+      "folke/zen-mode.nvim",
+      cmd = 'ZenMode',
+      config = function()
+        require("zen-mode").setup {}
+      end
+    }
 
     use({
       'danymat/neogen',

@@ -1,10 +1,22 @@
 local on_attach = require('lsp.on_attach')
 local opts = { noremap = true, silent = true }
 
+local tsserver_plugins = {
+  {
+    name = 'typescript-styled-plugin',
+    location = '/Users/maru85945/.nvm/versions/node/v16.13.1/lib/node_modules/typescript-styled-plugin'
+  }
+};
+
 return {
+  init_options = {
+    plugins = tsserver_plugins,
+  },
   on_attach = function(client)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
+
+
 
     if client.config.flags then
       client.config.flags.allow_incremental_sync = true
@@ -37,13 +49,12 @@ return {
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:lua vim.lsp.buf.formatting_sync(nil, 1000)<cr>]], opts)
 
     -- no default maps, so you may want to define some here
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gs', ':TSLspOrganize<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gstypescript', ':TSLspOrganize<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', ':TSLspRenameFile<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', [[:call CocActionAsync("jumpDefinition")<cr>]], opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', [[:call CocActionAsync("jumpReferences")<cr>]], opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:call CocActionAsync("rename")<cr>]], opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:call CocActionAsync("format")<cr>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '==', [[:<C-u>set operatorfunc=<SID>FormatFromSelected<CR>g@]], opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ia', ':TSLspImportAll<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ic', ':TSLspImportCurrent<CR>', opts)
 

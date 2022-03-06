@@ -4,6 +4,9 @@ if not present then
 end
 
 nvimtree.setup({
+  actions = {
+    nvim_tree_quit_on_open = 0
+  },
   update_cwd = true,
   auto_close = true,
   diagnostics = {
