@@ -379,7 +379,7 @@ if (not vim.g.vscode) then
       end
     })
 
-    -- use({ 'tpope/vim-surround', event = 'BufRead' after = 'vim-repeat'})
+    use({ 'tpope/vim-surround', event = 'BufRead'})
     use({ 'wellle/targets.vim' })
     use({ 'tpope/vim-repeat', keys = '.' })
 
