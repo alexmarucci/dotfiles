@@ -11,4 +11,53 @@ work() {
   tmux new-session -A -s $1
 }
 
+function doesFileExists() {
+  local file=$1;
+  local root_dir=$(git rev-parse --show-toplevel 2> /dev/null || pwd);
+
+  if [[ -f "$root_dir/$file" || -f "$file" ]]; then
+    echo true;
+  else
+    echo false;
+  fi
+}
+
+# alias y='yarn'
+# # Yarn shortener (with args only)
+function y() {
+  local bin=${1:=''};
+  local pnpm_lock=$(doesFileExists 'pnpm-lock.yaml');
+  local yarn_lock=$(doesFileExists 'yarn.lock');
+  local package_lock=$(doesFileExists 'package-lock.json');
+
+  if [[ "$pnpm_lock" = true ]]; then
+    bin=pnpm
+  elif [[ "$yarn_lock" = true ]]; then
+    bin=yarn
+  elif [[ "$package_lock" = true ]]; then
+    bin=npm
+  else
+    echo 'No known lockfile found, unable to guess package manager.'
+    echo 'You may run the install manually: e.g. $ npm install'
+    exit -1
+    return;
+  fi
+
+  if [ $# -eq 0 ]; then
+    $bin install
+  else
+    $bin $@;
+  fi
+}
+
+function img() {
+  case $1 in
+    'clone')
+      local repo_name=$(gh repo list IMGARENA | cut -f1 | fzf -f ${2:-''} | fzf);
+
+      git clone "https://github.com/$repo_name";
+      cd ${repo_name#*/};
+      ;;
+  esac
+}
 

@@ -1,3 +1,5 @@
+source "$HOME/.config/zsh/config.zsh"
+return;
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -63,7 +65,7 @@ ZSH_THEME="bira"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # starts zsh-vi-mode initialisation immediately
-ZVM_INIT_MODE='sourcing'
+# ZVM_INIT_MODE='sourcing'
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -217,22 +219,11 @@ bindkey -v
 # zsh-autosuggestions
 bindkey '^ ' autosuggest-execute
 bindkey -M viins '^@' autosuggest-execute
+bindkey -M viins '^L' autosuggest-accept
 
 _user_key_binding() {
-  # Instant search through history
-  # autoload -U history-search-end
-  # zle -N history-beginning-search-backward-end history-search-end
-  # zle -N history-beginning-search-forward-end history-search-end
-  #
-  # bindkey "^[[A" history-beginning-search-backward-end
-  # bindkey "^[[B" history-b eginning-search-forward-end
-  #
+  bindkey '^K' clear-screen
   bindkey "^[[A" history-substring-search-down
   bindkey "^[[B" history-substring-search-up
-  # bindkey -M viins "^[[A" history-beginning-search-backward-end
-  # bindkey -M viins "^[[B" history-beginning-search-forward-end
-
-  # bindkey -M vicmd "^[[A" history-beginning-search-backward-end
-  # bindkey -M vicmd "^[[B" history-beginning-search-forward-end
 }
 precmd_functions+=(_user_key_binding)
