@@ -74,6 +74,9 @@ lfcd () {
 }
 bindkey -s '^o' 'lfcd\n'
 
+# Provide smartlog fn
+alias sl=$HOME/projects/hacks/smartlog/smartlog.mjs
+
 # User configuration
 source $HOME/.config/zsh/.gitaliases
 source $HOME/.config/zsh/.functions
@@ -133,7 +136,7 @@ source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlightin
 
 # Load after highlight enabled
 source "$HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
-bindkey "^[[A" history-substring-search-down
-bindkey "^[[B" history-substring-search-up
+bindkey "^[[B" history-substring-search-down # Arrow up
+bindkey "^[[A" history-substring-search-up # Arrow down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
