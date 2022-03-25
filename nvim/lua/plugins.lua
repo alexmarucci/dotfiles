@@ -364,7 +364,9 @@ if (not vim.g.vscode) then
     use({
       'karb94/neoscroll.nvim',
       config = function()
-        require('neoscroll').setup()
+        require('neoscroll').setup({
+          easing_function = 'quintic' -- Default easing function
+        })
       end,
     })
 
@@ -390,6 +392,8 @@ if (not vim.g.vscode) then
         require("zen-mode").setup {}
       end
     }
+
+    use({ 'andymass/vim-matchup', after = 'nvim-treesitter' })
 
     use({
       'danymat/neogen',

@@ -609,6 +609,7 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-fugitive"
   },
   ["vim-repeat"] = {
+    after = { "vim-surround" },
     keys = { { "", "." } },
     loaded = false,
     needs_bufread = false,
@@ -617,6 +618,9 @@ _G.packer_plugins = {
     url = "https://github.com/tpope/vim-repeat"
   },
   ["vim-surround"] = {
+    load_after = {
+      ["vim-repeat"] = true
+    },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -768,9 +772,9 @@ vim.cmd [[au FileType json ++once lua require("packer.load")({'package-info.nvim
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'packer.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 vim.cmd [[au BufRead * ++once lua require("packer.load")({'fzf', 'fzf.vim', 'gitsigns.nvim', 'nvim-autopairs', 'lsp_extensions.nvim', 'Comment.nvim', 'lsp_signature.nvim', 'lspkind-nvim', 'lspsaga.nvim', 'lua-dev.nvim', 'nvim-lsp-installer', 'nvim-lspfuzzy', 'trouble.nvim', 'nvim-bufferline.lua', 'nvim-colorizer.lua', 'nvim-web-devicons', 'indent-blankline.nvim', 'cmp-nvim-lsp', 'nvim-ts-rainbow', 'vim-surround', 'nvim-ts-autotag', 'nvim-treesitter-refactor', 'renamer.nvim', 'dsf.vim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au InsertCharPre * ++once lua require("packer.load")({'cmp-path', 'cmp-treesitter', 'cmp-spell', 'cmp-buffer', 'cmp-rg'}, { event = "InsertCharPre *" }, _G.packer_plugins)]]
-vim.cmd [[au VimEnter * ++once lua require("packer.load")({'packer.nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")
 if should_profile then save_profiles() end
