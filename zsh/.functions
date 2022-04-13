@@ -61,3 +61,13 @@ function img() {
   esac
 }
 
+function addOtp() {
+  local QR_CODE=$1; 
+  local OTP_NAME=$2; 
+
+  if [ $# -eq 2 ]; then
+    zbarimg -q --raw $QR_CODE | pass otp insert $OTP_NAME
+  else
+    echo "Parameters missing. Usage: addOtp ~/path/to/qr_code.png otp_secret_name"
+  fi
+}
