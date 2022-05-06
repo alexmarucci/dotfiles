@@ -1,5 +1,6 @@
 local on_attach = require('lsp.on_attach')
 local opts = { noremap = true, silent = true }
+if not bufnr then bufnr = 0 end
 
 local tsserver_plugins = {
   {

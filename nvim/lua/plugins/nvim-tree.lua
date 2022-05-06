@@ -5,7 +5,9 @@ end
 
 nvimtree.setup({
   actions = {
-    nvim_tree_quit_on_open = 0
+    open_file = {
+      quit_on_open = true 
+    }
   },
   update_cwd = true,
   auto_close = true,

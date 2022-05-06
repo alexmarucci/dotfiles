@@ -1,4 +1,5 @@
 local M = {}
+if not bufnr then bufnr = 0 end
 
 function M.add(value, str, sep)
   sep = sep or ','

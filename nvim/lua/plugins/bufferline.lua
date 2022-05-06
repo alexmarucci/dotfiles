@@ -5,6 +5,7 @@ end
 
 bufferline.setup({
   options = {
+    diagnostics = 'nvim_lsp',
     numbers = 'none',
     buffer_close_icon = '',
     modified_icon = '',

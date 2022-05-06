@@ -273,7 +273,9 @@ if (not vim.g.vscode) then
     use({ 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', after = 'cmp' })
 
     use({
-      'akinsho/nvim-bufferline.lua',
+      'akinsho/bufferline.nvim',
+      tag = "v2.*",
+      requires = 'kyazdani42/nvim-web-devicons',
       event = 'BufRead',
       config = function()
         require('plugins.bufferline')

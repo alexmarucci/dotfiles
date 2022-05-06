@@ -11,6 +11,8 @@ g.did_load_filetypes = true
 g.targets_aiAI = 'aiAI'
 g.targets_mapped_aiAI = g.targets_aiAI
 
+-- Enables global statusline
+opt.laststatus = 3
 opt.undofile = true
 opt.completeopt = 'menu,menuone,noselect'
 opt.termguicolors = true
