@@ -10,7 +10,6 @@ nvimtree.setup({
     }
   },
   update_cwd = true,
-  auto_close = true,
   diagnostics = {
     enable = true,
     icons = {
@@ -19,6 +18,9 @@ nvimtree.setup({
       warning = '',
       error = '',
     },
+  },
+  renderer = {
+    indent_markers = {enable = true},
   },
   view = {
     -- width of the window, can be either a number (columns) or a string in `%`
@@ -37,4 +39,9 @@ nvimtree.setup({
   git = {
     ignore = true,
   },
+})
+
+vim.api.nvim_create_autocmd('BufEnter', {
+    command = "if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif",
+    nested = true,
 })

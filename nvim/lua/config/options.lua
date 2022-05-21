@@ -109,7 +109,6 @@ vim.cmd[[colorscheme vscode]]
 -- vim.cmd[[colorscheme github_dark]]
 
 
-g.nvim_tree_indent_markers = 1
 g.nvim_tree_git_hl = 1
 -- g.t_Co = 256
 g.nvim_tree_root_folder_modifier = ':t'

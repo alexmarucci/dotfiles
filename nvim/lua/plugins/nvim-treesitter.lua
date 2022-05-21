@@ -3,11 +3,25 @@ if not present then
   return
 end
 
+local parsers_maintained = {
+  'lua',
+  'typescript',
+  'scss',
+  'css',
+  'bash',
+  'json',
+  'jsonc',
+  'javascript',
+  'markdown',
+  'tsx',
+  'html'
+}
+
 treesitter.setup({
   autopairs = { enable = true },
   autotag = { enable = true },
   rainbow = { enable = true, extended_mode = false, max_file_lines = 2000 },
-  ensure_installed = 'maintained',
+  ensure_installed = parsers_maintained,
   context_commentstring = {
     enable = true,
     config = {
@@ -15,20 +29,6 @@ treesitter.setup({
         enable = true,
         enable_autocmd = false,
       },
-      -- typescript = {
-      --   __default = '// %s',
-      --   jsx_element = '{/* %s */}',
-      --   jsx_fragment = '{/* %s */}',
-      --   jsx_attribute = '// %s',
-      --   comment = '// %s'
-      -- },
-      -- javascript = {
-      --   __default = '// %s',
-      --   jsx_element = '{/* %s */}',
-      --   jsx_fragment = '{/* %s */}',
-      --   jsx_attribute = '// %s',
-      --   comment = '// %s'
-      -- }
     }
   },
   highlight = { enable = true, use_languagetree = true },
