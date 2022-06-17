@@ -109,26 +109,25 @@ vim.cmd[[colorscheme vscode]]
 -- vim.cmd[[colorscheme github_dark]]
 
 
-g.nvim_tree_git_hl = 1
 -- g.t_Co = 256
-g.nvim_tree_root_folder_modifier = ':t'
-g.nvim_tree_allow_resize = 1
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_show_icons = { git = 0, folders = 1, files = 1 }
-g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'package.json', '.env' }
-g.nvim_tree_icons = {
-  default = '',
-  symlink = '',
-  folder = {
-    open = '',
-    default = '',
-    -- default = '',
-    -- open = '',
-    empty = '',
-    empty_open = '',
-    symlink = '',
-    symlink_open = '',
-  },
-  lsp = { hint = '', info = '', warning = '', error = '' },
-}
+-- g.nvim_tree_root_folder_modifier = ':t'
+-- g.nvim_tree_allow_resize = 1
+-- g.nvim_tree_git_hl = 1
+-- g.nvim_tree_highlight_opened_files = 1
+-- g.nvim_tree_show_icons = { git = 0, folders = 1, files = 1 }
+-- g.nvim_tree_special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'package.json', '.env' }
+-- g.nvim_tree_icons = {
+--   default = '',
+--   symlink = '',
+--   folder = {
+--     open = '',
+--     default = '',
+--     -- default = '',
+--     -- open = '',
+--     empty = '',
+--     empty_open = '',
+--     symlink = '',
+--     symlink_open = '',
+--   },
+--   lsp = { hint = '', info = '', warning = '', error = '' },
+-- }

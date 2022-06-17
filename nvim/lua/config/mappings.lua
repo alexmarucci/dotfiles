@@ -105,8 +105,12 @@ map('n', '<S-t>', [[<Cmd>tabnew<CR>]], opts)
 map('n', '<S-x>', [[<Cmd>Bdelete<CR>]], opts)
 map('n', '<leader>b', [[<Cmd>BufferLinePick<CR>]], opts)
 
-map('n', ']b', [[<Cmd>BufferLineCycleNext<CR>]], opts)
-map('n', '[b', [[<Cmd>BufferLineCyclePrev<CR>]], opts)
+-- map('n', ']b', [[<Cmd>BufferLineCycleNext<CR>]], opts)
+-- map('n', '[b', [[<Cmd>BufferLineCyclePrev<CR>]], opts)
+map('n', ']b', [[<Cmd>BufSurfForward<CR>]], opts)
+map('n', '[b', [[<Cmd>BufSurfBack<CR>]], opts)
+-- nmap ]b <Plug>(buf-surf-forward)
+-- nmap [b <Plug>(buf-surf-back)
 
 map('n', '<leader>1', '<Cmd>BufferLineGoToBuffer 1<CR>', opts)
 map('n', '<leader>2', '<Cmd>BufferLineGoToBuffer 2<CR>', opts)
@@ -202,8 +206,8 @@ map('i', 'jj', '<Esc>', opts);
 
 
 -- in mormal mode map swap 2 to @
-map('n', '2', '@', opts);
-map('n', '@', '2', opts);
+-- map('n', '2', '@', opts);
+-- map('n', '@', '2', opts);
 
 -- test :/; swap
 map('n', ':', ';', opts);

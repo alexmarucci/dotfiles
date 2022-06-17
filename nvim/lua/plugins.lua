@@ -13,6 +13,7 @@ if (not vim.g.vscode) then
   return packer.startup(function()
     use('lewis6991/impatient.nvim')
     use({ 'wbthomason/packer.nvim', event = 'VimEnter' })
+    use('duane9/nvim-rg')
 
     -- UI
     use({
@@ -282,6 +283,8 @@ if (not vim.g.vscode) then
       end,
     })
 
+    use({ 'ton/vim-bufsurf', event = 'BufRead' })
+
     use({
       'lewis6991/gitsigns.nvim',
       event = 'BufRead',
@@ -341,18 +344,7 @@ if (not vim.g.vscode) then
       'theblob42/drex.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function() 
-        require('drex.config').configure({
-          keybindings = {
-            ['n'] = {
-               -- switch root directory
-              ['<C-l>'] = false,
-              ['<C-h>'] = false,
-              ['o'] = '<cmd>lua require("drex").open_directory()<CR>',
-              ['O'] = '<cmd>lua require("drex").open_parent_directory()<CR>',
-            }}
-          })
-
-        vim.cmd('autocmd FileType drex setlocal nobuflisted')
+        require('plugins.drex')
       end,
     }
 

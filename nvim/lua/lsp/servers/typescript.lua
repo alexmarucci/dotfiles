@@ -2,6 +2,13 @@ local on_attach = require('lsp.on_attach')
 local opts = { noremap = true, silent = true }
 if not bufnr then bufnr = 0 end
 
+local lsp_signature_config = {
+  bind = true,
+  use_lspsaga = true,
+  -- enable virtual text only
+  floating_window = false,
+}
+
 local tsserver_plugins = {
   {
     name = 'typescript-styled-plugin',
@@ -13,7 +20,7 @@ return {
   init_options = {
     plugins = tsserver_plugins,
   },
-  on_attach = function(client)
+  on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
 
@@ -23,7 +30,7 @@ return {
       client.config.flags.allow_incremental_sync = true
     end
 
-    require('lsp_signature').on_attach({ bind = true, use_lspsaga = true })
+    require('lsp_signature').on_attach(lsp_signature_config, bufnr)
 
     local ts_utils = require('nvim-lsp-ts-utils')
 

@@ -19,8 +19,30 @@ nvimtree.setup({
       error = '',
     },
   },
+  icons = {
+    glyphs = {
+      default = '',
+      symlink = '',
+      folder = {
+        open = '',
+        default = '',
+        -- default = '',
+        -- open = '',
+        empty = '',
+        empty_open = '',
+        symlink = '',
+        symlink_open = '',
+      },
+      lsp = { hint = '', info = '', warning = '', error = '' },
+    },
+    show = { git = false, folder = true, file = true },
+  },
   renderer = {
+    highlight_opened_files = "icon",
+    highlight_git = true,
     indent_markers = {enable = true},
+    special_files = { 'README.md', 'Makefile', 'MAKEFILE', 'package.json', '.env' },
+    root_folder_modifier = ":t",
   },
   view = {
     -- width of the window, can be either a number (columns) or a string in `%`
