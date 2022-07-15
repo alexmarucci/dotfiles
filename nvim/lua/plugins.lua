@@ -136,7 +136,8 @@ if (not vim.g.vscode) then
 
     -- Terminal
     use({
-      'akinsho/nvim-toggleterm.lua',
+      'akinsho/toggleterm.nvim',
+      tag = 'v2.*',
       cmd = 'ToggleTerm',
       config = function()
         require('plugins.toggleterm')
@@ -318,10 +319,10 @@ if (not vim.g.vscode) then
       end,
     })
 
-    use({
-      'dsznajder/vscode-es7-javascript-react-snippets',
-      run = 'yarn install --frozen-lockfile && yarn compile',
-    })
+    -- use({
+    --   'dsznajder/vscode-es7-javascript-react-snippets',
+    --   run = 'yarn install --frozen-lockfile && yarn compile',
+    -- })
 
     use({
       'TimUntersberger/neogit',
@@ -388,6 +389,9 @@ if (not vim.g.vscode) then
     }
 
     use({ 'andymass/vim-matchup', after = 'nvim-treesitter' })
+    
+    -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
+    use({'aklt/plantuml-syntax'})
 
     use({
       'danymat/neogen',

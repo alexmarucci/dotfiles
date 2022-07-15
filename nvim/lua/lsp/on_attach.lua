@@ -17,13 +17,13 @@ local on_attach = function(client)
   buf_map('n', '<leader>cs', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
   buf_map(
     'n',
-    '<leader>dj',
+    ']d',
     [[<cmd>lua require('lspsaga.diagnostic').navigate('next')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
     opts
   )
   buf_map(
     'n',
-    '<leader>dk',
+    '[d',
     [[<cmd>lua require('lspsaga.diagnostic').navigate('prev')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
     opts
   )

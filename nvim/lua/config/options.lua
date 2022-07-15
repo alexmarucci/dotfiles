@@ -11,6 +11,30 @@ g.did_load_filetypes = true
 g.targets_aiAI = 'aiAI'
 g.targets_mapped_aiAI = g.targets_aiAI
 
+-- Neovide
+g.neovide_input_use_logo = 1
+
+-- GUI terminal colors
+g.terminal_color_0  = '#2e3436'
+g.terminal_color_1  = '#ff6d67'
+g.terminal_color_2  = '#00c200'
+g.terminal_color_3  = '#fefb67'
+g.terminal_color_4  = '#6871ff'
+g.terminal_color_5  = '#75507b'
+g.terminal_color_6  = '#0b939b'
+g.terminal_color_7  = '#d3d7cf'
+g.terminal_color_8  = '#555753'
+g.terminal_color_9  = '#ef2929'
+g.terminal_color_10 = '#8ae234'
+g.terminal_color_11 = '#fce94f'
+g.terminal_color_12 = '#729fcf'
+g.terminal_color_13 = '#ad7fa8'
+g.terminal_color_14 = '#00f5e9'
+g.terminal_color_15 = '#eeeeec'
+
+-- GUI Font (Neovide)
+opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
+
 -- Enables global statusline
 opt.laststatus = 3
 opt.undofile = true

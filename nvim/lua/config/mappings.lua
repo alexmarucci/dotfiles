@@ -12,7 +12,7 @@ map('v', 'X', [["_d]])
 
 -- save
 map('n', '<C-s>', [[ <Cmd> w <CR>]], opts)
-map('i', '<C-s>', [[ <Cmd> w <CR>]], opts)
+-- map('i', '<C-s>', [[ <Esc>h<Cmd> w <CR>]], opts)
 map(
   'n',
   '<Leader>ww',
@@ -66,8 +66,16 @@ map('o', 'H', [[^]], opts)
 
 -- Terminal
 -- Escape to exit to normal mode in terminal
-map('t', '<Esc>', [[<C-\><C-n>]], opts)
--- map('t', 'jj', [[<C-\><C-n>]], opts)
+-- map('t', '<Esc>', [[<C-\><C-n>]], opts)
+map('t', '<C-t>', [[<C-\><C-n>]], opts)
+map('n', '<Leader>tt', [[:ToggleTerm direction=float<CR>]], opts)
+
+-- Allow clipboard copy paste in neovim
+map('', '<D-v>', '+p<CR>', opts)
+map('!', '<D-v>', '<C-R>+', opts)
+map('t', '<D-v>', '<C-R>+', opts)
+map('v', '<D-v>', '<C-R>+', opts)
+map('v', '<D-c>', '"+y<CR>', opts)
 
 -- Substitute
 -- map('n', 'c*', [[*``cgn]], opts)
@@ -90,7 +98,6 @@ map('v', '<leader>d', [[_d]], opts)
 -- map('n', ',', [[<PageDown>]], opts)
 -- map('n', '-', [[<PageUp>]], opts)
 
-map('n', '<Leader>tt', [[:ToggleTerm<CR>]], opts)
 
 -- -- Telescope
 -- map('n', '<C-p>', [[:Telescope find_files hidden=true<CR>]], opts)
@@ -200,10 +207,7 @@ map('n', '<leader>gs', '<cmd>Git<cr>', opts);
 map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
 map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
 
--- deprecated
-map('i', '[[', '<Esc>', opts);
 map('i', 'jj', '<Esc>', opts);
-
 
 -- in mormal mode map swap 2 to @
 -- map('n', '2', '@', opts);
