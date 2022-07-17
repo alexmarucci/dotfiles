@@ -13,6 +13,8 @@ g.targets_mapped_aiAI = g.targets_aiAI
 
 -- Neovide
 g.neovide_input_use_logo = 1
+g.neovide_floating_opacity = 1
+g.neovide_transparency = 1
 
 -- GUI terminal colors
 g.terminal_color_0  = '#2e3436'

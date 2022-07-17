@@ -1,9 +1,19 @@
 local map = require('helpers').map
+local font_resize = require('config.font_resize')
+
 
 local g = vim.g
 g.mapleader = ' '
 
 local opts = { noremap = true, silent = true }
+
+-- guifont resize
+if vim.g.neovide then
+  vim.keymap.set('n', '<D-=>', font_resize.increase_font_size, opts)
+  vim.keymap.set('n', '<D-->', font_resize.decrease_font_size, opts)
+  vim.keymap.set('v', '<D-=>', font_resize.increase_font_size, opts)
+  vim.keymap.set('v', '<D-->',font_resize.decrease_font_size, opts)
+end
 
 -- general
 -- don't know what the below does yet
@@ -13,14 +23,6 @@ map('v', 'X', [["_d]])
 -- save
 map('n', '<C-s>', [[ <Cmd> w <CR>]], opts)
 -- map('i', '<C-s>', [[ <Esc>h<Cmd> w <CR>]], opts)
-map(
-  'n',
-  '<Leader>ww',
-  [[ const wait = (ms: number): Promise<void> => {<CR>return new]]
-    .. [[Promise(res => setTimeout(res, ms));<CR>}<esc>k=i{<CR> ]],
-  opts
-)
-map('n', '<Leader>ss', [[ O/** @type {sinon.SinonStub} */<esc><CR>]], opts)
 
 -- Search and replace under cursor
 map('n', '<Leader>s', [[ :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left> ]], opts)
@@ -51,7 +53,10 @@ map('n', '<leader>Y', [[:CopyMatches<CR>]], opts)
 map('n', '<Esc>', [[:nohlsearch<CR>]], opts)
 
 -- Macros
-map('x', '@', [[:<C-u>call ExecuteMacroOverVisualRange()<CR>]], opts)
+-- map('x', '@', [[:<C-u>call ExecuteMacroOverVisualRange()<CR>]], opts)
+-- map('x', '@', [[:'<,'>normal @]], opts)
+map('x', '@', [[:<C-u>execute ":'<,'>normal @".nr2char(getchar())<CR>]], opts)
+
 
 -- Movement
 -- Move to end of line
@@ -67,13 +72,14 @@ map('o', 'H', [[^]], opts)
 -- Terminal
 -- Escape to exit to normal mode in terminal
 -- map('t', '<Esc>', [[<C-\><C-n>]], opts)
-map('t', '<C-t>', [[<C-\><C-n>]], opts)
-map('n', '<Leader>tt', [[:ToggleTerm direction=float<CR>]], opts)
+map('t', '<C-e>', [[<C-\><C-n>]], opts)
+map('n', '<C-t>', [[:ToggleTerm direction=float<CR>]], opts)
 
 -- Allow clipboard copy paste in neovim
 map('', '<D-v>', '+p<CR>', opts)
 map('!', '<D-v>', '<C-R>+', opts)
-map('t', '<D-v>', '<C-R>+', opts)
+map('c', '<D-v>', '<C-R>+', opts)
+map('t', '<D-v>', [[<C-\><C-n>"+pi]], opts)
 map('v', '<D-v>', '<C-R>+', opts)
 map('v', '<D-c>', '"+y<CR>', opts)
 

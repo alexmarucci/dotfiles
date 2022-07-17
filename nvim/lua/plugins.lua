@@ -376,7 +376,13 @@ if (not vim.g.vscode) then
       end
     })
 
-    use({ 'tpope/vim-surround', event = 'BufRead'})
+    -- Experimental - use of next-gen surrounding
+    -- use({ 'tpope/vim-surround', event = 'BufRead'})
+    use({ 'kylechui/nvim-surround', event = 'BufRead',
+    config = function() 
+       require("nvim-surround").setup({})
+      end
+  })
     use({ 'wellle/targets.vim' })
     use({ 'tpope/vim-repeat', keys = '.' })
 

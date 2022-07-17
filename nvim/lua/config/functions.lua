@@ -32,12 +32,9 @@ cmd(
   false
 )
 
-cmd(
-  [[
-    au BufNewFile,BufRead *.prisma set filetype=prisma
-  ]],
-  false
-)
+cmd([[au BufNewFile,BufRead *.puml set filetype=plantuml]], false)
+
+cmd([[au BufNewFile,BufRead *.prisma set filetype=prisma]], false)
 
 vim.cmd([[
   function! RangeSearch(direction)
