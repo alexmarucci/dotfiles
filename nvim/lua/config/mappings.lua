@@ -73,12 +73,19 @@ map('o', 'H', [[^]], opts)
 -- Escape to exit to normal mode in terminal
 -- map('t', '<Esc>', [[<C-\><C-n>]], opts)
 map('t', '<C-e>', [[<C-\><C-n>]], opts)
-map('n', '<C-t>', [[:ToggleTerm direction=float<CR>]], opts)
+map('n', '<leader>t', [[:<C-u>execute ":".nr2char(getchar())."TermExec cmd=\"tmux && exit\" direction=float"<CR>]], opts)
+map('n', '<leader>th', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=horizontal"<CR>]], opts)
+map('n', '<leader>tv', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=vertical"<CR>]], opts)
+map('n', '<leader>tf', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=float"<CR>]], opts)
+
+
+-- new Neovide instance 
+map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
 
 -- Allow clipboard copy paste in neovim
 map('', '<D-v>', '+p<CR>', opts)
-map('!', '<D-v>', '<C-R>+', opts)
-map('c', '<D-v>', '<C-R>+', opts)
+map('!', '<D-v>', '<C-R>+', {noremap = true, silent = false})
+map('c', '<D-v>', '<C-R>+', {noremap = true, silent = false})
 map('t', '<D-v>', [[<C-\><C-n>"+pi]], opts)
 map('v', '<D-v>', '<C-R>+', opts)
 map('v', '<D-c>', '"+y<CR>', opts)
@@ -92,7 +99,7 @@ map('v', '<D-c>', '"+y<CR>', opts)
 map('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
 
 -- Delete current visual selection and dump in black hole buffer before pasting
-map('v', '<leader>p', [["_dP]], opts)
+map('v', 'p', [["_dP]], opts)
 
 map('n', '<leader>y', [["+y]], opts)
 map('v', '<leader>y', [["+y]], opts)

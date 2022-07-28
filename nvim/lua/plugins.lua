@@ -57,7 +57,13 @@ if (not vim.g.vscode) then
     })
 
     -- LSP
-    use({ 'tami5/lspsaga.nvim', event = 'BufRead' })
+    use({
+      'glepnir/lspsaga.nvim', {branch = 'main' },
+      event = 'BufRead',
+      config = function()
+        require("lspsaga").init_lsp_saga();
+      end,
+    })
     use({ 'ray-x/lsp_signature.nvim', event = 'BufRead' })
     use({ 'folke/lua-dev.nvim', event = 'BufRead' })
     use({ 'williamboman/nvim-lsp-installer', event = 'BufRead' })
@@ -138,7 +144,7 @@ if (not vim.g.vscode) then
     use({
       'akinsho/toggleterm.nvim',
       tag = 'v2.*',
-      cmd = 'ToggleTerm',
+      cmd = { 'TermExec', 'ToggleTerm' },
       config = function()
         require('plugins.toggleterm')
       end,
@@ -158,7 +164,7 @@ if (not vim.g.vscode) then
         reload.lua_reload_dirs = {}
         reload.post_reload_hook = function()
           vim.cmd('source ' .. plugin_dir)
-          vim.cmd('colorscheme vscode')
+          vim.cmd('colorscheme nvcode')
         end
       end,
     })
@@ -217,6 +223,14 @@ if (not vim.g.vscode) then
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     use({
+      'Shatur/neovim-session-manager',
+      require = 'plenary.nvim',
+      config = function()
+        require('plugins.neovim-session-manager')
+      end,
+    })
+
+    use({
       'nvim-treesitter/nvim-treesitter-refactor',
       event = 'BufRead',
       after = 'nvim-treesitter',
@@ -243,6 +257,13 @@ if (not vim.g.vscode) then
       config = function()
         require('plugins.autopairs')
       end,
+    })
+
+    use({
+      'L3MON4D3/LuaSnip',
+      config = function()
+        require("luasnip").config.setup({ store_selection_keys="<C-i>" })
+      end
     })
 
     use({
@@ -398,6 +419,8 @@ if (not vim.g.vscode) then
     
     -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
     use({'aklt/plantuml-syntax'})
+
+    use({'christianchiarulli/nvcode-color-schemes.vim'})
 
     use({
       'danymat/neogen',

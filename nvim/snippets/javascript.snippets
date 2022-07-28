@@ -20,7 +20,7 @@ snippet exafun "function"
 	}
 
 snippet clo "() =>"
-	(${1}) => ${0:${VISUAL}
+	(${1}) => ${0:${VISUAL}}
 
 # Flow control
 # if
@@ -80,3 +80,14 @@ snippet excon
 
 snippet imp "import { member } from 'xyz'"
 	import { ${2} } from '${1}';
+
+# Jest test snippets
+snippet it "it('msg', () => { ... });"
+	it('${1}', () => {
+		${0:${VISUAL}}
+	});
+
+snippet des "describe('msg', () => { ... });"
+	describe('${1}', () => {
+		${0:${VISUAL}}
+	});

@@ -15,18 +15,12 @@ local on_attach = function(client)
   buf_map('n', '<leader>sh', '<cmd>Lspsaga signature_help<CR>', opts)
   buf_map('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
   buf_map('n', '<leader>cs', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
-  buf_map(
-    'n',
-    ']d',
-    [[<cmd>lua require('lspsaga.diagnostic').navigate('next')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
-    opts
-  )
-  buf_map(
-    'n',
-    '[d',
-    [[<cmd>lua require('lspsaga.diagnostic').navigate('prev')({ severity = { min=vim.diagnostic.severity.WARN } })<CR>]],
-    opts
-  )
+  vim.keymap.set("n", "[d", function()
+    require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+  end, opts)
+  vim.keymap.set("n", "]d", function()
+    require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+  end, opts)
   buf_map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
   buf_map('v', '<leader>ca', '<cmd><C-U>Telescope lsp_range_code_actions<CR>', opts)
 
@@ -37,8 +31,8 @@ local on_attach = function(client)
   end
 
   if client.resolved_capabilities.document_formatting then
-    buf_map('n', '<leader>fo', '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<CR>', opts)
-    buf_map('v', '<leader>fr', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
+    -- buf_map('n', '<leader>fo', '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<CR>', opts)
+    -- buf_map('v', '<leader>fr', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
     vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()')
   end
 end

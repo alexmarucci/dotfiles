@@ -5,6 +5,7 @@ local dashboard = require('alpha.themes.dashboard')
 dashboard.section.buttons.val = {
   dashboard.button('f', ' 🎄  Find file', ':Telescope find_files<CR>'),
   dashboard.button('r', ' 🚀  Recent', ':Telescope oldfiles<CR>'),
+  dashboard.button('l', ' 💼  Load session', ':SessionManager load_session<CR>'),
   dashboard.button(
     's',
     ' 🔬  Settings',
