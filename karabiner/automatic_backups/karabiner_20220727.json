@@ -177,26 +177,6 @@
                         },
                         {
                             "from": {
-                                "key_code": "page_down"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "right_arrow"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "page_up"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_arrow"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
                                 "key_code": "print_screen"
                             },
                             "to": [
@@ -212,16 +192,6 @@
                             "to": [
                                 {
                                     "key_code": "right_command"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
-                                "key_code": "non_us_backslash"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "grave_accent_and_tilde"
                                 }
                             ]
                         }
