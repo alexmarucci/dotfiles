@@ -9,6 +9,9 @@ local opts = { noremap = true, silent = true }
 
 -- guifont resize
 if vim.g.neovide then
+  -- new Neovide instance 
+  map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
+
   vim.keymap.set('n', '<D-=>', font_resize.increase_font_size, opts)
   vim.keymap.set('n', '<D-->', font_resize.decrease_font_size, opts)
   vim.keymap.set('v', '<D-=>', font_resize.increase_font_size, opts)
@@ -56,6 +59,7 @@ map('n', '<Esc>', [[:nohlsearch<CR>]], opts)
 -- map('x', '@', [[:<C-u>call ExecuteMacroOverVisualRange()<CR>]], opts)
 -- map('x', '@', [[:'<,'>normal @]], opts)
 map('x', '@', [[:<C-u>execute ":'<,'>normal @".nr2char(getchar())<CR>]], opts)
+map('n', 'Q', [[@q]], opts)
 
 
 -- Movement
@@ -73,22 +77,21 @@ map('o', 'H', [[^]], opts)
 -- Escape to exit to normal mode in terminal
 -- map('t', '<Esc>', [[<C-\><C-n>]], opts)
 map('t', '<C-e>', [[<C-\><C-n>]], opts)
-map('n', '<leader>t', [[:<C-u>execute ":".nr2char(getchar())."TermExec cmd=\"tmux && exit\" direction=float"<CR>]], opts)
-map('n', '<leader>th', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=horizontal"<CR>]], opts)
-map('n', '<leader>tv', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=vertical"<CR>]], opts)
-map('n', '<leader>tf', [[:<C-u>execute ":".nr2char(getchar())."ToggleTerm direction=float"<CR>]], opts)
+map('n', '<leader>q', [[:<C-u>execute ":".v:count."TermExec cmd=\"tmux && exit\" direction=float"<CR>]], opts)
+map('n', '<C-q>q', [[:<C-u>execute ":".v:count."ToggleTerm direction=float"<CR>]], opts)
+map('n', '<C-q>j', [[:<C-u>execute ":".v:count."ToggleTerm direction=horizontal size=30"<CR>]], opts)
+map('n', '<C-q>l', [[:<C-u>execute ":".v:count."ToggleTerm direction=vertical"<CR>]], opts)
 
-
--- new Neovide instance 
-map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
-
--- Allow clipboard copy paste in neovim
-map('', '<D-v>', '+p<CR>', opts)
-map('!', '<D-v>', '<C-R>+', {noremap = true, silent = false})
-map('c', '<D-v>', '<C-R>+', {noremap = true, silent = false})
-map('t', '<D-v>', [[<C-\><C-n>"+pi]], opts)
-map('v', '<D-v>', '<C-R>+', opts)
-map('v', '<D-c>', '"+y<CR>', opts)
+-- Allow clipboard copy paste in neovide
+if vim.g.neovide then
+  --- [ Neovide ]  --> [ neovim ]
+  map('', '<D-v>', '+p<CR>', opts)
+  map('!', '<D-v>', '<C-R>+', {noremap = true, silent = false})
+  map('c', '<D-v>', '<C-R>+', {noremap = true, silent = false})
+  map('t', '<D-v>', [[<C-\><C-n>"+pi]], opts)
+  map('v', '<D-v>', '<C-R>+', opts)
+  map('v', '<D-c>', '"+y<CR>', opts)
+end
 
 -- Substitute
 -- map('n', 'c*', [[*``cgn]], opts)
@@ -197,17 +200,19 @@ map(
 -- map('x', '<leader>ff', '<cmd>lua require("fzf-lua").grep()<CR>')
 
 -- Format
+map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").resume()<cr>')
 map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
-map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files()<cr>')
+map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep({ search_dirs = {".", ".github"}})<cr>')
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").grep_string()<cr>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
-map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>')
+map('n', '<leader>fh', '<cmd>Telescope<cr>')
 
 -- Functions
 map('n', 'vaf', 'Va{V');
 map('n', 'daf', 'Va{Vd');
 map('n', 'caf', 'Va{Vc');
+map('n', 'yaf', 'Va{Vy');
 
 -- Fake Full screen in new tab
 map('n', '<leader>M', '<cmd>tab vsplit<cr>');
@@ -221,6 +226,7 @@ map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
 map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
 
 map('i', 'jj', '<Esc>', opts);
+map('i', '<C-e>', '<Esc>', opts);
 
 -- in mormal mode map swap 2 to @
 -- map('n', '2', '@', opts);

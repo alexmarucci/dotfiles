@@ -1,20 +1,20 @@
 local drex = require('drex.config')
 local utils = require('drex.utils')
-local actions = require('drex.actions')
+local actionsFiles = require('drex.actions.files')
 
 function create_same_level_path()
   local line = vim.api.nvim_get_current_line()
 
-  actions.create(utils.get_path(line))
+  actionsFiles.create(utils.get_path(line))
 end
 
 function create_inside_path()
   local line = vim.api.nvim_get_current_line()
   if utils.is_directory(line) then
-      actions.create(utils.get_element(line) .. utils.path_separator)
+      actionsFiles.create(utils.get_element(line) .. utils.path_separator)
   else
       -- fallback to same level if element is not a directory
-      actions.create(utils.get_path(line))
+      actionsFiles.create(utils.get_path(line))
   end
 end
 

@@ -5,7 +5,6 @@ end
 
 bufferline.setup({
   options = {
-    diagnostics = 'nvim_lsp',
     numbers = 'none',
     buffer_close_icon = '',
     modified_icon = '',
@@ -15,11 +14,14 @@ bufferline.setup({
     max_name_length = 18,
     max_prefix_length = 15,
     tab_size = 40,
-    offsets = { { filetype = 'NvimTree', text = 'Files' } },
+    offsets = {
+      { filetype = 'NvimTree', text = 'Files' },
+      { filetype = 'drex', text = 'Files' },
+    },
     enforce_regular_tabs = true,
     view = 'multiwindow',
     show_buffer_close_icons = true,
-    separator_style = 'thin',
-    sort_by = 'directory',
+    separator_style = 'slant',
+    sort_by = 'insert_after_current',
   },
 })

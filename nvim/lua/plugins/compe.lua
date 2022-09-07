@@ -86,11 +86,11 @@ cmp.setup({
     ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
-    { name = 'luasnip', option = { use_show_condition = false } },
     { name = 'nvim_lsp' },
+    { name = 'luasnip', option = { use_show_condition = false } },
+    { name = 'buffer' },
     { name = 'nvim_lua' },
     { name = 'spell' },
-    { name = 'buffer' },
     { name = 'path' },
     -- { name = 'treesitter' },
     -- { name = 'rg' },

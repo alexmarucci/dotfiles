@@ -1,6 +1,8 @@
 local present, _ = pcall(require, 'packerInit')
 local packer
 
+-- require('postman')
+
 if (not vim.g.vscode) then
   if present then
     packer = require('packer')
@@ -85,7 +87,7 @@ if (not vim.g.vscode) then
       after = 'plenary.nvim',
       requires = { { 'nvim-lua/plenary.nvim' } },
       config = function()
-        require('renamer').setup()
+        require('renamer').setup({})
       end,
     })
     use({
@@ -206,7 +208,8 @@ if (not vim.g.vscode) then
     })
 
     use({
-      'windwp/nvim-spectre',
+      'nvim-pack/nvim-spectre',
+      require = 'plenary.nvim',
       module = 'spectre',
       config = function()
         require('plugins.nvim-spectre')
@@ -294,7 +297,7 @@ if (not vim.g.vscode) then
     })
 
     use({ 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', after = 'cmp' })
-
+    
     use({
       'akinsho/bufferline.nvim',
       tag = "v2.*",
@@ -422,6 +425,23 @@ if (not vim.g.vscode) then
 
     use({'christianchiarulli/nvcode-color-schemes.vim'})
 
+    -- use({
+    --   'mfussenegger/nvim-dap',
+    --   config = function ()
+    --     require('plugins.nvim-dap');
+    --   end
+    -- })
+    --
+    -- use {
+    --   'rcarriga/nvim-dap-ui',
+    --   requires = { { 'mfussenegger/nvim-dap' } },
+    --   after = 'dap',
+    --   event = 'BufRead', 
+    --   config = function ()
+    --     require("dapui").setup()
+    --   end
+    -- }
+    --
     use({
       'danymat/neogen',
       module = 'neogen',

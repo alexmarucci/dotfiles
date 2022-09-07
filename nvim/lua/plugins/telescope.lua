@@ -32,4 +32,10 @@ telescope.setup({
     sorting_strategy = 'ascending',
     file_ignore_patterns = { 'node_modules', '.git/', 'terraform.tfstate' },
   },
+
+  pickers = {
+    lsp_references = {
+      show_line = false,
+    }
+  }
 })
