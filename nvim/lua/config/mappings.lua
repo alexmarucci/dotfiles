@@ -225,15 +225,43 @@ map('n', '<leader>gs', '<cmd>Git<cr>', opts);
 map('n', '<leader>gf', '<cmd>diffget //2<cr>', opts);
 map('n', '<leader>gj', '<cmd>diffget //3<cr>', opts);
 
-map('i', 'jj', '<Esc>', opts);
-map('i', '<C-e>', '<Esc>', opts);
+map('i', 'jj', '<Esc><Esc>', opts);
+map('i', '<C-e>', '<Esc><Esc>', opts);
 
 -- in mormal mode map swap 2 to @
 -- map('n', '2', '@', opts);
 -- map('n', '@', '2', opts);
+
+-- Native LSP diagnostic
+local error = {severity = vim.diagnostic.severity.ERROR,}
+local float_win_opts = {
+  border = 'single',
+  max_width = 100,
+  severity = vim.diagnostic.severity.ERROR,
+};
+
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.goto_prev({severity=error, float=float_win_opts})
+end, opts)
+vim.keymap.set("n", "]d", function()
+    vim.diagnostic.goto_next({severity=error, float=float_win_opts})
+end, opts)
+
+vim.keymap.set("n", "<C-W>d", function()
+  vim.diagnostic.open_float(float_win_opts);
+  vim.schedule(vim.diagnostic.open_float)
+end, opts)
 
 -- test :/; swap
 map('n', ':', ';', opts);
 map('n', ';', ':', opts);
 map('v', ':', ';', opts);
 map('v', ';', ':', opts);
+
+-- fast quit
+map('n', 'qa', ':qa!<cr>', opts);
+
+map('n', 'qa', ':qa!<cr>', opts);
+-- Workaround for :terminal where this key combination will clear the input
+map('t', '<S-space>', [[<space>]], opts)
+

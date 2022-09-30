@@ -14,14 +14,14 @@ local on_attach = function(client)
   buf_map('n', '<leader>sh', '<cmd>Lspsaga signature_help<CR>', opts)
   buf_map('n', 'K', '<cmd>Lspsaga hover_doc<CR>', opts)
   buf_map('n', '<leader>cs', '<cmd>Lspsaga show_line_diagnostics<CR>', opts)
-  vim.keymap.set("n", "[d", function()
-    require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-  end, opts)
-  vim.keymap.set("n", "]d", function()
-    require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-  end, opts)
-  buf_map('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
-  buf_map('v', '<leader>ca', '<cmd><C-U>Telescope lsp_range_code_actions<CR>', opts)
+  --[[ vim.keymap.set("n", "[d", function() ]]
+    --[[ require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR }) ]]
+  --[[ end, opts) ]]
+  --[[ vim.keymap.set("n", "]d", function() ]]
+    --[[ require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR }) ]]
+  --[[ end, opts) ]]
+  buf_map('n', '<leader>ca', '<cmd>Lspsaga code_actions<CR>', opts)
+  buf_map('v', '<leader>ca', '<cmd><C-U>Lspsaga range_code_actions<CR>', opts)
 
   -- vim.cmd [[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()]]
   if client.resolved_capabilities.signature_help then
