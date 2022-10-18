@@ -7,6 +7,10 @@ setopt prompt_subst
 zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
 
+# Neovide multigrid
+export NEOVIDE_FRAME='buttoless'
+export NEOVIDE_MULTIGRID=true
+
 source ~/.config/zsh/plugins/git.zh
 source ~/.config/zsh/themes/bira.zsh
 
@@ -74,8 +78,32 @@ lfcd () {
 }
 bindkey -s '^o' 'lfcd\n'
 
+# Use lf to switch directories and bind it to ctrl-o
+bindkey -s '^n' 'nvim\n'
+
 # Provide smartlog fn
 alias sl=$HOME/projects/hacks/smartlog/smartlog.mjs
+
+# Alias for neovide
+# alias neo="open -n $HOME/Applications/Neovide.app/ --args --multigrid --frame buttonless"
+# alias neo="open -n -a Neovide --args '--multigrid' '--frame=buttonless' '--' '--cmd' ' ' '\"cd $(pwd)\"'"
+function neo() {
+  local PROJECT_DIR="${1:=$PWD}";
+
+  if [[ "$PROJECT_DIR" != /* ]]; then
+     # Relative path
+     PROJECT_DIR="$(pwd)/${PROJECT_DIR}"
+  fi
+
+  if [[ -e "${PROJECT_DIR}" ]]; then
+    open -n -a Neovide --args '--multigrid' '--frame=buttonless' '--' '--cmd' ' ' "\"cd ${PROJECT_DIR}\""
+  else
+    echo "${PROJECT_DIR} does not exists."
+  fi
+}
+
+# Open drex as file explorer
+alias dr='nvim -c "Drex"'
 
 # User configuration
 source $HOME/.config/zsh/.gitaliases

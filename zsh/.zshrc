@@ -227,3 +227,10 @@ _user_key_binding() {
   bindkey "^[[B" history-substring-search-up
 }
 precmd_functions+=(_user_key_binding)
+
+# LF
+LFCD="$HOME/.config/lf/lfrc"                                #  pre-built binary, make sure to use absolute path
+
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
