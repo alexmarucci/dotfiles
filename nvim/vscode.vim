@@ -1,17 +1,6 @@
 let mapleader=" "
-colorscheme default
 
-" Plugins
-call plug#begin('~/.vim/plugged')
-
-Plug 'wellle/targets.vim'
-Plug 'tpope/vim-surround'
-
-call plug#end()
-
-"
 if exists('g:vscode')
-
   " VSCode extension
   nnoremap ? <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>')})<CR>
   xmap gc  <Plug>VSCodeCommentary
@@ -27,12 +16,12 @@ if exists('g:vscode')
 map gy "py
 map gp "pp
 map gP "pP
+map ; :
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
 
-set rnu
 "*****************************************************************************
 "" Abbreviations
 "*****************************************************************************
