@@ -40,6 +40,8 @@ opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
 -- NVCode colorscheme
 g.nvcode_termcolors=256
 
+-- Enables winbar
+opt.winbar = '%=%m %f' 
 -- Enables global statusline
 opt.laststatus = 3
 opt.undofile = true

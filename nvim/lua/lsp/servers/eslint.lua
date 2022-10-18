@@ -2,7 +2,7 @@ local on_attach = require('lsp.on_attach')
 
 return {
   on_attach = function(client)
-    client.resolved_capabilities.document_formatting = true
+    client.server_capabilities.documentFormattingProvider = true
     vim.cmd('autocmd BufWritePre <buffer> silent! <cmd>EslintFixAll<CR>')
     on_attach(client)
   end,
