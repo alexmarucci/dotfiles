@@ -116,7 +116,7 @@ return packer.startup(function()
     'neovim/nvim-lspconfig',
     cond = not_vscode,
     config = function()
-      require('lsp')
+      require('lsp.init')
     end,
     after = {
       'cmp',
@@ -182,7 +182,7 @@ return packer.startup(function()
       reload.lua_reload_dirs = {}
       reload.post_reload_hook = function()
         vim.cmd('source ' .. plugin_dir)
-        vim.cmd('colorscheme nvcode')
+        vim.cmd('colorscheme vscode')
       end
     end,
   })
@@ -280,13 +280,14 @@ return packer.startup(function()
     end,
   }
 
-  use({
-    'p00f/nvim-ts-rainbow',
-    cond = not_vscode,
-    event = 'BufRead',
-    after = 'nvim-treesitter'
-  })
-
+  --[[ use({ ]]
+  --[[   'p00f/nvim-ts-rainbow', ]]
+  --[[   disable = 1, ]]
+  --[[   cond = not_vscode, ]]
+  --[[   event = 'BufRead', ]]
+  --[[   after = 'nvim-treesitter' ]]
+  --[[ }) ]]
+        
   use({
     'windwp/nvim-ts-autotag',
     cond = not_vscode,
@@ -295,20 +296,10 @@ return packer.startup(function()
   })
 
   use({
-    'windwp/nvim-autopairs',
-    cond = not_vscode,
-    after = 'cmp',
-    event = 'BufRead',
-    config = function()
-      require('plugins.autopairs')
-    end,
-  })
-
-  use({
     'L3MON4D3/LuaSnip',
     cond = not_vscode,
     config = function()
-      require("luasnip").config.setup({ store_selection_keys="<C-i>" })
+      require("luasnip").setup({ store_selection_keys="<C-i>" })
     end
   })
 
@@ -341,6 +332,16 @@ return packer.startup(function()
   })
 
   use({ 'hrsh7th/cmp-nvim-lsp', cond = not_vscode, event = 'BufRead', after = 'cmp' })
+  use({
+    'windwp/nvim-autopairs',
+    cond = not_vscode,
+    after = 'cmp',
+    event = 'BufRead',
+    config = function()
+      require('plugins.autopairs')
+    end,
+  })
+
 
   use({
     'akinsho/bufferline.nvim',
@@ -376,6 +377,7 @@ return packer.startup(function()
   --   end,
   -- })
 
+  -- adds background color to hex text #fff
   use({
     'norcalli/nvim-colorizer.lua',
     cond = not_vscode,
@@ -427,7 +429,7 @@ return packer.startup(function()
 
   use 'famiu/bufdelete.nvim'
 
-  -- use ({ 'styled-components/vim-styled-components', branch = 'main' })
+  --[[ use ({ 'styled-components/vim-styled-components', branch = 'main' }) ]]
   use ({ 'charliesbot/night-owl.vim' })
   use 'folke/tokyonight.nvim'
   use 'Mofiqul/vscode.nvim'
@@ -444,12 +446,12 @@ return packer.startup(function()
 
   -- -- Experimental
   --[[ use 'ggandor/lightspeed.nvim' ]]
-  use({ "catppuccin/nvim", as = "catppuccin" })
+  -- use({ "catppuccin/nvim", as = "catppuccin" })
   -- --fades inactive buffers
   --[[ use({ ]]
   --[[   'TaDaa/vimade', ]]
   --[[   event = 'BufRead', ]]
-  --[[   cond = {vscode}, ]]
+  --[[   cond = not_vscode, ]]
   --[[   config = function() ]]
   --[[     require('vimade').setup() ]]
   --[[   end ]]
@@ -476,7 +478,7 @@ return packer.startup(function()
   --   end
   -- }
 
-  use({ 'andymass/vim-matchup', cond = not_vscode, after = 'nvim-treesitter' })
+  -- use({ 'andymass/vim-matchup', cond = not_vscode, after = 'nvim-treesitter' })
 
   use 'rhysd/clever-f.vim'
 
@@ -490,8 +492,6 @@ return packer.startup(function()
 
   -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
   use({'aklt/plantuml-syntax'})
-
-  use({'christianchiarulli/nvcode-color-schemes.vim'})
 
   -- use({
   --   'mfussenegger/nvim-dap',

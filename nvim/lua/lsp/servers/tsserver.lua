@@ -24,6 +24,8 @@ return {
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
+
+
     if client.config.flags then
       client.config.flags.allow_incremental_sync = true
     end

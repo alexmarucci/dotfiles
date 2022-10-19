@@ -37,8 +37,8 @@ g.terminal_color_15 = '#eeeeec'
 -- GUI Font (Neovide)
 opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
 
--- NVCode colorscheme
-g.nvcode_termcolors=256
+-- Disable legacy syntax
+vim.cmd[[syntax off]]
 
 -- Enables winbar
 opt.winbar = '%=%m %f' 
@@ -135,7 +135,7 @@ vim.g.vscode_style = "dark"
 -- vim.g.vscode_transparent = 1
 -- Enable italic comment
 vim.g.vscode_italic_comment = 1
-vim.cmd[[colorscheme nvcode]]
+vim.cmd[[colorscheme vscode]]
 
 -- vim.cmd[[colorscheme github_dark]]
 
