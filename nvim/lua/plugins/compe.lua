@@ -25,7 +25,7 @@ luasnip.filetype_extend("typescript", {"typescriptreact", "javascript"})
 
 cmp.setup({
   preselect = types.cmp.PreselectMode.None,
-  experimental = {ghost_text = true, native_menu = false},
+  experimental = {ghost_text = true},
   confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false},
 
   completion = { completeopt = 'menu,menuone,noinsert' },

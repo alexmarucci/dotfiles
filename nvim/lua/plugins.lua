@@ -5,8 +5,6 @@ local not_vscode = function()
   return vim.g.vscode == nil;
 end
 
--- require('postman')
-
 if present then
   packer = require('packer')
 else
@@ -18,44 +16,41 @@ local use = packer.use
 return packer.startup(function()
   use({ 'lewis6991/impatient.nvim' })
   use({ 'wbthomason/packer.nvim', event = 'VimEnter' })
-  use('duane9/nvim-rg')
+  use 'duane9/nvim-rg'
 
-  -- UI
+  -- -- UI
   use({
     'VonHeikemen/searchbox.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     requires = {
       { 'MunifTanjim/nui.nvim' },
     },
   })
   use({
     'nvim-lualine/lualine.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('plugins.lualine')
     end,
   })
   use({
     'luukvbaal/stabilize.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('stabilize').setup()
     end,
   })
+
+  -- -- Does not actually indent... adds vertical lines on indentation
   use({
     'lukas-reineke/indent-blankline.nvim',
+    cond = not_vscode,
     event = 'BufRead',
     config = function()
       require('plugins.indentline')
     end,
   })
-  -- use({
-  --   'monsonjeremy/onedark.nvim',
-  --   after = 'lualine.nvim',
-  --   config = function()
-  --     require('plugins.onedark').setupOneDark()
-  --   end,
-  -- })
+
   use({
     'kyazdani42/nvim-web-devicons',
     --[[ cond = {vscode}, ]]
@@ -67,30 +62,34 @@ return packer.startup(function()
 
   -- LSP
   use({
-    'glepnir/lspsaga.nvim', {branch = 'main' },
+    'glepnir/lspsaga.nvim',
+    branch = 'main',
+    cond = not_vscode,
     event = 'BufRead',
     config = function()
       require("lspsaga").init_lsp_saga();
     end,
   })
-  use({ 'ray-x/lsp_signature.nvim', event = 'BufRead' })
-  use({ 'folke/lua-dev.nvim', event = 'BufRead' })
+  use({ 'ray-x/lsp_signature.nvim', cond = not_vscode, event = 'BufRead' })
+  use({ 'folke/neodev.nvim', event = 'BufRead' })
   use({ 'williamboman/nvim-lsp-installer', event = 'BufRead' })
-  use({ 'nvim-lua/lsp_extensions.nvim', event = 'BufRead' })
-  use({
-    'ojroques/nvim-lspfuzzy',
-    requires = {
-      { 'junegunn/fzf', event = 'BufRead' },
-      { 'junegunn/fzf.vim', event = 'BufRead' },
-    },
-    event = 'BufRead',
-    config = function()
-      require('lspfuzzy').setup({})
-    end,
-  })
+  use({ 'nvim-lua/lsp_extensions.nvim', cond = not_vscode, event = 'BufRead' })
+  -- we use telescope instead
+  -- use({
+  --   'ojroques/nvim-lspfuzzy',
+  --   cond = not_vscode,
+  --   requires = {
+  --     { 'junegunn/fzf', event = 'BufRead' },
+  --     { 'junegunn/fzf.vim', event = 'BufRead' },
+  --   },
+  --   event = 'BufRead',
+  --   config = function()
+  --     require('lspfuzzy').setup({})
+  --   end,
+  -- })
   use({
     'filipdutescu/renamer.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     event = 'BufRead',
     after = 'plenary.nvim',
     requires = { { 'nvim-lua/plenary.nvim' } },
@@ -100,6 +99,7 @@ return packer.startup(function()
   })
   use({
     'folke/trouble.nvim',
+    cond = not_vscode,
     event = 'BufRead',
     after = 'nvim-web-devicons',
     config = function()
@@ -108,11 +108,13 @@ return packer.startup(function()
   })
   use({
     'onsails/lspkind-nvim',
+    cond = not_vscode,
     event = 'BufRead',
     module = 'lspkind',
   })
   use({
     'neovim/nvim-lspconfig',
+    cond = not_vscode,
     config = function()
       require('lsp')
     end,
@@ -122,36 +124,41 @@ return packer.startup(function()
       'nvim-lsp-installer',
       'lspsaga.nvim',
       'lsp_signature.nvim',
-      'lua-dev.nvim',
+      'neodev.nvim',
       'lsp_extensions.nvim',
-      'nvim-lspfuzzy',
+      -- marked for deletion
+      -- 'nvim-lspfuzzy',
       'trouble.nvim',
       'lspkind-nvim',
     },
   })
 
   use({
+    cond = not_vscode,
     'jose-elias-alvarez/null-ls.nvim',
     after = 'nvim-lspconfig',
     module = 'null-ls',
   })
 
   use({
+    cond = not_vscode,
     'jose-elias-alvarez/nvim-lsp-ts-utils',
     after = 'nvim-lspconfig',
     module = 'nvim-lsp-ts-utils',
   })
 
-  use({
-    'simrat39/rust-tools.nvim',
-    ft = 'rs',
-    config = function()
-      require('rust-tools').setup()
-    end,
-  })
+  -- use({
+  --   cond = not_vscode,
+  --   'simrat39/rust-tools.nvim',
+  --   ft = 'rs',
+  --   config = function()
+  --     require('rust-tools').setup()
+  --   end,
+  -- })
 
-  -- Terminal
+  -- -- Terminal
   use({
+    cond = not_vscode,
     'akinsho/toggleterm.nvim',
     tag = 'v2.*',
     cmd = { 'TermExec', 'ToggleTerm' },
@@ -163,11 +170,11 @@ return packer.startup(function()
   -- Navigation / Helpers
   --[[ use({ 'tpope/vim-fugitive', cond = {vscode}, cmd = { 'Git' } }) ]]
   use({ 'nvim-lua/plenary.nvim' })
-  use({ 'nvim-lua/popup.nvim', after = 'plenary.nvim' })
+  use({ 'nvim-lua/popup.nvim', cond = not_vscode, after = 'plenary.nvim' })
   use({
     'famiu/nvim-reload',
     cmd = 'Reload',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       local reload = require('nvim-reload')
       local plugin_dir = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
@@ -180,7 +187,6 @@ return packer.startup(function()
     end,
   })
   use({ 'simrat39/symbols-outline.nvim', cmd = 'SymbolsOutline' })
-  use({'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' })
   use({
     'numToStr/Comment.nvim',
     config = function()
@@ -190,8 +196,8 @@ return packer.startup(function()
   })
   use({ 'AndrewRadev/dsf.vim', event = 'BufRead' })
   -- use({ 'chaoren/vim-wordmotion', event = 'BufRead' })
-  use({ 'tweekmonster/startuptime.vim', cmd = 'StartupTime' })
-  use({ 'tversteeg/registers.nvim', cmd = 'Registers' })
+  use({ 'tweekmonster/startuptime.vim', cond = not_vscode, cmd = 'StartupTime' })
+  use({ 'tversteeg/registers.nvim', cond = not_vscode, cmd = 'Registers' })
   use({
     'vuki656/package-info.nvim',
     requires = 'MunifTanjim/nui.nvim',
@@ -201,10 +207,11 @@ return packer.startup(function()
     end,
   })
 
-  use({ 'fedepujol/move.nvim', cmd = { 'MoveLine', 'MoveBlock' } })
+  -- use({ 'fedepujol/move.nvim', cmd = { 'MoveLine', 'MoveBlock' } })
 
   use({
     'goolord/alpha-nvim',
+    cond = not_vscode,
     config = function()
       require('plugins.dashboard')
     end,
@@ -212,6 +219,7 @@ return packer.startup(function()
 
   use({
     'nvim-pack/nvim-spectre',
+    cond = not_vscode,
     require = 'plenary.nvim',
     module = 'spectre',
     config = function()
@@ -222,16 +230,20 @@ return packer.startup(function()
   use({
     'nvim-telescope/telescope.nvim',
     require = 'plenary.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('plugins.telescope')
     end,
   })
-  --[[ use {'nvim-telescope/telescope-fzf-native.nvim', cond = {vscode}, run = 'make' } ]]
+  use({
+    'nvim-telescope/telescope-fzf-native.nvim',
+    cond = not_vscode,
+    run = 'make'
+  })
 
   use({
     'Shatur/neovim-session-manager',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     require = 'plenary.nvim',
     config = function()
       require('plugins.neovim-session-manager')
@@ -240,12 +252,16 @@ return packer.startup(function()
 
   use({
     'nvim-treesitter/nvim-treesitter-refactor',
+    cond = not_vscode,
     event = 'BufRead',
     after = 'nvim-treesitter',
   })
 
+  use({'JoosepAlviste/nvim-ts-context-commentstring', cond = not_vscode, after = 'nvim-treesitter' })
+
   use({
     'nvim-treesitter/nvim-treesitter-context',
+    cond = not_vscode,
     event = 'BufRead',
     after = 'nvim-treesitter',
     config = function()
@@ -257,18 +273,30 @@ return packer.startup(function()
 
   use {
     'nvim-treesitter/nvim-treesitter',
+    cond = not_vscode,
     run = ':TSUpdate',
     config = function()
       require('plugins.nvim-treesitter')
     end,
   }
 
-  use({ 'p00f/nvim-ts-rainbow', event = 'BufRead', after = 'nvim-treesitter' })
+  use({
+    'p00f/nvim-ts-rainbow',
+    cond = not_vscode,
+    event = 'BufRead',
+    after = 'nvim-treesitter'
+  })
 
-  use({ 'windwp/nvim-ts-autotag', event = 'BufRead', after = 'nvim-treesitter' })
+  use({
+    'windwp/nvim-ts-autotag',
+    cond = not_vscode,
+    event = 'BufRead',
+    after = 'nvim-treesitter'
+  })
 
   use({
     'windwp/nvim-autopairs',
+    cond = not_vscode,
     after = 'cmp',
     event = 'BufRead',
     config = function()
@@ -278,7 +306,7 @@ return packer.startup(function()
 
   use({
     'L3MON4D3/LuaSnip',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require("luasnip").config.setup({ store_selection_keys="<C-i>" })
     end
@@ -287,10 +315,10 @@ return packer.startup(function()
   use({
     'hrsh7th/nvim-cmp',
     as = 'cmp',
+    cond = not_vscode,
     config = function()
       require('plugins.compe')
     end,
-    --[[ cond = {vscode}, ]]
     wants = {
       'LuaSnip',
       'cmp_luasnip',
@@ -312,14 +340,14 @@ return packer.startup(function()
     },
   })
 
-  use({ 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', after = 'cmp' })
-  
+  use({ 'hrsh7th/cmp-nvim-lsp', cond = not_vscode, event = 'BufRead', after = 'cmp' })
+
   use({
     'akinsho/bufferline.nvim',
     tag = "v2.*",
     requires = 'kyazdani42/nvim-web-devicons',
     event = 'BufRead',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('plugins.bufferline')
     end,
@@ -328,6 +356,7 @@ return packer.startup(function()
   use({ 'ton/vim-bufsurf', cond = not_vscode, event = 'BufRead' })
 
   use({
+    cond = not_vscode,
     'lewis6991/gitsigns.nvim',
     event = 'BufRead',
     after = 'plenary.nvim',
@@ -336,19 +365,20 @@ return packer.startup(function()
     end,
   })
 
-  use({
-    'kyazdani42/nvim-tree.lua',
-    --[[ cond = {vscode}, ]]
-    cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
-    after = 'nvim-web-devicons',
-    config = function()
-      require('plugins.nvim-tree')
-    end,
-  })
+  -- marked to be removed
+  -- use({
+  --   'kyazdani42/nvim-tree.lua',
+  --   cond = not_vscode,
+  --   cmd = { 'NvimTreeToggle', 'NvimTreeFindFile' },
+  --   after = 'nvim-web-devicons',
+  --   config = function()
+  --     require('plugins.nvim-tree')
+  --   end,
+  -- })
 
   use({
     'norcalli/nvim-colorizer.lua',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     event = 'BufRead',
     config = function()
       require('colorizer').setup()
@@ -357,40 +387,40 @@ return packer.startup(function()
 
   use({
     'folke/which-key.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('which-key').setup()
     end,
   })
 
-  -- use({
-  --   'dsznajder/vscode-es7-javascript-react-snippets',
-  --   run = 'yarn install --frozen-lockfile && yarn compile',
-  -- })
+  -- -- use({
+  -- --   'dsznajder/vscode-es7-javascript-react-snippets',
+  -- --   run = 'yarn install --frozen-lockfile && yarn compile',
+  -- -- })
 
-  use({
-    'TimUntersberger/neogit',
-    --[[ cond = {vscode}, ]]
-    cmd = 'Neogit',
-    after = 'plenary.nvim',
-    config = function()
-      require('neogit').setup({})
-    end,
-  })
+  -- use({
+  --   cond = not_vscode,
+  --   'TimUntersberger/neogit',
+  --   cmd = 'Neogit',
+  --   after = 'plenary.nvim',
+  --   config = function()
+  --     require('neogit').setup({})
+  --   end,
+  -- })
 
   use({ 'nathom/filetype.nvim' })
 
-  use { 'ibhagwan/fzf-lua',
-    requires = {
-      'vijaymarupudi/nvim-fzf',
-      'kyazdani42/nvim-web-devicons' } -- optional for icons
-  }
+  -- use { 'ibhagwan/fzf-lua',
+  --   requires = {
+  --     'vijaymarupudi/nvim-fzf',
+  --     'kyazdani42/nvim-web-devicons' } -- optional for icons
+  -- }
 
   use {
     'theblob42/drex.nvim',
     cond = not_vscode,
     requires = 'kyazdani42/nvim-web-devicons',
-    config = function() 
+    config = function()
       require('plugins.drex')
     end,
   }
@@ -404,7 +434,7 @@ return packer.startup(function()
 
   use({
     'karb94/neoscroll.nvim',
-    --[[ cond = {vscode}, ]]
+    cond = not_vscode,
     config = function()
       require('neoscroll').setup({
         easing_function = 'quintic' -- Default easing function
@@ -412,9 +442,10 @@ return packer.startup(function()
     end,
   })
 
-  -- Experimental 
+  -- -- Experimental
   --[[ use 'ggandor/lightspeed.nvim' ]]
   use({ "catppuccin/nvim", as = "catppuccin" })
+  -- --fades inactive buffers
   --[[ use({ ]]
   --[[   'TaDaa/vimade', ]]
   --[[   event = 'BufRead', ]]
@@ -426,27 +457,37 @@ return packer.startup(function()
 
   -- Experimental - use of next-gen surrounding
   -- use({ 'tpope/vim-surround', event = 'BufRead'})
-  use({ 'kylechui/nvim-surround', event = 'BufRead',
-  config = function() 
+  use({
+    'kylechui/nvim-surround',
+    event = 'BufRead',
+    config = function()
      require("nvim-surround").setup({})
     end
-})
+  })
+
   use({ 'wellle/targets.vim' })
   use({ 'tpope/vim-repeat', keys = '.' })
 
-  use {
-    "folke/zen-mode.nvim",
-    cmd = 'ZenMode',
-    config = function()
-      require("zen-mode").setup {}
-    end
-  }
+  -- use {
+  --   "folke/zen-mode.nvim",
+  --   cmd = 'ZenMode',
+  --   config = function()
+  --     require("zen-mode").setup {}
+  --   end
+  -- }
 
-  use({ 'andymass/vim-matchup', after = 'nvim-treesitter' })
+  use({ 'andymass/vim-matchup', cond = not_vscode, after = 'nvim-treesitter' })
 
   use 'rhysd/clever-f.vim'
-  use({ 'ggandor/leap.nvim' })
-  
+
+  use({
+    'ggandor/leap.nvim',
+    cond = not_vscode,
+    config = function()
+      require('leap').add_default_mappings();
+    end,
+  })
+
   -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
   use({'aklt/plantuml-syntax'})
 
@@ -463,23 +504,24 @@ return packer.startup(function()
   --   'rcarriga/nvim-dap-ui',
   --   requires = { { 'mfussenegger/nvim-dap' } },
   --   after = 'dap',
-  --   event = 'BufRead', 
+  --   event = 'BufRead',
   --   config = function ()
   --     require("dapui").setup()
   --   end
   -- }
 
   use({ 'rose-pine/neovim', as = 'rose-pine' })
-    
-  use({
-    'danymat/neogen',
-    --[[ cond = {vscode}, ]]
-    module = 'neogen',
-    cmd = 'Neogen',
-    config = function()
-      require('neogen').setup({ enabled = true })
-    end,
-  })
+
+  -- use({
+  --   'danymat/neogen',
+  --   cond = not_vscode,
+  --   module = 'neogen',
+  --   cmd = 'Neogen',
+  --   config = function()
+  --     require('neogen').setup({ enabled = true })
+  --   end,
+  -- })
+
 end, {
   config = {
     -- Move to lua dir so impatient.nvim can cache it

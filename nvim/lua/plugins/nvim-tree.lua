@@ -19,24 +19,6 @@ nvimtree.setup({
       error = '',
     },
   },
-  icons = {
-    glyphs = {
-      default = '',
-      symlink = '',
-      folder = {
-        open = '',
-        default = '',
-        -- default = '',
-        -- open = '',
-        empty = '',
-        empty_open = '',
-        symlink = '',
-        symlink_open = '',
-      },
-      lsp = { hint = '', info = '', warning = '', error = '' },
-    },
-    show = { git = false, folder = true, file = true },
-  },
   renderer = {
     highlight_opened_files = "icon",
     highlight_git = true,
