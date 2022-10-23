@@ -257,7 +257,11 @@ return packer.startup(function()
     after = 'nvim-treesitter',
   })
 
-  use({'JoosepAlviste/nvim-ts-context-commentstring', cond = not_vscode, after = 'nvim-treesitter' })
+  use({
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    cond = not_vscode,
+    after = 'nvim-treesitter'
+  })
 
   use({
     'nvim-treesitter/nvim-treesitter-context',
@@ -280,13 +284,12 @@ return packer.startup(function()
     end,
   }
 
-  --[[ use({ ]]
-  --[[   'p00f/nvim-ts-rainbow', ]]
-  --[[   disable = 1, ]]
-  --[[   cond = not_vscode, ]]
-  --[[   event = 'BufRead', ]]
-  --[[   after = 'nvim-treesitter' ]]
-  --[[ }) ]]
+   use({ 
+     'p00f/nvim-ts-rainbow', 
+     cond = not_vscode, 
+     event = 'BufRead', 
+     after = 'nvim-treesitter' 
+   }) 
         
   use({
     'windwp/nvim-ts-autotag',
@@ -445,6 +448,7 @@ return packer.startup(function()
   })
 
   -- -- Experimental
+  use 'takac/vim-hardtime'
   --[[ use 'ggandor/lightspeed.nvim' ]]
   -- use({ "catppuccin/nvim", as = "catppuccin" })
   -- --fades inactive buffers
@@ -493,22 +497,36 @@ return packer.startup(function()
   -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
   use({'aklt/plantuml-syntax'})
 
-  -- use({
-  --   'mfussenegger/nvim-dap',
-  --   config = function ()
-  --     require('plugins.nvim-dap');
-  --   end
-  -- })
-  --
-  -- use {
-  --   'rcarriga/nvim-dap-ui',
-  --   requires = { { 'mfussenegger/nvim-dap' } },
-  --   after = 'dap',
-  --   event = 'BufRead',
-  --   config = function ()
-  --     require("dapui").setup()
-  --   end
-  -- }
+  use({
+    cond = not_vscode,
+    'mfussenegger/nvim-dap',
+  })
+
+  use {
+    'rcarriga/nvim-dap-ui',
+    cond = not_vscode,
+    requires = { 'mfussenegger/nvim-dap' },
+    event = 'BufRead',
+    config = function ()
+      require("plugins.nvim-dap-ui")
+    end
+  }
+
+  use {
+    "microsoft/vscode-js-debug",
+    cond = not_vscode,
+    opt = true,
+    run = "npm install --legacy-peer-deps && npm run compile" 
+  }
+
+  use {
+    "mxsdev/nvim-dap-vscode-js",
+    cond = not_vscode,
+    requires = {"mfussenegger/nvim-dap"},
+    config = function ()
+      require('plugins.nvim-dap-vscode-js');
+    end
+  }
 
   use({ 'rose-pine/neovim', as = 'rose-pine' })
 

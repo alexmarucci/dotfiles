@@ -21,7 +21,7 @@ end
 luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
 
 -- Use tsx and js snippets in ts
-luasnip.filetype_extend("typescript", {"typescriptreact", "javascript"})
+luasnip.filetype_extend("typescript", {"javascript"})
 
 cmp.setup({
   preselect = types.cmp.PreselectMode.None,

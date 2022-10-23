@@ -32,7 +32,7 @@ end
 
 -- Buffer local keymap
 function M.buf_map(...)
-  vim.api.nvim_buf_set_keymap(bufnr, ...)
+  vim.keymap.nvim_buf_set_keymap(bufnr, ...)
 end
 
 -- Buffer local option

@@ -99,8 +99,6 @@ end
 -- map('n', 'd*', [[*``dgn]], opts)
 -- map('n', 'd#', [[*``dgN]], opts)
 
-map('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], opts)
-
 -- Delete current visual selection and dump in black hole buffer before pasting
 map('v', 'p', [["_dP]], opts)
 
@@ -109,8 +107,8 @@ map('v', '<leader>y', [["+y]], opts)
 
 map('n', '<leader>Y', [[gg"+yG]], opts)
 
-map('n', '<leader>d', [[_d]], opts)
-map('v', '<leader>d', [[_d]], opts)
+-- map('n', '<leader>d', [["_d]], opts)
+-- map('v', '<leader>d', [["_d]], opts)
 -- map('n', ',', [[<PageDown>]], opts)
 -- map('n', '-', [[<PageUp>]], opts)
 
@@ -126,7 +124,8 @@ map('v', '<leader>d', [[_d]], opts)
 
 map('n', '<S-t>', [[<Cmd>tabnew<CR>]], opts)
 map('n', '<S-x>', [[<Cmd>Bdelete<CR>]], opts)
-map('n', '<leader>b', [[<Cmd>BufferLinePick<CR>]], opts)
+-- conflicts with DAP, but also never use it
+-- map('n', '<leader>b', [[<Cmd>BufferLinePick<CR>]], opts)
 
 -- map('n', ']b', [[<Cmd>BufferLineCycleNext<CR>]], opts)
 -- map('n', '[b', [[<Cmd>BufferLineCyclePrev<CR>]], opts)
@@ -165,8 +164,36 @@ map('n', '<C-j>', [[:call WinMove('j')<CR>]], opts)
 map('n', '<C-k>', [[:call WinMove('k')<CR>]], opts)
 map('n', '<C-l>', [[:call WinMove('l')<CR>]], opts)
 
-map('n', '/', '<cmd>lua require("searchbox").incsearch()<CR>', opts)
-map('n', '?', '<cmd>lua require("searchbox").incsearch({ reverse = true })<CR>', opts)
+-- map('n', '/', '<cmd>lua require("searchbox").incsearch()<CR>', opts)
+vim.keymap.set('n', '/', function()
+  local winid = vim.api.nvim_get_current_win();
+  local config = vim.api.nvim_win_get_config(winid);
+
+  if config.relative ~= '' or config.zindex then
+   -- window with this window_id is floating
+   -- prefer this as is async
+   -- vim.api.nvim_input('/'); 
+   -- try this if the above does not work
+   vim.api.nvim_feedkeys('/', 'n', false --[[escape]])
+  else
+    require('searchbox').incsearch()
+  end
+end, opts)
+-- map('n', '?', '<cmd>lua require("searchbox").incsearch({ reverse = true })<CR>', opts)
+vim.keymap.set('n', '?', function()
+  local winid = vim.api.nvim_get_current_win();
+  local config = vim.api.nvim_win_get_config(winid);
+
+  if config.relative ~= '' or config.zindex then
+   -- window with this window_id is floating
+   -- prefer this as is async
+   -- vim.api.nvim_input('?'); 
+   -- try this if the above does not work
+   vim.api.nvim_feedkeys('?', 'n', false --[[escape]])
+  else
+    require('searchbox').incsearch({reverse = true})
+  end
+end, opts)
 
 map(
   'v',

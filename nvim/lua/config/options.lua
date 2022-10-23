@@ -37,9 +37,6 @@ g.terminal_color_15 = '#eeeeec'
 -- GUI Font (Neovide)
 opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
 
--- Disable legacy syntax
-vim.cmd[[syntax off]]
-
 -- Enables winbar
 opt.winbar = '%=%m %f' 
 -- Enables global statusline

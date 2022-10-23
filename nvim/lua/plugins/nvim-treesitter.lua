@@ -20,7 +20,8 @@ local parsers_maintained = {
 treesitter.setup({
  autopairs = { enable = true },
  autotag = { enable = true },
- rainbow = { enable = true, extended_mode = false, max_file_lines = 2000 },
+ -- last time messed up the syntax highlighter
+ rainbow = { enable = false, extended_mode = false, max_file_lines = 2000 },
  ensure_installed = parsers_maintained,
  context_commentstring = {
    enable = true,
