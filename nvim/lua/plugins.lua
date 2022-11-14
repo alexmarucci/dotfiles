@@ -189,6 +189,7 @@ return packer.startup(function()
   use({ 'simrat39/symbols-outline.nvim', cmd = 'SymbolsOutline' })
   use({
     'numToStr/Comment.nvim',
+    cond = not_vscode,
     config = function()
       require('plugins.Comment')
     end,
@@ -284,13 +285,13 @@ return packer.startup(function()
     end,
   }
 
-   use({ 
-     'p00f/nvim-ts-rainbow', 
-     cond = not_vscode, 
-     event = 'BufRead', 
-     after = 'nvim-treesitter' 
-   }) 
-        
+   use({
+     'p00f/nvim-ts-rainbow',
+     cond = not_vscode,
+     event = 'BufRead',
+     after = 'nvim-treesitter'
+   })
+
   use({
     'windwp/nvim-ts-autotag',
     cond = not_vscode,
@@ -307,9 +308,18 @@ return packer.startup(function()
   })
 
   use({
+    'pwntester/octo.nvim',
+    cmd = "Octo",
+    config = function ()
+      require"octo".setup()
+    end
+  })
+
+  use({
     'hrsh7th/nvim-cmp',
     as = 'cmp',
     cond = not_vscode,
+    opt = false,
     config = function()
       require('plugins.compe')
     end,
@@ -432,6 +442,7 @@ return packer.startup(function()
 
   use 'famiu/bufdelete.nvim'
 
+  -- Themes colorscheme
   --[[ use ({ 'styled-components/vim-styled-components', branch = 'main' }) ]]
   use ({ 'charliesbot/night-owl.vim' })
   use 'folke/tokyonight.nvim'
@@ -488,7 +499,6 @@ return packer.startup(function()
 
   use({
     'ggandor/leap.nvim',
-    cond = not_vscode,
     config = function()
       require('leap').add_default_mappings();
     end,
@@ -516,7 +526,7 @@ return packer.startup(function()
     "microsoft/vscode-js-debug",
     cond = not_vscode,
     opt = true,
-    run = "npm install --legacy-peer-deps && npm run compile" 
+    run = "npm install --legacy-peer-deps && npm run compile"
   }
 
   use {

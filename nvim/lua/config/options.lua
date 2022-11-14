@@ -38,7 +38,7 @@ g.terminal_color_15 = '#eeeeec'
 opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
 
 -- Enables winbar
-opt.winbar = '%=%m %f' 
+opt.winbar = '%=%m %f'
 -- Enables global statusline
 opt.laststatus = 3
 opt.undofile = true
@@ -127,7 +127,7 @@ g.tokyonight_italic_functions = true
 
 -- vim.cmd[[colorscheme tokyonight]]
 
-vim.g.vscode_style = "dark"
+-- vim.g.vscode_style = "dark"
 -- Enable transparent background.
 -- vim.g.vscode_transparent = 1
 -- Enable italic comment

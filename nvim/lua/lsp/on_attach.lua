@@ -5,8 +5,6 @@ local on_attach = function(client)
 
   buf_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  print('Running')
-
   -- vim.keymap.set('n', '<leader>dd', '<cmd>Telescope lsp_definitions<CR>', opts)
   -- vim.keymap.set('n', '<leader>df', '<cmd>Telescope lsp_implementations<CR>', opts)
   -- vim.keymap.set('n', '<leader>dt', '<cmd>Telescope lsp_type_definitions<CR>', opts)
