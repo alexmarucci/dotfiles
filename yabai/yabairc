@@ -1,0 +1,31 @@
+# bsp or float (default: float)
+yabai -m config layout bsp
+
+# Set all padding and gaps to 20pt (default: 0)
+yabai -m config top_padding    20
+yabai -m config bottom_padding 20
+yabai -m config left_padding   20
+yabai -m config right_padding  20
+yabai -m config window_gap     20
+
+# window.padding.y
+
+# on or off (default: off)
+yabai -m config auto_balance off
+
+# float system preferences
+yabai -m rule --add app='^System Information$' manage=off
+yabai -m rule --add app='^System Preferences$' manage=off
+yabai -m rule --add title='Preferences$' manage=off
+
+# float settings windows
+yabai -m rule --add title='Settings$' manage=off
+
+# Setup window borders
+yabai -m config window_border on
+yabai -m config window_border_width 1
+# yabai -m config active_window_border_color 0xffEE4B2B
+yabai -m config active_window_border_color 0xffffffff
+yabai -m config normal_window_border_color 0xff555555
+yabai -m config window.padding.x 2
+yabai -m config window.padding.y 2
