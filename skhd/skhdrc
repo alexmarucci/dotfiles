@@ -85,6 +85,7 @@ cmd + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
 
 # Focus display focused before the current one (so you can alternate)
 alt - 6 : yabai -m window --focus recent
+alt - 0 : yabai -m space --balance
 
 alt - f : yabai -m window --toggle zoom-fullscreen
 alt + shift - f : yabai -m window --toggle float --grid 4:4:1:1:2:2
@@ -119,8 +120,8 @@ bookmark_mode < alt - b ; default
 
 # Disables skhd
 :: passthrough
-cmd + shift - p ; passthrough
-passthrough < cmd + shift - p ; default
+alt - p ; passthrough
+passthrough < alt - p ; default
 
 ctrl - w : skhd --key "alt - backspace"
 
@@ -129,6 +130,9 @@ ctrl + alt - a : skhd --key "ctrl - left"
 ctrl + alt - d : skhd --key "ctrl - right"
 ctrl + alt - w : skhd --key "ctrl - up"
 ctrl + alt - s : skhd --key "ctrl - down"
+
+## Applications
+alt - o : pass otp -c okta
 
 # focus window
 # alt - h : yabai -m window --focus west

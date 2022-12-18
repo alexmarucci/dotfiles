@@ -17,6 +17,9 @@ yabai -m config auto_balance off
 yabai -m rule --add app='^System Information$' manage=off
 yabai -m rule --add app='^System Preferences$' manage=off
 yabai -m rule --add title='Preferences$' manage=off
+yabai -m rule --add title='Pop$' manage=off
+yabai -m rule --add title='Slack$' window_border_blur=off
+yabai -m config window_border_blur off
 
 # float settings windows
 yabai -m rule --add title='Settings$' manage=off
@@ -29,3 +32,6 @@ yabai -m config active_window_border_color 0xffffffff
 yabai -m config normal_window_border_color 0xff555555
 yabai -m config window.padding.x 2
 yabai -m config window.padding.y 2
+
+# config: always keep windows balance
+yabai -m config auto_balance on
