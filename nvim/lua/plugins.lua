@@ -300,14 +300,6 @@ return packer.startup(function()
   })
 
   use({
-    'L3MON4D3/LuaSnip',
-    cond = not_vscode,
-    config = function()
-      require("luasnip").setup({ store_selection_keys="<C-i>" })
-    end
-  })
-
-  use({
     'pwntester/octo.nvim',
     cmd = "Octo",
     config = function ()
@@ -323,28 +315,55 @@ return packer.startup(function()
     config = function()
       require('plugins.compe')
     end,
-    wants = {
-      'LuaSnip',
-      'cmp_luasnip',
-      'cmp-nvim-lsp',
-      'cmp-buffer',
-      'cmp-path',
-      'cmp-treesitter',
-      'cmp-spell',
-      'cmp-rg',
-    },
-    requires = {
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      { 'hrsh7th/cmp-buffer', event = 'InsertCharPre' },
-      { 'hrsh7th/cmp-path', event = 'InsertCharPre' },
-      { 'f3fora/cmp-spell', event = 'InsertCharPre' },
-      { 'ray-x/cmp-treesitter', event = 'InsertCharPre' },
-      { 'lukas-reineke/cmp-rg', event = 'InsertCharPre' },
-    },
   })
 
+  -- "cmp" dependencies
+  use({ 
+    'saadparwaiz1/cmp_luasnip',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
+  use({ 
+    'hrsh7th/cmp-buffer',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
+  use({ 
+    'hrsh7th/cmp-path',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
+  use({ 
+    'f3fora/cmp-spell',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
+  use({ 
+    'ray-x/cmp-treesitter',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
+  use({ 
+    'lukas-reineke/cmp-rg',
+    after = 'cmp',
+    cond = not_vscode,
+    event = 'InsertCharPre' 
+  })
   use({ 'hrsh7th/cmp-nvim-lsp', cond = not_vscode, event = 'BufRead', after = 'cmp' })
+  use({
+    'L3MON4D3/LuaSnip',
+    cond = not_vscode,
+    config = function()
+      require("luasnip").setup({ store_selection_keys="<C-i>" })
+    end
+  })
+  -- end "cmp" dependencies
+
   use({
     'windwp/nvim-autopairs',
     cond = not_vscode,

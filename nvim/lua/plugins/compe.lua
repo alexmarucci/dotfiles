@@ -24,11 +24,11 @@ luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
 luasnip.filetype_extend("typescript", {"javascript"})
 
 cmp.setup({
-  preselect = types.cmp.PreselectMode.None,
+  preselect = cmp.PreselectMode.Item,
   experimental = {ghost_text = true},
-  confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false},
+  -- confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = true},
 
-  completion = { completeopt = 'menu,menuone,noinsert' },
+  -- completion = { completeopt = 'menu,menuone,noinsert' },
   formatting = {
     format = lspkind.cmp_format({
       with_text = false,
@@ -58,14 +58,14 @@ cmp.setup({
     end),
     ['<Down>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item()
+        cmp.select_next_item({ count = 1 })
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      elseif vim.b._copilot_suggestion ~= nil then
-        vim.fn.feedkeys(
-          vim.api.nvim_replace_termcodes(vim.fn['copilot#Accept'](), true, true, true),
-          ''
-        )
+      -- elseif vim.b._copilot_suggestion ~= nil then
+      --   vim.fn.feedkeys(
+      --     vim.api.nvim_replace_termcodes(vim.fn['copilot#Accept'](), true, true, true),
+      --     ''
+      --   )
       else
         fallback()
       end
@@ -75,7 +75,7 @@ cmp.setup({
     }),
     ['<Up>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_prev_item()
+        cmp.select_prev_item({ count = 1 })
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
       else
