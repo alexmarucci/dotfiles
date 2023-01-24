@@ -67,12 +67,18 @@ return packer.startup(function()
     cond = not_vscode,
     event = 'BufRead',
     config = function()
-      require("lspsaga").init_lsp_saga();
+      require("lspsaga").setup();
     end,
   })
   use({ 'ray-x/lsp_signature.nvim', cond = not_vscode, event = 'BufRead' })
   use({ 'folke/neodev.nvim', event = 'BufRead' })
-  use({ 'williamboman/nvim-lsp-installer', event = 'BufRead' })
+  use({
+    'williamboman/mason.nvim',
+    event = 'BufRead',
+    config = function()
+      require('mason').setup();
+    end,
+  })
   use({ 'nvim-lua/lsp_extensions.nvim', cond = not_vscode, event = 'BufRead' })
   -- we use telescope instead
   -- use({
@@ -113,17 +119,27 @@ return packer.startup(function()
     module = 'lspkind',
   })
   use({
+    "williamboman/mason-lspconfig.nvim",
+    event = 'BufRead',
+    config = function()
+      require('mason-lspconfig').setup();
+    end
+  })
+
+  use({
     'neovim/nvim-lspconfig',
     cond = not_vscode,
+    event = 'BufRead',
     config = function()
       require('lsp.init')
     end,
     after = {
       'cmp',
       'cmp-nvim-lsp',
-      'nvim-lsp-installer',
       'lspsaga.nvim',
       'lsp_signature.nvim',
+      'mason.nvim',
+      'mason-lspconfig.nvim',
       'neodev.nvim',
       'lsp_extensions.nvim',
       -- marked for deletion
@@ -132,7 +148,7 @@ return packer.startup(function()
       'lspkind-nvim',
     },
   })
-
+  
   use({
     cond = not_vscode,
     'jose-elias-alvarez/null-ls.nvim',

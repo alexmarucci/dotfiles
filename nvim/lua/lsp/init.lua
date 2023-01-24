@@ -1,12 +1,15 @@
 local present1, lspconfig = pcall(require, 'lspconfig')
-local present2, lspinstall = pcall(require, 'nvim-lsp-installer')
-local present3, lsp_installer_servers = pcall(require, 'nvim-lsp-installer.servers')
-if not (present1 or present2 or present3) then
+local present2, lspinstall = pcall(require, 'mason')
+local present3, mason_regitry = pcall(require, 'mason-registry');
+local present4, mason_lspconfig = pcall(require, 'mason-lspconfig')
+if not (present1 or present2 or present3 or present4) then
   return
 end
 
 local base_config = require('lsp.config')
 local configs = require('lsp.servers')
+local mason_to_lspconfig = mason_lspconfig.get_mappings().mason_to_lspconfig;
+local lspconfig_to_mason = mason_lspconfig.get_mappings().lspconfig_to_mason;
 
 local required_servers = {
   'bashls',
@@ -28,19 +31,23 @@ local required_servers = {
 
 local function auto_install_servers()
   for _, name in pairs(required_servers) do
-    local ok, server = lsp_installer_servers.get_server(name)
-    -- Check that the server is supported in nvim-lsp-installer
-    if ok and not server:is_installed() then
-      server:install()
+    local package_name = lspconfig_to_mason[name];
+    local ok = mason_regitry.has_package(package_name);
+    local package = ok and mason_regitry.get_package(package_name)
+
+    -- Check that the server is supported in mason
+    if ok and package and not package:is_installed() then
+      package:install()
     end
   end
 end
 
 local function run_servers_config()
-  for _, server in pairs(lspinstall.get_installed_servers()) do
-    local config = configs[server.name]
+  for _, package_name in pairs(mason_regitry.get_installed_package_names()) do
+    local server_name = mason_to_lspconfig[package_name];
+    local config = configs[server_name]
 
-    lspconfig[server.name].setup(config or base_config())
+    lspconfig[server_name].setup(config or base_config())
 
     vim.cmd([[ do User LspAttachBuffers ]])
   end
