@@ -26,7 +26,7 @@ luasnip.filetype_extend("typescript", {"javascript"})
 cmp.setup({
   preselect = cmp.PreselectMode.Item,
   experimental = {ghost_text = true},
-  -- confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = true},
+  confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = true},
 
   -- completion = { completeopt = 'menu,menuone,noinsert' },
   formatting = {

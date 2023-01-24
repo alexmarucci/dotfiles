@@ -78,7 +78,8 @@ opt.numberwidth = 2
 -- for indentline
 opt.expandtab = true
 opt.shiftwidth = 2
-opt.smartindent = true
+-- This causes jsx/tsx files to be wrongly indented
+opt.smartindent = false
 
 -- Backups
 opt.backup = true

@@ -30,10 +30,8 @@ local function auto_install_servers()
   for _, name in pairs(required_servers) do
     local ok, server = lsp_installer_servers.get_server(name)
     -- Check that the server is supported in nvim-lsp-installer
-    if ok then
-      if not server:is_installed() then
-        server:install()
-      end
+    if ok and not server:is_installed() then
+      server:install()
     end
   end
 end
