@@ -6,6 +6,9 @@ end
 if (not vim.g.vscode) then
   lualine.setup({
     options = { theme = 'vscode' },
-    sections = { lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } }, { 'filename' } } },
+    sections = {
+      lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } }, { 'filename' } },
+      lualine_x = { 'tabnine' },
+    },
   })
 end

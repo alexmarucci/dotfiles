@@ -67,7 +67,10 @@ return packer.startup(function()
     cond = not_vscode,
     event = 'BufRead',
     config = function()
-      require("lspsaga").setup();
+      require("lspsaga").setup({});
+      vim.schedule(function()
+        vim.cmd('colorscheme vscode')
+      end)
     end,
   })
   use({ 'ray-x/lsp_signature.nvim', cond = not_vscode, event = 'BufRead' })
@@ -480,7 +483,7 @@ return packer.startup(function()
   -- Themes colorscheme
   --[[ use ({ 'styled-components/vim-styled-components', branch = 'main' }) ]]
   use ({ 'charliesbot/night-owl.vim' })
-  use 'folke/tokyonight.nvim'
+  use ({'folke/tokyonight.nvim', branch = 'main'})
   use 'Mofiqul/vscode.nvim'
 
   use({
@@ -574,6 +577,24 @@ return packer.startup(function()
   }
 
   use({ 'rose-pine/neovim', as = 'rose-pine' })
+  use 'olimorris/onedarkpro.nvim'
+
+  use {
+    -- 'codota/tabnine-nvim',
+    '~/projects/_/tabnine-nvim',
+    run = "./dl_binaries.sh",
+    event = 'BufRead',
+    config = function ()
+      require('tabnine').setup({
+        disable_auto_comment=true,
+        accept_keymap="<C-l>",
+        dismiss_keymap = "<C-e>",
+        debounce_ms = 300,
+        suggestion_color = {gui = "#808080", cterm = 244},
+        execlude_filetypes = {"TelescopePrompt"}
+      })
+    end
+  }
 
   -- use({
   --   'danymat/neogen',

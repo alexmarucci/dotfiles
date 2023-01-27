@@ -20,7 +20,8 @@ local required_servers = {
   'rust_analyzer',
   'tsserver',
   'vimls',
-  'graphql',
+  -- this breaks LspSaga and I do not use it anyway
+  -- 'graphql',
   'terraformls',
   'prismals',
   'elixirls',

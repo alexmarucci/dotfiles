@@ -16,7 +16,11 @@ local function base_config()
     -- enable snippet support
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      client.server_capabilities.hoverProvider = false
+
+      on_attach(client);
+    end,
   }
 end
 
