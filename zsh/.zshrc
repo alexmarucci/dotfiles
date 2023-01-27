@@ -1,5 +1,10 @@
 source "$HOME/.config/zsh/config.zsh"
+
 return;
+
+# !!! The below configuration is deprecated. Do not use.
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -114,7 +119,6 @@ function doesFileExists() {
   fi
 }
 
-# alias y='yarn'
 # # Yarn shortener (with args only)
 function y() {
   local bin=${1:=''};
@@ -176,7 +180,6 @@ function img() {
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 
 _on_directory_change() {
   # emulate -L zsh

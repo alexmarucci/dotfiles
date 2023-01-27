@@ -42,6 +42,10 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
+# Add binding to insert-last-word
+bindkey '\e.' insert-last-word
+bindkey -M viins '\e.' insert-last-word
+
 # Auto suggestions binding
 bindkey '^K' clear-screen
 
@@ -168,3 +172,7 @@ bindkey "^[[B" history-substring-search-down # Arrow up
 bindkey "^[[A" history-substring-search-up # Arrow down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# Initialise zoxide
+eval "$(zoxide init zsh)"
+alias cd="z"
