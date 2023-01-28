@@ -3,6 +3,7 @@ local present2, lspkind = pcall(require, 'lspkind')
     --   luasnip.lsp_expand(args.body)
 local present3, luasnip = pcall(require, 'luasnip')
 local types = require('cmp.types')
+local compare = require('cmp.config.compare')
 
 -- local present4, luasnipVscode = pcall(require, 'luasnip.loaders/from_vscode')
 
@@ -28,10 +29,20 @@ cmp.setup({
   experimental = {ghost_text = true},
   confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = true},
 
-  -- completion = { completeopt = 'menu,menuone,noinsert' },
+  window = {
+    completion = cmp.config.window.bordered({
+      scrollbar = false,
+    })
+  },
+
+  -- completion = { -- completeopt = 'menu,menuone,noinsert' },
   formatting = {
     format = lspkind.cmp_format({
       with_text = false,
+      menu = {
+        cmp_tabnine = '',
+        treesitter = '',
+      }
       --[[ menu = {
         buffer = ' ﬘ ',
         path = '   ',
@@ -50,6 +61,7 @@ cmp.setup({
     -- end,
   },
   mapping = {
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     ['<Tab>'] = cmp.mapping(function()
       if luasnip.expand_or_jumpable() then
@@ -86,14 +98,30 @@ cmp.setup({
     ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
-    { name = 'luasnip', option = { use_show_condition = false } },
-    { name = 'buffer' },
+    { name = 'cmp_tabnine', keyword_length = 1 },
+    -- { name = 'luasnip', option = { use_show_condition = false } },
+    -- { name = 'buffer' },
+    { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'nvim_lua' },
-    { name = 'spell' },
-    { name = 'nvim_lsp' },
-    -- { name = 'treesitter' },
+    -- { name = 'spell' },
+    { name = 'treesitter' },
     -- { name = 'rg' },
+  },
+
+   sorting = {
+    priority_weight = 2,
+    comparators = {
+      require('cmp_tabnine.compare'),
+      compare.offset,
+      compare.exact,
+      compare.score,
+      compare.recently_used,
+      compare.kind,
+      compare.sort_text,
+      compare.length,
+      compare.order,
+    },
   },
 })
 

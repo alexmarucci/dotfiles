@@ -578,23 +578,27 @@ return packer.startup(function()
 
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   use 'olimorris/onedarkpro.nvim'
+  use 'ajmwagar/vim-deus'
 
-  use {
-    -- 'codota/tabnine-nvim',
-    '~/projects/_/tabnine-nvim',
-    run = "./dl_binaries.sh",
-    event = 'BufRead',
-    config = function ()
-      require('tabnine').setup({
-        disable_auto_comment=true,
-        accept_keymap="<C-l>",
-        dismiss_keymap = "<C-e>",
-        debounce_ms = 300,
-        suggestion_color = {gui = "#808080", cterm = 244},
-        execlude_filetypes = {"TelescopePrompt"}
-      })
-    end
-  }
+  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+
+
+  -- use {
+  --   -- 'codota/tabnine-nvim',
+  --   '~/projects/_/tabnine-nvim',
+  --   run = "./dl_binaries.sh",
+  --   event = 'BufRead',
+  --   config = function ()
+  --     require('tabnine').setup({
+  --       disable_auto_comment=true,
+  --       accept_keymap="<C-l>",
+  --       dismiss_keymap = "<C-e>",
+  --       debounce_ms = 300,
+  --       suggestion_color = {gui = "#808080", cterm = 244},
+  --       execlude_filetypes = {"TelescopePrompt"}
+  --     })
+  --   end
+  -- }
 
   -- use({
   --   'danymat/neogen',
