@@ -9,6 +9,10 @@ local lsp_signature_config = {
   floating_window = false,
 }
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
 local tsserver_plugins = {
   {
     name = 'typescript-styled-plugin',
@@ -20,6 +24,7 @@ return {
   init_options = {
     plugins = tsserver_plugins,
   },
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false

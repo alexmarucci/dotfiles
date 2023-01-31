@@ -16,10 +16,15 @@ local tsserver_plugins = {
   }
 };
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities(
+  vim.lsp.protocol.make_client_capabilities()
+)
+
 return {
   init_options = {
     plugins = tsserver_plugins,
   },
+  capabilities = capabilities,
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false

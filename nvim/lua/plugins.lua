@@ -373,6 +373,12 @@ return packer.startup(function()
     cond = not_vscode,
     event = 'InsertCharPre' 
   })
+  use ({
+    'tzachar/cmp-tabnine',
+    run = './install.sh',
+    after = 'cmp',
+    cond = not_vscode,
+  })
   use({ 'hrsh7th/cmp-nvim-lsp', cond = not_vscode, event = 'BufRead', after = 'cmp' })
   use({
     'L3MON4D3/LuaSnip',
@@ -579,8 +585,7 @@ return packer.startup(function()
   use({ 'rose-pine/neovim', as = 'rose-pine' })
   use 'olimorris/onedarkpro.nvim'
   use 'ajmwagar/vim-deus'
-
-  use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+  use 'gbprod/nord.nvim'
 
 
   -- use {
