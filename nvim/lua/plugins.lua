@@ -154,17 +154,30 @@ return packer.startup(function()
   
   use({
     cond = not_vscode,
-    'jose-elias-alvarez/null-ls.nvim',
-    after = 'nvim-lspconfig',
-    module = 'null-ls',
+    'jose-elias-alvarez/typescript.nvim',
+    event = 'BufRead',
   })
 
   use({
     cond = not_vscode,
-    'jose-elias-alvarez/nvim-lsp-ts-utils',
-    after = 'nvim-lspconfig',
-    module = 'nvim-lsp-ts-utils',
+    'jose-elias-alvarez/null-ls.nvim',
   })
+
+  use({
+    cond = not_vscode,
+    event = 'BufRed',
+    'MunifTanjim/prettier.nvim',
+    config = function()
+      require('plugins.prettier');
+    end
+  })
+
+  -- use({
+  --   cond = not_vscode,
+  --   'jose-elias-alvarez/nvim-lsp-ts-utils',
+  --   after = 'nvim-lspconfig',
+  --   module = 'nvim-lsp-ts-utils',
+  -- })
 
   -- use({
   --   cond = not_vscode,

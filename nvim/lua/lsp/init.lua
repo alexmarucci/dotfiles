@@ -19,6 +19,7 @@ local required_servers = {
   'sumneko_lua',
   'rust_analyzer',
   'tsserver',
+  'typescript',
   'vimls',
   -- this breaks LspSaga and I do not use it anyway
   -- 'graphql',
@@ -70,3 +71,5 @@ vim.notify = function(msg, log_level)
     vim.api.nvim_echo({ { msg } }, true, {})
   end
 end
+
+vim.lsp.set_log_level("debug")
