@@ -24,7 +24,8 @@ end
 map('v', 'X', [["_d]])
 
 -- save
-map('n', '<C-s>', [[ <Cmd> w <CR>]], opts)
+map('n', '<leader>w', [[ <Cmd> up <CR>]], opts)
+map('n', '<C-s>', [[ysi]], opts)
 -- map('i', '<C-s>', [[ <Esc>h<Cmd> w <CR>]], opts)
 
 -- Search and replace under cursor
@@ -227,9 +228,10 @@ map(
 -- map('x', '<leader>ff', '<cmd>lua require("fzf-lua").grep()<CR>')
 
 -- Format
-map('n', '<leader>ff', '<cmd>lua require("telescope.builtin").resume()<cr>')
+map('n', '<leader>f', '<cmd>lua require("telescope.builtin").resume()<cr>')
 map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
-map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
+-- map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
+map('n', '<leader>fd', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
 map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep({ search_dirs = {".", ".github"}})<cr>')
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").grep_string()<cr>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')

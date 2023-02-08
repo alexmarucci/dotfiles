@@ -87,7 +87,7 @@ local Format = vim.api.nvim_create_augroup("Format", { clear = true })
 local ts_utils = require('typescript')
 vim.api.nvim_create_autocmd("BufWritePre", {
   group = Format,
-  pattern = "*.tsx,*.ts,*.jsx,*.js",
+  pattern = "*.tsx,*.ts,*.jsx,*.js,*.mjs",
   callback = function()
     ts_utils.actions.addMissingImports({ sync = true });
     ts_utils.actions.fixAll({ sync = true });

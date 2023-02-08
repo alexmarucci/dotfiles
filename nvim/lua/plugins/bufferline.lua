@@ -21,7 +21,9 @@ bufferline.setup({
     enforce_regular_tabs = true,
     view = 'multiwindow',
     show_buffer_close_icons = true,
-    separator_style = 'slant',
     sort_by = 'insert_after_current',
+    -- sort_by = function(buffer_a, buffer_b)
+    --     return buffer_a.modified > buffer_b.modified
+    -- end
   },
 })

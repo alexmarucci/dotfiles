@@ -67,10 +67,18 @@ return packer.startup(function()
     cond = not_vscode,
     event = 'BufRead',
     config = function()
-      require("lspsaga").setup({});
-      vim.schedule(function()
-        vim.cmd('colorscheme vscode')
-      end)
+      require("lspsaga").setup({
+        symbol_in_winbar = {
+          -- buggy, try re-enable on nvim v0.9
+          enable = false,
+          separator = " ",
+          hide_keyword = true,
+          show_file = true,
+          folder_level = 2,
+          respect_root = false,
+          color_mode = true,
+        },
+      });
     end,
   })
   use({ 'ray-x/lsp_signature.nvim', cond = not_vscode, event = 'BufRead' })
@@ -161,15 +169,6 @@ return packer.startup(function()
   use({
     cond = not_vscode,
     'jose-elias-alvarez/null-ls.nvim',
-  })
-
-  use({
-    cond = not_vscode,
-    event = 'BufRed',
-    'MunifTanjim/prettier.nvim',
-    config = function()
-      require('plugins.prettier');
-    end
   })
 
   -- use({
@@ -273,6 +272,27 @@ return packer.startup(function()
     cond = not_vscode,
     run = 'make'
   })
+  use 'kkharji/sqlite.lua'
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    after = {"sqlite.lua"}
+  }
+  use {
+    "danielfalk/smart-open.nvim",
+    branch = "0.1.x",
+    config = function()
+      require('telescope').load_extension('smart_open')
+    end,
+    after = { "sqlite.lua" }
+  }
+  use {
+    "AckslD/nvim-neoclip.lua",
+    config = function()
+      require('neoclip').setup() require"telescope".load_extension("neoclip") end,
+  }
 
   use({
     'Shatur/neovim-session-manager',
@@ -295,6 +315,12 @@ return packer.startup(function()
     cond = not_vscode,
     after = 'nvim-treesitter'
   })
+  use {
+    'axkirillov/easypick.nvim',
+    config = function()
+      require('plugins.easypick');
+    end
+  }
 
   use({
     'nvim-treesitter/nvim-treesitter-context',
@@ -599,6 +625,10 @@ return packer.startup(function()
   use 'olimorris/onedarkpro.nvim'
   use 'ajmwagar/vim-deus'
   use 'gbprod/nord.nvim'
+  use 'tanvirtin/monokai.nvim'
+  use 'cpea2506/one_monokai.nvim'
+  use { 'bluz71/vim-nightfly-colors', as = 'nightfly' }
+
 
 
   -- use {

@@ -5,6 +5,12 @@ end
 
 telescope.setup({
   extensions = {
+    frecency = {
+      cwd_only = true
+    },
+    smart_open = {
+      cwd_only = true
+    },
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
       override_generic_sorter = true,  -- override the generic sorter

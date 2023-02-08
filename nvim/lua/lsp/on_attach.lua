@@ -32,7 +32,7 @@ local on_attach = function(client)
   if client.server_capabilities.documentFormattingProvider then
     -- vim.keymap.set('n', '<leader>fo', '<cmd>lua vim.lsp.buf.formatting_seq_sync(nil, 1000)<CR>', opts)
     -- vim.keymap.set('v', '<leader>fr', '<cmd>lua vim.lsp.buf.range_formatting()<CR>', opts)
-    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()')
+    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.format()')
   end
 end
 
