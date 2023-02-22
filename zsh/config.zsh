@@ -87,6 +87,7 @@ bindkey -s '^n' 'nvim\n'
 
 # Provide smartlog fn
 alias sl=$HOME/projects/hacks/smartlog/smartlog.mjs
+alias plover=/Applications/Plover.app/MacOS/Plover
 
 # Alias for neovide
 # alias neo="open -n $HOME/Applications/Neovide.app/ --args --multigrid --frame buttonless"
@@ -104,6 +105,22 @@ function neo() {
   else
     echo "${PROJECT_DIR} does not exists."
   fi
+}
+
+function ghsearch() {
+  sha="$1";
+
+  if [[ -z "${sha}" ]]; then
+    commit=$(g log --oneline | fzf);
+
+    sha=$(echo ${commit} | cut -d " " -f1);
+  fi
+
+  echo "Searching: ${commit:=$sha}"
+  echo "-"
+
+  template='{{range .}}{{"PR #"}}{{.number}} {{hyperlink .url .title}}{{"\n"}}{{end}}';
+  gh pr list --search "${sha}" --state merged --json number,url,title --template "${template}"
 }
 
 # Open drex as file explorer
