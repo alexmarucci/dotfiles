@@ -159,7 +159,7 @@ return packer.startup(function()
       'lspkind-nvim',
     },
   })
-  
+
   use({
     cond = not_vscode,
     'jose-elias-alvarez/typescript.nvim',
@@ -230,14 +230,14 @@ return packer.startup(function()
   -- use({ 'chaoren/vim-wordmotion', event = 'BufRead' })
   use({ 'tweekmonster/startuptime.vim', cond = not_vscode, cmd = 'StartupTime' })
   use({ 'tversteeg/registers.nvim', cond = not_vscode, cmd = 'Registers' })
-  use({
-    'vuki656/package-info.nvim',
-    requires = 'MunifTanjim/nui.nvim',
-    ft = 'json',
-    config = function()
-      require('package-info').setup()
-    end,
-  })
+  -- use({
+  --   'vuki656/package-info.nvim',
+  --   requires = 'MunifTanjim/nui.nvim',
+  --   ft = 'json',
+  --   config = function()
+  --     require('package-info').setup()
+  --   end,
+  -- })
 
   -- use({ 'fedepujol/move.nvim', cmd = { 'MoveLine', 'MoveBlock' } })
 
@@ -276,9 +276,9 @@ return packer.startup(function()
   use {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
-      require"telescope".load_extension("frecency")
+      require "telescope".load_extension("frecency")
     end,
-    after = {"sqlite.lua"}
+    after = { "sqlite.lua" }
   }
   use {
     "danielfalk/smart-open.nvim",
@@ -291,7 +291,9 @@ return packer.startup(function()
   use {
     "AckslD/nvim-neoclip.lua",
     config = function()
-      require('neoclip').setup() require"telescope".load_extension("neoclip") end,
+      require('neoclip').setup();
+      require "telescope".load_extension("neoclip")
+    end,
   }
 
   use({
@@ -343,12 +345,12 @@ return packer.startup(function()
     end,
   }
 
-   use({
-     'p00f/nvim-ts-rainbow',
-     cond = not_vscode,
-     event = 'BufRead',
-     after = 'nvim-treesitter'
-   })
+  use({
+    'p00f/nvim-ts-rainbow',
+    cond = not_vscode,
+    event = 'BufRead',
+    after = 'nvim-treesitter'
+  })
 
   use({
     'windwp/nvim-ts-autotag',
@@ -360,8 +362,8 @@ return packer.startup(function()
   use({
     'pwntester/octo.nvim',
     cmd = "Octo",
-    config = function ()
-      require"octo".setup()
+    config = function()
+      require "octo".setup()
     end
   })
 
@@ -376,43 +378,43 @@ return packer.startup(function()
   })
 
   -- "cmp" dependencies
-  use({ 
+  use({
     'saadparwaiz1/cmp_luasnip',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use({ 
+  use({
     'hrsh7th/cmp-buffer',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use({ 
+  use({
     'hrsh7th/cmp-path',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use({ 
+  use({
     'f3fora/cmp-spell',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use({ 
+  use({
     'ray-x/cmp-treesitter',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use({ 
+  use({
     'lukas-reineke/cmp-rg',
     after = 'cmp',
     cond = not_vscode,
-    event = 'InsertCharPre' 
+    event = 'InsertCharPre'
   })
-  use ({
+  use({
     'tzachar/cmp-tabnine',
     run = './install.sh',
     after = 'cmp',
@@ -423,7 +425,7 @@ return packer.startup(function()
     'L3MON4D3/LuaSnip',
     cond = not_vscode,
     config = function()
-      require("luasnip").setup({ store_selection_keys="<C-i>" })
+      require("luasnip").setup({ store_selection_keys = "<C-i>" })
     end
   })
   -- end "cmp" dependencies
@@ -527,8 +529,8 @@ return packer.startup(function()
 
   -- Themes colorscheme
   --[[ use ({ 'styled-components/vim-styled-components', branch = 'main' }) ]]
-  use ({ 'charliesbot/night-owl.vim' })
-  use ({'folke/tokyonight.nvim', branch = 'main'})
+  use({ 'charliesbot/night-owl.vim' })
+  use({ 'folke/tokyonight.nvim', branch = 'main' })
   use 'Mofiqul/vscode.nvim'
 
   use({
@@ -561,7 +563,7 @@ return packer.startup(function()
     'kylechui/nvim-surround',
     event = 'BufRead',
     config = function()
-     require("nvim-surround").setup({})
+      require("nvim-surround").setup({})
     end
   })
 
@@ -588,7 +590,7 @@ return packer.startup(function()
   })
 
   -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
-  use({'aklt/plantuml-syntax'})
+  use({ 'aklt/plantuml-syntax' })
 
   use({
     cond = not_vscode,
@@ -600,7 +602,7 @@ return packer.startup(function()
     cond = not_vscode,
     requires = { 'mfussenegger/nvim-dap' },
     event = 'BufRead',
-    config = function ()
+    config = function()
       require("plugins.nvim-dap-ui")
     end
   }
@@ -609,14 +611,14 @@ return packer.startup(function()
     "microsoft/vscode-js-debug",
     cond = not_vscode,
     opt = true,
-    run = "npm install --legacy-peer-deps && npm run compile"
+    run = "npm install --legacy-peer-deps && npm install got@11.8.5 && npm run compile"
   }
 
   use {
     "mxsdev/nvim-dap-vscode-js",
     cond = not_vscode,
-    requires = {"mfussenegger/nvim-dap"},
-    config = function ()
+    requires = { "mfussenegger/nvim-dap" },
+    config = function()
       require('plugins.nvim-dap-vscode-js');
     end
   }
@@ -629,7 +631,11 @@ return packer.startup(function()
   use 'cpea2506/one_monokai.nvim'
   use { 'bluz71/vim-nightfly-colors', as = 'nightfly' }
 
-
+  use {
+    'nanotee/zoxide.vim',
+    cond = vim.g.gonvim_running,
+    as = 'Cd'
+  }
 
   -- use {
   --   -- 'codota/tabnine-nvim',

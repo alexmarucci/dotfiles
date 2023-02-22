@@ -47,9 +47,15 @@ end
 local function run_servers_config()
   for _, package_name in pairs(mason_regitry.get_installed_package_names()) do
     local server_name = mason_to_lspconfig[package_name];
-    local config = configs[server_name]
+    local config = configs[server_name];
+    local serverLspConfig = lspconfig[server_name];
 
-    lspconfig[server_name].setup(config or base_config())
+    if serverLspConfig then
+      lspconfig[server_name].setup(config or base_config())
+    else
+      error("Could not find lsp-config for " .. server_name);
+    end
+
 
     vim.cmd([[ do User LspAttachBuffers ]])
   end

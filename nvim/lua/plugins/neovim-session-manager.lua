@@ -1,5 +1,7 @@
 local Path = require('plenary.path')
 
+local AutoloadMode = require('session_manager.config').AutoloadMode;
+
 require('session_manager').setup({
   -- The directory where the session files will be saved.
   sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'), 
@@ -12,7 +14,7 @@ require('session_manager').setup({
   
   -- Define what to do when Neovim is started without arguments.
   -- Possible values: Disabled, CurrentDir, LastSession
-  autoload_mode = require('session_manager.config').AutoloadMode.CurrentDir, 
+  autoload_mode = vim.g.gonvim_running and AutoloadMode.Disabled or AutoloadMode.CurrentDir, 
 
   -- Automatically save last session on exit and on session switch.
   autosave_last_session = true, 

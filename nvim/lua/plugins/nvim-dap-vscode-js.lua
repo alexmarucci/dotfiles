@@ -93,6 +93,23 @@ for _, language in ipairs({ "typescript", "javascript" }) do
     {
       type = "pwa-node",
       request = "launch",
+      name = "Debug Jest Tests",
+      -- trace = true, -- include debugger info
+      -- runtimeExecutable = "node",
+      runtimeArgs = {
+        "./node_modules/jest/bin/jest.js",
+        "--config",
+        "./jest.config.js",
+        "--",
+        "${file}",
+      },
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
       name = "BTEC Primary - Debug Jest Tests",
       -- trace = true, -- include debugger info
       -- runtimeExecutable = "node",
@@ -104,7 +121,7 @@ for _, language in ipairs({ "typescript", "javascript" }) do
         "${file}",
       },
       rootPath = "${workspaceFolder}",
-      cwd = "${workspaceFolder}/apps/primary/",
+      cwd = "${workspaceFolder}/apps/btec-primary/",
       console = "integratedTerminal",
     }
   }

@@ -9,7 +9,7 @@ function change_font_size(action)
   local font_size = tonumber(guifont:match(':h(%d+)$'))
 
   -- set new font size
-  vim.opt.guifont =guifont:gsub(font_size, action(font_size)) 
+  vim.opt.guifont = guifont:gsub(font_size, action(font_size)) 
 end
 
 function M.increase_font_size()

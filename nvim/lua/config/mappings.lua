@@ -6,16 +6,32 @@ local g = vim.g
 g.mapleader = ' '
 
 local opts = { noremap = true, silent = true }
+local is_gui = vim.g.neovide or vim.g.gonvim_running;
 
 -- guifont resize
-if vim.g.neovide then
+if is_gui then
   -- new Neovide instance 
-  map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
+  -- map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
 
   vim.keymap.set('n', '<D-=>', font_resize.increase_font_size, opts)
   vim.keymap.set('n', '<D-->', font_resize.decrease_font_size, opts)
   vim.keymap.set('v', '<D-=>', font_resize.increase_font_size, opts)
   vim.keymap.set('v', '<D-->',font_resize.decrease_font_size, opts)
+
+  local modes = {'n', 'v', 'i'};
+
+
+  vim.keymap.set(modes, '<D-t>', '<cmd>GonvimWorkspaceNew<cr>', opts)
+  vim.keymap.set(modes, '<D-1>', '<cmd>GonvimWorkspaceSwitch 1<cr>', opts)
+  vim.keymap.set(modes, '<D-2>', '<cmd>GonvimWorkspaceSwitch 2<cr>', opts)
+  vim.keymap.set(modes, '<D-3>', '<cmd>GonvimWorkspaceSwitch 3<cr>', opts)
+  vim.keymap.set(modes, '<D-4>', '<cmd>GonvimWorkspaceSwitch 4<cr>', opts)
+  vim.keymap.set(modes, '<D-5>', '<cmd>GonvimWorkspaceSwitch 5<cr>', opts)
+  vim.keymap.set(modes, '<D-6>', '<cmd>GonvimWorkspaceSwitch 6<cr>', opts)
+  vim.keymap.set(modes, '<D-7>', '<cmd>GonvimWorkspaceSwitch 7<cr>', opts)
+  vim.keymap.set(modes, '<D-8>', '<cmd>GonvimWorkspaceSwitch 8<cr>', opts)
+  vim.keymap.set(modes, '<D-9>', '<cmd>GonvimWorkspaceSwitch 9<cr>', opts)
+
 end
 
 -- general
@@ -24,7 +40,7 @@ end
 map('v', 'X', [["_d]])
 
 -- save
-map('n', '<leader>w', [[ <Cmd> up <CR>]], opts)
+map('n', '<leader>w', [[ <Cmd> noautocmd up <CR>]], opts)
 map('n', '<C-s>', [[ysi]], opts)
 -- map('i', '<C-s>', [[ <Esc>h<Cmd> w <CR>]], opts)
 
@@ -84,7 +100,7 @@ map('n', '<C-q>j', [[:<C-u>execute ":".v:count."ToggleTerm direction=horizontal 
 map('n', '<C-q>l', [[:<C-u>execute ":".v:count."ToggleTerm direction=vertical"<CR>]], opts)
 
 -- Allow clipboard copy paste in neovide
-if vim.g.neovide then
+if is_gui then
   --- [ Neovide ]  --> [ neovim ]
   map('', '<D-v>', '+p<CR>', opts)
   map('!', '<D-v>', '<C-R>+', {noremap = true, silent = false})

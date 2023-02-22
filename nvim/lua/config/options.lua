@@ -35,7 +35,8 @@ g.terminal_color_14 = '#00f5e9'
 g.terminal_color_15 = '#eeeeec'
 
 -- GUI Font (Neovide)
-opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
+-- opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
+opt.guifont = 'TerminessTTF_Nerd_Font_Mono:h18'
 
 -- Enables winbar
 opt.winbar = '%=%m %f'
