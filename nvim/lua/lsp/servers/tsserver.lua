@@ -28,6 +28,7 @@ local config = {
   -- root_dir = util.find_git_ancestor,
   root_dir = util.root_pattern('.git'),
   on_attach = function(client, bufnr)
+    print('registering TS server')
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -38,6 +39,8 @@ local config = {
     require('lsp_signature').on_attach(lsp_signature_config, bufnr)
 
     local ts_utils = require('typescript')
+    local commands = require('typescript.commands')
+    commands.setupCommands(0);
 
     -- defaults
     -- ts_utils.setup({
@@ -50,13 +53,13 @@ local config = {
     --   import_all_timeout = 5000,
     --   import_all_scan_buffers = 100,
     -- })
-    
+
     -- required to fix code action ranges and filter diagnostics
     -- ts_utils.setup_client(client)
-
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_implementations<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>hl', '<cmd>Telescope git_bcommits<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
@@ -83,26 +86,30 @@ local config = {
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
 }
 
-local Format = vim.api.nvim_create_augroup("Format", { clear = true })
-local ts_utils = require('typescript')
-vim.api.nvim_create_autocmd("BufWritePre", {
-  group = Format,
-  pattern = "*.tsx,*.ts,*.jsx,*.js,*.mjs",
-  callback = function()
-    ts_utils.actions.addMissingImports({ sync = true });
-    ts_utils.actions.fixAll({ sync = true });
-    ts_utils.actions.removeUnused({ sync = true });
-  end,
-})
+-- local Format = vim.api.nvim_create_augroup("Format", { clear = true })
+-- local ts_utils = require('typescript')
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   group = Format,
+--   pattern = "*.tsx,*.ts,*.jsx,*.js,*.mjs",
+--   callback = function()
+--     ts_utils.actions.addMissingImports({ sync = true });
+--     ts_utils.actions.fixAll({ sync = true });
+--     ts_utils.actions.removeUnused({ sync = true });
+--   end,
+-- })
 
-ts_utils.setup({
-  disable_commands = false, -- prevent the plugin from creating Vim commands
-  debug = false, -- enable debug logging for commands
-  go_to_source_definition = {
-      -- fall back to standard LSP definition on failure
-      fallback = true, 
-  },
-  setup = config,
-})
-
+-- require('typescript').setup({
+--   disable_commands = false, -- prevent the plugin from creating Vim commands
+--   debug = false, -- enable debug logging for commands
+--   go_to_source_definition = {
+--     -- fall back to standard LSP definition on failure
+--     fallback = true,
+--   },
+--   setup = {
+--     on_attach = function()
+--       print('on attach')
+--     end
+--   }
+-- })
+--
 return config;

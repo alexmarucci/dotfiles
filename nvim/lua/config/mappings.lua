@@ -40,7 +40,8 @@ end
 map('v', 'X', [["_d]])
 
 -- save
-map('n', '<leader>w', [[ <Cmd> noautocmd up <CR>]], opts)
+map('n', '<leader>w', [[ <Cmd>up <CR>]], opts)
+map('n', '<leader>w', [[ <Cmd>up <CR>]], opts)
 map('n', '<C-s>', [[ysi]], opts)
 -- map('i', '<C-s>', [[ <Esc>h<Cmd> w <CR>]], opts)
 

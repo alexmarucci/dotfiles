@@ -42,7 +42,7 @@ dap.configurations.typescriptreact = {
   },
 };
 
-for _, language in ipairs({ "typescript", "javascript" }) do
+for _, language in ipairs({ "typescriptreact", "typescript", "javascript" }) do
   dap.configurations[language] = {
     -- {
     --   type = "pwa-node",
@@ -134,7 +134,7 @@ require('dap.ext.vscode').load_launchjs(nil, {
 })
 
 -- Keybindings
-local function opts(desc) 
+local function opts(desc)
   return {desc = desc, noremap = true, silent = true }
 end
 

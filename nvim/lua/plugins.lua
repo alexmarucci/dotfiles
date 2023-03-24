@@ -327,6 +327,8 @@ return packer.startup(function()
   use({
     'nvim-treesitter/nvim-treesitter-context',
     cond = not_vscode,
+    -- use compatible mode until queries are added for tsx lang
+    tag = 'compat/0.7',
     event = 'BufRead',
     after = 'nvim-treesitter',
     config = function()
@@ -556,7 +558,6 @@ return packer.startup(function()
   --[[     require('vimade').setup() ]]
   --[[   end ]]
   --[[ }) ]]
-
   -- Experimental - use of next-gen surrounding
   -- use({ 'tpope/vim-surround', event = 'BufRead'})
   use({
@@ -580,12 +581,33 @@ return packer.startup(function()
 
   -- use({ 'andymass/vim-matchup', cond = not_vscode, after = 'nvim-treesitter' })
 
-  use 'rhysd/clever-f.vim'
+  -- this looks incompatible with latest nvim as of v0.8.3
+  -- use 'rhysd/clever-f.vim'
+
+  use({
+    'ggandor/flit.nvim',
+    event = 'BufRead',
+    config = function()
+      local flit = require('flit');
+      flit.setup();
+    end,
+  })
 
   use({
     'ggandor/leap.nvim',
     config = function()
-      require('leap').add_default_mappings();
+      local leap = require('leap');
+
+      leap.add_default_mappings();
+      leap.opts.special_keys.prev_target = 'F';
+      leap.opts.special_keys.next_target = { 'f', '<tab>' };
+    end,
+  })
+
+  use({
+    'ggandor/leap-spooky.nvim',
+    config = function()
+      require('leap-spooky').setup();
     end,
   })
 
@@ -637,6 +659,8 @@ return packer.startup(function()
     as = 'Cd'
   }
 
+  use 'Oldenborg/vim-px-to-rem'
+
   -- use {
   --   -- 'codota/tabnine-nvim',
   --   '~/projects/_/tabnine-nvim',
@@ -663,7 +687,6 @@ return packer.startup(function()
   --     require('neogen').setup({ enabled = true })
   --   end,
   -- })
-
 end, {
   config = {
     -- Move to lua dir so impatient.nvim can cache it

@@ -2,6 +2,8 @@ local present1, lspconfig = pcall(require, 'lspconfig')
 local present2, lspinstall = pcall(require, 'mason')
 local present3, mason_regitry = pcall(require, 'mason-registry');
 local present4, mason_lspconfig = pcall(require, 'mason-lspconfig')
+local ts_utils = require('typescript')
+
 if not (present1 or present2 or present3 or present4) then
   return
 end
@@ -61,7 +63,7 @@ local function run_servers_config()
   end
 end
 
-auto_install_servers()
+auto_install_servers();
 run_servers_config();
 
 -- vim.cmd('bufdo e')

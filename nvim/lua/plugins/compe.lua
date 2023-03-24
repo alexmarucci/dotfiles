@@ -1,6 +1,6 @@
 local present, cmp = pcall(require, 'cmp')
 local present2, lspkind = pcall(require, 'lspkind')
-    --   luasnip.lsp_expand(args.body)
+--   luasnip.lsp_expand(args.body)
 local present3, luasnip = pcall(require, 'luasnip')
 local types = require('cmp.types')
 local compare = require('cmp.config.compare')
@@ -19,22 +19,20 @@ end
 -- require("luasnip.loaders.from_snipmate").lazy_load() -- Lazy loading
 
 -- Use ts and js snippets in tsx
-luasnip.filetype_extend("typescriptreact", {"typescript", "javascript"})
+luasnip.filetype_extend("typescriptreact", { "typescript", "javascript" })
 
 -- Use tsx and js snippets in ts
-luasnip.filetype_extend("typescript", {"javascript"})
+luasnip.filetype_extend("typescript", { "javascript" })
 
 cmp.setup({
   preselect = cmp.PreselectMode.Item,
-  experimental = {ghost_text = true},
-  confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = true},
-
+  experimental = { ghost_text = true },
+  confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = true },
   window = {
     completion = cmp.config.window.bordered({
       scrollbar = false,
     })
   },
-
   -- completion = { -- completeopt = 'menu,menuone,noinsert' },
   formatting = {
     format = lspkind.cmp_format({
@@ -42,6 +40,10 @@ cmp.setup({
       menu = {
         cmp_tabnine = '',
         treesitter = '',
+        -- path = 'PATH',
+        -- nvim_lsp = 'nvim_lsp',
+        -- nvim_lua = 'nvim_lua',
+        -- { name = 'spell' },
       }
       --[[ menu = {
         buffer = ' ﬘ ',
@@ -61,23 +63,23 @@ cmp.setup({
     -- end,
   },
   mapping = {
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<Tab>'] = cmp.mapping(function()
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<Tab>'] = cmp.mapping(function()
       if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       end
     end),
-    ['<Down>'] = cmp.mapping(function(fallback)
+        ['<Down>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item({ count = 1 })
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
-      -- elseif vim.b._copilot_suggestion ~= nil then
-      --   vim.fn.feedkeys(
-      --     vim.api.nvim_replace_termcodes(vim.fn['copilot#Accept'](), true, true, true),
-      --     ''
-      --   )
+        -- elseif vim.b._copilot_suggestion ~= nil then
+        --   vim.fn.feedkeys(
+        --     vim.api.nvim_replace_termcodes(vim.fn['copilot#Accept'](), true, true, true),
+        --     ''
+        --   )
       else
         fallback()
       end
@@ -85,7 +87,7 @@ cmp.setup({
       'i',
       's',
     }),
-    ['<Up>'] = cmp.mapping(function(fallback)
+        ['<Up>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item({ count = 1 })
       elseif luasnip.jumpable(-1) then
@@ -94,35 +96,35 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
-    { name = 'cmp_tabnine', keyword_length = 1 },
     -- { name = 'luasnip', option = { use_show_condition = false } },
     -- { name = 'buffer' },
-    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp',    max_item_count = 5 },
     { name = 'path' },
     { name = 'nvim_lua' },
     -- { name = 'spell' },
     { name = 'treesitter' },
+    { name = 'buffer' },
+    { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
     -- { name = 'rg' },
   },
-
-   sorting = {
-    priority_weight = 2,
-    comparators = {
-      require('cmp_tabnine.compare'),
-      compare.offset,
-      compare.exact,
-      compare.score,
-      compare.recently_used,
-      compare.kind,
-      compare.sort_text,
-      compare.length,
-      compare.order,
-    },
-  },
+  -- sorting = {
+  --   priority_weight = 2,
+  --   comparators = {
+  --     require('cmp_tabnine.compare'),
+  --     compare.offset,
+  --     compare.exact,
+  --     compare.score,
+  --     compare.recently_used,
+  --     compare.kind,
+  --     compare.sort_text,
+  --     compare.length,
+  --     compare.order,
+  --   },
+  -- },
 })
 
 -- if present4 then
