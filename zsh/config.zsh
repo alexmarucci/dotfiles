@@ -123,6 +123,10 @@ function ghsearch() {
   gh pr list --search "${sha}" --state merged --json number,url,title --template "${template}"
 }
 
+function gar() {
+  git add "*${1}*"
+}
+
 # Open drex as file explorer
 alias dr='nvim -c "Drex"'
 

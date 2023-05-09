@@ -19,13 +19,13 @@ return packer.startup(function()
   use 'duane9/nvim-rg'
 
   -- -- UI
-  use({
-    'VonHeikemen/searchbox.nvim',
-    cond = not_vscode,
-    requires = {
-      { 'MunifTanjim/nui.nvim' },
-    },
-  })
+  -- use({
+  --   'VonHeikemen/searchbox.nvim',
+  --   cond = not_vscode,
+  --   requires = {
+  --     { 'MunifTanjim/nui.nvim' },
+  --   },
+  -- })
   use({
     'nvim-lualine/lualine.nvim',
     cond = not_vscode,
@@ -132,6 +132,7 @@ return packer.startup(function()
   use({
     "williamboman/mason-lspconfig.nvim",
     event = 'BufRead',
+    after = { 'mason.nvim' },
     config = function()
       require('mason-lspconfig').setup();
     end
@@ -328,7 +329,7 @@ return packer.startup(function()
     'nvim-treesitter/nvim-treesitter-context',
     cond = not_vscode,
     -- use compatible mode until queries are added for tsx lang
-    tag = 'compat/0.7',
+    -- tag = 'compat/0.7',
     event = 'BufRead',
     after = 'nvim-treesitter',
     config = function()
@@ -348,7 +349,7 @@ return packer.startup(function()
   }
 
   use({
-    'p00f/nvim-ts-rainbow',
+    'mrjones2014/nvim-ts-rainbow',
     cond = not_vscode,
     event = 'BufRead',
     after = 'nvim-treesitter'
@@ -380,6 +381,7 @@ return packer.startup(function()
   })
 
   -- "cmp" dependencies
+
   use({
     'saadparwaiz1/cmp_luasnip',
     after = 'cmp',
@@ -534,6 +536,9 @@ return packer.startup(function()
   use({ 'charliesbot/night-owl.vim' })
   use({ 'folke/tokyonight.nvim', branch = 'main' })
   use 'Mofiqul/vscode.nvim'
+  use({ 'luisiacc/the-matrix.nvim', as = 'thematrix' })
+  use "rebelot/kanagawa.nvim"
+
 
   use({
     'karb94/neoscroll.nvim',
@@ -660,6 +665,21 @@ return packer.startup(function()
   }
 
   use 'Oldenborg/vim-px-to-rem'
+
+  use({
+    "folke/noice.nvim",
+    config = function()
+      require('plugins.noice');
+    end,
+    requires = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  })
 
   -- use {
   --   -- 'codota/tabnine-nvim',

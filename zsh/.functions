@@ -43,8 +43,12 @@ function y() {
     return;
   fi
 
-  if [ $# -eq 0 ]; then
+  local hasScript=$(jq -e ".scripts | has(\"$1\")" package.json);
+
+  if [ -z "$1" ]; then
     $bin install
+  elif ($hasScript); then
+    $bin run $@;
   else
     $bin $@;
   fi

@@ -1,6 +1,7 @@
 local on_attach = require('lsp.on_attach')
 local util = require('lspconfig/util')
 local opts = { noremap = true, silent = true }
+
 if not bufnr then bufnr = 0 end
 
 local lsp_signature_config = {
@@ -14,23 +15,36 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 )
 
 local tsserver_plugins = {
+  -- {
+  --   name = 'typescript-styled-plugin',
+  --   location = '/Users/maru85945/.config/yarn/global/node_modules/typescript-styled-plugin'
+  -- },
   {
-    name = 'typescript-styled-plugin',
-    location = '/Users/maru85945/.nvm/versions/node/v16.13.1/lib/node_modules/typescript-styled-plugin'
-  }
+    name = '@styled/typescript-styled-plugin',
+    location = '/Users/maru85945/.config/yarn/global/node_modules/@styled/typescript-styled-plugin'
+  },
 };
 
 local config = {
   init_options = {
+    hostInfo = "neovim",
     plugins = tsserver_plugins,
+    tsserver = {
+      path = '/Users/maru85945/.config/yarn/global/node_modules/typescript/lib/tsserver.js',
+    },
   },
   capabilities = capabilities,
   -- root_dir = util.find_git_ancestor,
   root_dir = util.root_pattern('.git'),
   on_attach = function(client, bufnr)
-    print('registering TS server')
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+    -- most themes do not support semantic tokens
+    -- there is a workaround to link lsp tokens groups to treesitter groups
+    -- Follow updates here @see
+    -- https://www.reddit.com/r/neovim/comments/12g5qk3/comment/jfld8ec/?utm_source=share&utm_medium=web3x
+    client.server_capabilities.semanticTokensProvider = nil
+
 
     if client.config.flags then
       client.config.flags.allow_incremental_sync = true
@@ -80,6 +94,11 @@ local config = {
       buffer = bufnr,
       unpack(opts)
     });
+    vim.keymap.set('n', '<leader>id', '<cmd>TypescriptGoToSourceDefinition<cr>', {
+      desc = '[Typescript] - Go To Source Definition',
+      buffer = bufnr,
+      unpack(opts)
+    });
 
     on_attach(client)
   end,
@@ -98,18 +117,4 @@ local config = {
 --   end,
 -- })
 
--- require('typescript').setup({
---   disable_commands = false, -- prevent the plugin from creating Vim commands
---   debug = false, -- enable debug logging for commands
---   go_to_source_definition = {
---     -- fall back to standard LSP definition on failure
---     fallback = true,
---   },
---   setup = {
---     on_attach = function()
---       print('on attach')
---     end
---   }
--- })
---
 return config;

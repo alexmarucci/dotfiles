@@ -10,15 +10,15 @@ local is_gui = vim.g.neovide or vim.g.gonvim_running;
 
 -- guifont resize
 if is_gui then
-  -- new Neovide instance 
+  -- new Neovide instance
   -- map('n', '<D-n>', [[:silent !neo ~/projects/<CR>]], opts)
 
   vim.keymap.set('n', '<D-=>', font_resize.increase_font_size, opts)
   vim.keymap.set('n', '<D-->', font_resize.decrease_font_size, opts)
   vim.keymap.set('v', '<D-=>', font_resize.increase_font_size, opts)
-  vim.keymap.set('v', '<D-->',font_resize.decrease_font_size, opts)
+  vim.keymap.set('v', '<D-->', font_resize.decrease_font_size, opts)
 
-  local modes = {'n', 'v', 'i'};
+  local modes = { 'n', 'v', 'i' };
 
 
   vim.keymap.set(modes, '<D-t>', '<cmd>GonvimWorkspaceNew<cr>', opts)
@@ -31,7 +31,6 @@ if is_gui then
   vim.keymap.set(modes, '<D-7>', '<cmd>GonvimWorkspaceSwitch 7<cr>', opts)
   vim.keymap.set(modes, '<D-8>', '<cmd>GonvimWorkspaceSwitch 8<cr>', opts)
   vim.keymap.set(modes, '<D-9>', '<cmd>GonvimWorkspaceSwitch 9<cr>', opts)
-
 end
 
 -- general
@@ -104,8 +103,8 @@ map('n', '<C-q>l', [[:<C-u>execute ":".v:count."ToggleTerm direction=vertical"<C
 if is_gui then
   --- [ Neovide ]  --> [ neovim ]
   map('', '<D-v>', '+p<CR>', opts)
-  map('!', '<D-v>', '<C-R>+', {noremap = true, silent = false})
-  map('c', '<D-v>', '<C-R>+', {noremap = true, silent = false})
+  map('!', '<D-v>', '<C-R>+', { noremap = true, silent = false })
+  map('c', '<D-v>', '<C-R>+', { noremap = true, silent = false })
   map('t', '<D-v>', [[<C-\><C-n>"+pi]], opts)
   map('v', '<D-v>', '<C-R>+', opts)
   map('v', '<D-c>', '"+y<CR>', opts)
@@ -183,35 +182,35 @@ map('n', '<C-k>', [[:call WinMove('k')<CR>]], opts)
 map('n', '<C-l>', [[:call WinMove('l')<CR>]], opts)
 
 -- map('n', '/', '<cmd>lua require("searchbox").incsearch()<CR>', opts)
-vim.keymap.set('n', '/', function()
-  local winid = vim.api.nvim_get_current_win();
-  local config = vim.api.nvim_win_get_config(winid);
-
-  if config.relative ~= '' or config.zindex then
-   -- window with this window_id is floating
-   -- prefer this as is async
-   -- vim.api.nvim_input('/'); 
-   -- try this if the above does not work
-   vim.api.nvim_feedkeys('/', 'n', false --[[escape]])
-  else
-    require('searchbox').incsearch()
-  end
-end, opts)
+-- vim.keymap.set('n', '/', function()
+--   local winid = vim.api.nvim_get_current_win();
+--   local config = vim.api.nvim_win_get_config(winid);
+--
+--   if config.relative ~= '' or config.zindex then
+--    -- window with this window_id is floating
+--    -- prefer this as is async
+--    -- vim.api.nvim_input('/');
+--    -- try this if the above does not work
+--    vim.api.nvim_feedkeys('/', 'n', false --[[escape]])
+--   else
+--     require('searchbox').incsearch()
+--   end
+-- end, opts)
 -- map('n', '?', '<cmd>lua require("searchbox").incsearch({ reverse = true })<CR>', opts)
-vim.keymap.set('n', '?', function()
-  local winid = vim.api.nvim_get_current_win();
-  local config = vim.api.nvim_win_get_config(winid);
-
-  if config.relative ~= '' or config.zindex then
-   -- window with this window_id is floating
-   -- prefer this as is async
-   -- vim.api.nvim_input('?'); 
-   -- try this if the above does not work
-   vim.api.nvim_feedkeys('?', 'n', false --[[escape]])
-  else
-    require('searchbox').incsearch({reverse = true})
-  end
-end, opts)
+-- vim.keymap.set('n', '?', function()
+--   local winid = vim.api.nvim_get_current_win();
+--   local config = vim.api.nvim_win_get_config(winid);
+--
+--   if config.relative ~= '' or config.zindex then
+--    -- window with this window_id is floating
+--    -- prefer this as is async
+--    -- vim.api.nvim_input('?');
+--    -- try this if the above does not work
+--    vim.api.nvim_feedkeys('?', 'n', false --[[escape]])
+--   else
+--     require('searchbox').incsearch({reverse = true})
+--   end
+-- end, opts)
 
 map(
   'v',
@@ -279,7 +278,7 @@ map('i', '<C-e>', '<Esc><Esc>', opts);
 -- map('n', '@', '2', opts);
 
 -- Native LSP diagnostic
-local error = {severity = vim.diagnostic.severity.ERROR,}
+local error = { severity = vim.diagnostic.severity.ERROR, }
 local float_win_opts = {
   border = 'single',
   max_width = 100,
@@ -287,10 +286,10 @@ local float_win_opts = {
 };
 
 vim.keymap.set("n", "[d", function()
-  vim.diagnostic.goto_prev({severity=error, float=float_win_opts})
+  vim.diagnostic.goto_prev({ severity = error, float = float_win_opts })
 end, opts)
 vim.keymap.set("n", "]d", function()
-    vim.diagnostic.goto_next({severity=error, float=float_win_opts})
+  vim.diagnostic.goto_next({ severity = error, float = float_win_opts })
 end, opts)
 
 vim.keymap.set("n", "<C-W>d", function()
@@ -310,4 +309,3 @@ map('n', 'qa', ':qa!<cr>', opts);
 map('n', 'qa', ':qa!<cr>', opts);
 -- Workaround for :terminal where this key combination will clear the input
 map('t', '<S-space>', [[<space>]], opts)
-

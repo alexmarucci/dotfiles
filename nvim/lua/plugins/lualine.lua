@@ -1,5 +1,7 @@
 local present, lualine = pcall(require, 'lualine')
-if not present then
+local present2, noice = pcall(require, 'noice')
+
+if not present or not present2 then
   return
 end
 
@@ -9,9 +11,15 @@ if (not vim.g.vscode) then
     sections = {
       lualine_c = {
         { 'diagnostics', sources = { 'nvim_diagnostic' } },
-        { 'filename', path = 1 }
+        { 'filename',    path = 1 }
       },
-      lualine_x = { 'tabnine' },
+      lualine_x = {
+        {
+          noice.api.statusline.mode.get,
+          cond = noice.api.statusline.mode.has,
+          color = { fg = "#ff9e64" },
+        }
+      },
     },
   })
 end

@@ -40,8 +40,9 @@ cmp.setup({
       menu = {
         cmp_tabnine = '',
         treesitter = '',
-        -- path = 'PATH',
-        -- nvim_lsp = 'nvim_lsp',
+        path = 'path',
+        -- emmet_vim = 'Em',
+        -- nvim_lsp = 'LSP',
         -- nvim_lua = 'nvim_lua',
         -- { name = 'spell' },
       }
@@ -101,14 +102,17 @@ cmp.setup({
   },
   sources = {
     -- { name = 'luasnip', option = { use_show_condition = false } },
-    -- { name = 'buffer' },
-    { name = 'nvim_lsp',    max_item_count = 5 },
+    { name = "emmet_vim", keyword_length = 1, max_item_count = 2 },
+
+    { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'nvim_lua' },
     -- { name = 'spell' },
     { name = 'treesitter' },
-    { name = 'buffer' },
-    { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
+
+    { name = "buffer",    keyword_length = 5 },
+
+    -- { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
     -- { name = 'rg' },
   },
   -- sorting = {

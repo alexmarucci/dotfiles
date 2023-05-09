@@ -142,7 +142,7 @@ function y() {
   if [ $# -eq 0 ]; then
     $bin install
   else
-    $bin $@;
+    $bin $@ || $bin run $0;
   fi
 }
 
