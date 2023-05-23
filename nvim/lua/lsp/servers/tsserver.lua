@@ -90,7 +90,7 @@ local config = {
       unpack(opts)
     });
     vim.keymap.set('n', '<leader>ir', ts_utils.actions.removeUnused, {
-      desc = '[Typescript] - Remouse unused imports',
+      desc = '[Typescript] - Remove unused imports',
       buffer = bufnr,
       unpack(opts)
     });

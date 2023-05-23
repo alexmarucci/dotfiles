@@ -468,6 +468,12 @@ return packer.startup(function()
     end,
   })
 
+  use({
+    cond = not_vscode,
+    'rhysd/conflict-marker.vim',
+    event = 'BufRead',
+  })
+
   -- marked to be removed
   -- use({
   --   'kyazdani42/nvim-tree.lua',
@@ -538,7 +544,7 @@ return packer.startup(function()
   use 'Mofiqul/vscode.nvim'
   use({ 'luisiacc/the-matrix.nvim', as = 'thematrix' })
   use "rebelot/kanagawa.nvim"
-
+  use 'cschlueter/vim-github'
 
   use({
     'karb94/neoscroll.nvim',
