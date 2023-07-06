@@ -70,14 +70,6 @@ local config = {
 
     -- required to fix code action ranges and filter diagnostics
     -- ts_utils.setup_client(client)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_implementations<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>hl', '<cmd>Telescope git_bcommits<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ƒ', [[:lua vim.lsp.buf.format(nil, 1000)<cr>]], opts)
 
     -- no default maps, so you may want to define some here
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gstypescript', ':TSLspOrganize<CR>', opts)

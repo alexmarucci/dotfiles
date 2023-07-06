@@ -64,14 +64,14 @@ cmp.setup({
     -- end,
   },
   mapping = {
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<C-e>'] = cmp.mapping.close(),
-        ['<Tab>'] = cmp.mapping(function()
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<Tab>'] = cmp.mapping(function()
       if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       end
     end),
-        ['<Down>'] = cmp.mapping(function(fallback)
+    ['<Down>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item({ count = 1 })
       elseif luasnip.expand_or_jumpable() then
@@ -88,7 +88,7 @@ cmp.setup({
       'i',
       's',
     }),
-        ['<Up>'] = cmp.mapping(function(fallback)
+    ['<Up>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item({ count = 1 })
       elseif luasnip.jumpable(-1) then
@@ -97,12 +97,12 @@ cmp.setup({
         fallback()
       end
     end, { 'i', 's' }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
     -- { name = 'luasnip', option = { use_show_condition = false } },
-    { name = "emmet_vim", keyword_length = 1, max_item_count = 2 },
+    { name = "emmet_vim",   keyword_length = 1, max_item_count = 2 },
 
     { name = 'nvim_lsp' },
     { name = 'path' },
@@ -110,9 +110,9 @@ cmp.setup({
     -- { name = 'spell' },
     { name = 'treesitter' },
 
-    { name = "buffer",    keyword_length = 5 },
+    { name = "buffer",      keyword_length = 5 },
 
-    -- { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
+    { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
     -- { name = 'rg' },
   },
   -- sorting = {

@@ -248,6 +248,7 @@ map('n', '<leader>f', '<cmd>lua require("telescope.builtin").resume()<cr>')
 map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
 -- map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map('n', '<leader>fd', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
+map('n', '<leader>fx', '<cmd>lua require("telescope").extensions.search_dir_picker.search_dir_picker()<cr>')
 map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep({ search_dirs = {".", ".github"}})<cr>')
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").grep_string()<cr>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
@@ -309,3 +310,17 @@ map('n', 'qa', ':qa!<cr>', opts);
 map('n', 'qa', ':qa!<cr>', opts);
 -- Workaround for :terminal where this key combination will clear the input
 map('t', '<S-space>', [[<space>]], opts)
+
+-- LSP Server
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+-- vim.api.nvuf_set_keymap('n', 'gd', '<cmd>Telescope lsp_implementations<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+vim.api.nvim_set_keymap('n', '<leader>hl', '<cmd>Telescope git_bcommits<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
+-- vim.api.nvuf_set_keymap('n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
+vim.api.nvim_set_keymap('n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
+vim.api.nvim_set_keymap('n', 'ƒ', [[:lua vim.lsp.buf.format(nil, 1000)<cr>]], opts)
+
+
+map('n', ',', '<Plug>LineLetters', opts)
+map('v', ',', '<Plug>LineLetters', opts)

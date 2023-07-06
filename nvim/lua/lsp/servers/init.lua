@@ -13,6 +13,7 @@ M.terraformls = require('lsp.servers.terraform')
 -- M.elixirls = require('lsp.servers.elixir')
 M.eslint = require('lsp.servers.eslint')
 M.stylelint_lsp = require('lsp.servers.stylelint')
+M.zls = require('lsp.servers.zls')
 
 -- Not yet supported by lspinstall
 require('lsp.servers.null-ls')

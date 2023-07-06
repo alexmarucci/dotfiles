@@ -1,20 +1,31 @@
-local opt = vim.opt
-local g   = vim.g
+require('themes.evening')
 
-g['python_host_prog']      = vim.env.HOME .. '/.asdf/installs/python/2.7.18/bin/python'
-g['python3_host_prog']     = vim.env.HOME .. '/.asdf/installs/python/3.9.5/bin/python'
-g['copilot_no_tab_map']    = true
-g['copilot_assume_mapped'] = true
+local opt                           = vim.opt
+local g                             = vim.g
 
-g.did_load_filetypes = true
+g['python_host_prog']               = vim.env.HOME .. '/.asdf/installs/python/2.7.18/bin/python'
+g['python3_host_prog']              = vim.env.HOME .. '/.asdf/installs/python/3.9.5/bin/python'
+g['copilot_no_tab_map']             = true
+g['copilot_assume_mapped']          = true
 
-g.targets_aiAI        = 'aiAI'
-g.targets_mapped_aiAI = g.targets_aiAI
+g.did_load_filetypes                = true
+g.undotree_HighlightChangedWithSign = 0
+
+
+g.targets_aiAI             = 'aiAI'
+g.targets_mapped_aiAI      = g.targets_aiAI
 
 -- Neovide
 g.neovide_input_use_logo   = 1
 g.neovide_floating_opacity = 1
 g.neovide_transparency     = 1
+
+vim.filetype.add({
+  extension = {
+    env = 'bash',
+    sh = 'bash',
+  },
+});
 
 -- GUI terminal colors
 g.terminal_color_0  = '#2e3436'
@@ -36,61 +47,62 @@ g.terminal_color_15 = '#eeeeec'
 
 -- GUI Font (Neovide)
 -- opt.guifont = 'JetBrainsMono Nerd Font Mono:h15'
-opt.guifont = 'TerminessTTF_Nerd_Font_Mono:h18'
+opt.guifont         = 'TerminessTTF_Nerd_Font_Mono:h18'
 
 -- Enables winbar
-opt.winbar        = '%=%m %f'
+opt.winbar          = '%=%m %f'
 -- Enables global statusline
-opt.laststatus    = 3
-opt.undofile      = true
-opt.completeopt   = 'menu,menuone,noselect'
-opt.termguicolors = true
-opt.wrap          = true
-opt.ruler         = false
-opt.ignorecase    = true
-opt.splitbelow    = true
-opt.splitright    = true
-opt.cul           = true
-opt.mouse         = 'a'
-opt.signcolumn    = 'yes'
-opt.cmdheight     = 1
-opt.updatetime    = 250 -- update interval for gitsigns
-opt.timeoutlen    = 400
+opt.laststatus      = 3
+opt.undofile        = true
+opt.completeopt     = 'menu,menuone,noselect'
+opt.termguicolors   = true
+opt.wrap            = true
+opt.ruler           = false
+opt.ignorecase      = true
+opt.splitbelow      = true
+opt.splitright      = true
+opt.cul             = true
+opt.mouse           = 'a'
+opt.signcolumn      = 'yes'
+opt.cmdheight       = 1
+opt.updatetime      = 250 -- update interval for gitsigns
+opt.timeoutlen      = 400
 -- opt.clipboard = 'unnamedplus'
-opt.clipboard     = ''
-opt.scrolloff     = 8
-opt.lazyredraw    = false
-opt.linebreak     = true
-opt.textwidth     = 80
-opt.wildmenu      = true
-opt.showmatch     = true
-opt.showbreak     = '+++'
-opt.conceallevel  = 0 -- Show `` in markdown files
-opt.smartcase     = true
+opt.clipboard       = ''
+opt.scrolloff       = 8
+opt.lazyredraw      = false
+opt.linebreak       = true
+opt.textwidth       = 80
+opt.wildmenu        = true
+opt.showmatch       = true
+opt.showbreak       = '+++'
+opt.conceallevel    = 0 -- Show `` in markdown files
+opt.smartcase       = true
 
+-- I had to disable this flag as it adds "^[[5 q" to the output
 -- Interactive shell (recognises aliases)
-opt.shellcmdflag = '-ic'
+-- opt.shellcmdflag = '-ic'
 
 -- Numbers
-opt.number         = true
-opt.relativenumber = false
-opt.numberwidth    = 2
+opt.number          = true
+opt.relativenumber  = false
+opt.numberwidth     = 2
 
 -- for indentline
-opt.expandtab   = true
-opt.shiftwidth  = 2
+opt.expandtab       = true
+opt.shiftwidth      = 2
 -- This causes jsx/tsx files to be wrongly indented
-opt.smartindent = false
+opt.smartindent     = false
 
 -- Backups
-opt.backup      = true
-opt.writebackup = true
-opt.backupdir   = vim.fn.expand('~/.local/share/nvim/backup')
-opt.backupskip  = '/tmp/*,/private/tmp/*'
-opt.directory   = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
-opt.swapfile    = false
-opt.undofile    = true
-opt.undodir     = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
+opt.backup          = true
+opt.writebackup     = true
+opt.backupdir       = vim.fn.expand('~/.local/share/nvim/backup')
+opt.backupskip      = '/tmp/*,/private/tmp/*'
+opt.directory       = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
+opt.swapfile        = false
+opt.undofile        = true
+opt.undodir         = '~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp'
 
 -- shortmess options
 opt.shortmess:append('asI') -- disable intro
@@ -134,9 +146,11 @@ g.tokyonight_italic_functions = true
 -- vim.g.vscode_transparent = 1
 -- Enable italic comment
 vim.g.vscode_italic_comment = 1
-vim.cmd [[colorscheme vscode]]
+-- vim.cmd.colorscheme("night-owl")
+
+-- vim.cmd [[colorscheme slate]]
 -- Better underline
-vim.cmd [[hi CursorLine guibg=Grey20]]
+-- vim.cmd [[hi CursorLine guibg=Grey20]]
 
 -- vim.cmd[[colorscheme github_dark]]
 

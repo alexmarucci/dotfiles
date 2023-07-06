@@ -85,7 +85,6 @@ return packer.startup(function()
   use({ 'folke/neodev.nvim', event = 'BufRead' })
   use({
     'williamboman/mason.nvim',
-    event = 'BufRead',
     config = function()
       require('mason').setup();
     end,
@@ -203,21 +202,6 @@ return packer.startup(function()
   --[[ use({ 'tpope/vim-fugitive', cond = {vscode}, cmd = { 'Git' } }) ]]
   use({ 'nvim-lua/plenary.nvim' })
   use({ 'nvim-lua/popup.nvim', cond = not_vscode, after = 'plenary.nvim' })
-  use({
-    'famiu/nvim-reload',
-    cmd = 'Reload',
-    cond = not_vscode,
-    config = function()
-      local reload = require('nvim-reload')
-      local plugin_dir = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua'
-      reload.vim_reload_dirs = {}
-      reload.lua_reload_dirs = {}
-      reload.post_reload_hook = function()
-        vim.cmd('source ' .. plugin_dir)
-        vim.cmd('colorscheme vscode')
-      end
-    end,
-  })
   use({ 'simrat39/symbols-outline.nvim', cmd = 'SymbolsOutline' })
   use({
     'numToStr/Comment.nvim',
@@ -294,6 +278,12 @@ return packer.startup(function()
     config = function()
       require('neoclip').setup();
       require "telescope".load_extension("neoclip")
+    end,
+  }
+  use {
+    "smilovanovic/telescope-search-dir-picker.nvim",
+    config = function()
+      require "telescope".load_extension('search_dir_picker')
     end,
   }
 
@@ -535,12 +525,30 @@ return packer.startup(function()
     end,
   }
 
+  use 'mbbill/undotree'
+
   use 'famiu/bufdelete.nvim'
 
   -- Themes colorscheme
   --[[ use ({ 'styled-components/vim-styled-components', branch = 'main' }) ]]
-  use({ 'charliesbot/night-owl.vim' })
+  -- use({ 'oxfist/night-owl.nvim', disable = true })
   use({ 'folke/tokyonight.nvim', branch = 'main' })
+  use {
+    'catppuccin/nvim',
+    config = function()
+      require("catppuccin").setup({
+        flavour = 'frappe',
+        background = { light = 'latte', dark = 'frappe' },
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+          keywords = { "italic" },
+        },
+      });
+      vim.cmd.colorscheme('catppuccin-frappe')
+    end
+  }
+  use 'shaunsingh/solarized.nvim'
   use 'Mofiqul/vscode.nvim'
   use({ 'luisiacc/the-matrix.nvim', as = 'thematrix' })
   use "rebelot/kanagawa.nvim"
@@ -595,32 +603,41 @@ return packer.startup(function()
   -- this looks incompatible with latest nvim as of v0.8.3
   -- use 'rhysd/clever-f.vim'
 
-  use({
-    'ggandor/flit.nvim',
-    event = 'BufRead',
-    config = function()
-      local flit = require('flit');
-      flit.setup();
-    end,
-  })
+  -- use({
+  --   'ggandor/flit.nvim',
+  --   event = 'BufRead',
+  --   config = function()
+  --     local flit = require('flit');
+  --     flit.setup();
+  --   end,
+  -- })
 
   use({
-    'ggandor/leap.nvim',
+    'folke/flash.nvim',
     config = function()
-      local leap = require('leap');
-
-      leap.add_default_mappings();
-      leap.opts.special_keys.prev_target = 'F';
-      leap.opts.special_keys.next_target = { 'f', '<tab>' };
-    end,
+      require('plugins.flash');
+    end
   })
+  -- use({
+  --   'ggandor/leap.nvim',
+  --   config = function()
+  --     local leap = require('leap');
+  --
+  --     leap.add_default_mappings();
+  --     leap.opts.special_keys.prev_target = 'F';
+  --     leap.opts.special_keys.next_target = { 'f', '<tab>' };
+  --   end,
+  -- })
+  --
+  -- use({
+  --   'ggandor/leap-spooky.nvim',
+  --   config = function()
+  --     require('leap-spooky').setup();
+  --   end,
+  -- })
 
-  use({
-    'ggandor/leap-spooky.nvim',
-    config = function()
-      require('leap-spooky').setup();
-    end,
-  })
+  use 'skamsie/vim-lineletters'
+  use 'Mofiqul/dracula.nvim'
 
   -- PlantUML Syntax (TreeSitter is not supported as of 07-22)
   use({ 'aklt/plantuml-syntax' })
@@ -657,7 +674,12 @@ return packer.startup(function()
   }
 
   use({ 'rose-pine/neovim', as = 'rose-pine' })
-  use 'olimorris/onedarkpro.nvim'
+  use {
+    'olimorris/onedarkpro.nvim',
+    config = function()
+      require('plugins.onedarkpro');
+    end
+  }
   use 'ajmwagar/vim-deus'
   use 'gbprod/nord.nvim'
   use 'tanvirtin/monokai.nvim'
@@ -686,23 +708,6 @@ return packer.startup(function()
       "rcarriga/nvim-notify",
     }
   })
-
-  -- use {
-  --   -- 'codota/tabnine-nvim',
-  --   '~/projects/_/tabnine-nvim',
-  --   run = "./dl_binaries.sh",
-  --   event = 'BufRead',
-  --   config = function ()
-  --     require('tabnine').setup({
-  --       disable_auto_comment=true,
-  --       accept_keymap="<C-l>",
-  --       dismiss_keymap = "<C-e>",
-  --       debounce_ms = 300,
-  --       suggestion_color = {gui = "#808080", cterm = 244},
-  --       execlude_filetypes = {"TelescopePrompt"}
-  --     })
-  --   end
-  -- }
 
   -- use({
   --   'danymat/neogen',
