@@ -254,12 +254,14 @@ return packer.startup(function()
   })
   use({
     'nvim-telescope/telescope-fzf-native.nvim',
+    after = 'telescope.nvim',
     cond = not_vscode,
     run = 'make'
   })
   use 'kkharji/sqlite.lua'
   use {
     "nvim-telescope/telescope-frecency.nvim",
+    after = 'telescope.nvim',
     config = function()
       require "telescope".load_extension("frecency")
     end,
@@ -268,6 +270,7 @@ return packer.startup(function()
   use {
     "danielfalk/smart-open.nvim",
     branch = "0.1.x",
+    after = 'telescope.nvim',
     config = function()
       require('telescope').load_extension('smart_open')
     end,
@@ -275,6 +278,7 @@ return packer.startup(function()
   }
   use {
     "AckslD/nvim-neoclip.lua",
+    after = 'telescope.nvim',
     config = function()
       require('neoclip').setup();
       require "telescope".load_extension("neoclip")
@@ -282,6 +286,7 @@ return packer.startup(function()
   }
   use {
     "smilovanovic/telescope-search-dir-picker.nvim",
+    after = 'telescope.nvim',
     config = function()
       require "telescope".load_extension('search_dir_picker')
     end,
