@@ -139,7 +139,7 @@ end
 g.tokyonight_style = "night"
 g.tokyonight_italic_functions = true
 
--- vim.cmd[[colorscheme tokyonight]]
+vim.cmd [[colorscheme kanagawa]]
 
 -- vim.g.vscode_style = "dark"
 -- Enable transparent background.
