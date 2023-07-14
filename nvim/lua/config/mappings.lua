@@ -249,8 +249,36 @@ map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<c
 -- map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map('n', '<leader>fd', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
 map('n', '<leader>fx', '<cmd>lua require("telescope").extensions.search_dir_picker.search_dir_picker()<cr>')
-map('n', '<leader>F', '<cmd>lua require("telescope.builtin").live_grep({ search_dirs = {".", ".github"}})<cr>')
+
+for index, keybind in ipairs({ '<leader>F', '<leader>ff' }) do
+  vim.keymap.set('n', keybind, function()
+    require("telescope.builtin").live_grep({
+      attach_mappings = function(_, map)
+        map('i', '<C-y>', function(prompt_bufnr)
+          print('performing yank...')
+          local actions = require('telescope.actions');
+          local action_state = require('telescope.actions.state');
+          local entry = action_state.get_selected_entry();
+
+          if (entry.text) then
+            vim.fn.setreg('"', entry.text .. "\n");
+            actions.close(prompt_bufnr);
+            vim.schedule(function()
+              vim.cmd 'norm p'
+            end)
+          end
+        end);
+
+
+        return true;
+      end,
+      search_dirs = { ".", ".github" }
+    })
+  end, { desc = 'Live Grep' });
+end
+
 map('n', '<leader>fs', '<cmd>lua require("telescope.builtin").grep_string()<cr>')
+map('n', '<leader>/', '<cmd>lua require("telescope.builtin").current_buffer_fuzzy_find()<cr>')
 map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>')
 map('n', '<leader>fh', '<cmd>Telescope<cr>')
 
@@ -304,10 +332,13 @@ map('n', ';', ':', opts);
 map('v', ':', ';', opts);
 map('v', ';', ':', opts);
 
+-- Flash mapping
+vim.keymap.set('n', 's', require('flash').jump, { desc = 'Flash Jump' })
+vim.keymap.set('o', 'r', require('flash').remote, { desc = 'Remote Flash' })
+
 -- fast quit
 map('n', 'qa', ':qa!<cr>', opts);
 
-map('n', 'qa', ':qa!<cr>', opts);
 -- Workaround for :terminal where this key combination will clear the input
 map('t', '<S-space>', [[<space>]], opts)
 
@@ -319,7 +350,6 @@ vim.api.nvim_set_keymap('n', '<leader>hl', '<cmd>Telescope git_bcommits<CR>', op
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
 -- vim.api.nvuf_set_keymap('n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
 vim.api.nvim_set_keymap('n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
-vim.api.nvim_set_keymap('n', 'ƒ', [[:lua vim.lsp.buf.format(nil, 1000)<cr>]], opts)
 
 
 map('n', ',', '<Plug>LineLetters', opts)

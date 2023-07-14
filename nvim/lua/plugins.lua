@@ -18,6 +18,13 @@ return packer.startup(function()
   use({ 'wbthomason/packer.nvim', event = 'VimEnter' })
   use 'duane9/nvim-rg'
 
+  use {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup()
+    end
+  }
+
   -- -- UI
   -- use({
   --   'VonHeikemen/searchbox.nvim',
@@ -309,6 +316,12 @@ return packer.startup(function()
   })
 
   use({
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    cond = not_vscode,
+    after = "nvim-treesitter",
+  })
+
+  use({
     'JoosepAlviste/nvim-ts-context-commentstring',
     cond = not_vscode,
     after = 'nvim-treesitter'
@@ -353,7 +366,6 @@ return packer.startup(function()
   use({
     'windwp/nvim-ts-autotag',
     cond = not_vscode,
-    event = 'BufRead',
     after = 'nvim-treesitter'
   })
 
@@ -439,7 +451,6 @@ return packer.startup(function()
     end,
   })
 
-
   use({
     'akinsho/bufferline.nvim',
     tag = "v2.*",
@@ -455,7 +466,9 @@ return packer.startup(function()
 
   use({
     cond = not_vscode,
-    'lewis6991/gitsigns.nvim',
+    -- 'lewis6991/gitsigns.nvim',
+    '~/projects/hacks/gitsigns.nvim',
+
     event = 'BufRead',
     after = 'plenary.nvim',
     config = function()
@@ -550,13 +563,18 @@ return packer.startup(function()
           keywords = { "italic" },
         },
       });
-      vim.cmd.colorscheme('catppuccin-frappe')
+      -- vim.cmd.colorscheme('catppuccin-frappe')
     end
   }
   use 'shaunsingh/solarized.nvim'
   use 'Mofiqul/vscode.nvim'
   use({ 'luisiacc/the-matrix.nvim', as = 'thematrix' })
-  use "rebelot/kanagawa.nvim"
+  use({
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('plugins.kanagawa')
+    end
+  })
   use 'cschlueter/vim-github'
 
   use({
