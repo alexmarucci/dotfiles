@@ -1,0 +1,20 @@
+-- local typescript = require('typescript')
+-- local commands = require('typescript.commands')
+-- commands.setupCommands(0);
+-- 
+-- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>fr', ':TypescriptRenameFile<CR>', opts)
+-- vim.keymap.set('n', '<leader>ia', typescript.actions.addMissingImports, {
+--   desc = '[Typescript] - Add missing imports',
+--   buffer = bufnr,
+--   unpack(opts)
+-- });
+-- vim.keymap.set('n', '<leader>ir', typescript.actions.removeUnused, {
+--   desc = '[Typescript] - Remove unused imports',
+--   buffer = bufnr,
+--   unpack(opts)
+-- });
+-- vim.keymap.set('n', '<leader>id', '<cmd>TypescriptGoToSourceDefinition<cr>', {
+--   desc = '[Typescript] - Go To Source Definition',
+--   buffer = bufnr,
+--   unpack(opts)
+-- });
