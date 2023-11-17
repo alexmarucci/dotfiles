@@ -7,7 +7,7 @@ flash.setup({
   modes = {
     char = {
       config = function(opts)
-        local isOperator = vim.fn.mode(true):find 'no' and (vim.v.operator == 'y' or vim.v.operator == 'd');
+        local isOperator = vim.fn.mode(true):find 'no' and (vim.v.operator == 'y' or vim.v.operator == 'd' or vim.v.operator == 'c');
         -- autohide flash when in operator-pending mode
         opts.autohide = isOperator;
 

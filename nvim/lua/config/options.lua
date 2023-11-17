@@ -183,10 +183,15 @@ local prefetch_file_extensions = {
   "*.ts", "*.tsx", "*.js", "*.jsx", "*.css", "*.scss", "*.html", "*.lua"
 };
 
-vim.api.nvim_create_autocmd('BufRead', {
-  group = prefetch,
-  pattern = prefetch_file_extensions,
-  callback = function()
-    require('cmp_tabnine'):prefetch(vim.fn.expand('%:p'))
-  end
-})
+
+local present, tabnine = pcall(require, 'tabnine')
+
+if present then
+  vim.api.nvim_create_autocmd('BufRead', {
+    group = prefetch,
+    pattern = prefetch_file_extensions,
+    callback = function()
+      tabnine:prefetch(vim.fn.expand('%:p'))
+    end
+  })
+end
