@@ -77,8 +77,7 @@
 # ############################################################### #
 #
 
-# Launch lightweight App launcher
-alt - space : dmenu-mac
+# Run $ skhd --reload
 
 # Reload yabay
 cmd + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
@@ -112,18 +111,19 @@ fn - l : skhd -k "right"
 
 # Bookmarking
 # :: your_mode # or :: your_mode : script
-:: bookmark_mode
-alt - b ; bookmark_mode
-bookmark_mode < a :  open -n /Applications/iTerm.app --args "nvim $HOME/.local/share/bookmark/list"
-bookmark_mode < b : $HOME/.local/share/bookmark/select.sh
-bookmark_mode < alt - b ; default
+# :: bookmark_mode
+# alt - b ; bookmark_mode
+# bookmark_mode < a :  open -n /Applications/iTerm.app --args "nvim $HOME/.local/share/bookmark/list"
+# bookmark_mode < b : $HOME/.local/share/bookmark/select.sh
+# bookmark_mode < alt - b ; default
 
 # Disables skhd
 :: passthrough
 alt - p ; passthrough
 passthrough < alt - p ; default
 
-ctrl - w : skhd --key "alt - backspace"
+# ctrl - w : skhd --key "alt - backspace"
+# ctrl - j : skhd --key "return"
 
 # Moves between spaces
 ctrl + alt - a : skhd --key "ctrl - left"
@@ -133,6 +133,10 @@ ctrl + alt - s : skhd --key "ctrl - down"
 
 ## Applications
 alt - o : pass otp -c okta
+alt - space : pass otp -c `echo "atlassian, github, microsoft, npm, okta, totp-secret" | tr , '\n' | dmenu-mac`
+
+# Ctrl + .
+ctrl - 0x2B : /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle
 
 # focus window
 # alt - h : yabai -m window --focus west

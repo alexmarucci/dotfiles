@@ -106,27 +106,6 @@ function neo() {
     echo "${PROJECT_DIR} does not exists."
   fi
 }
-
-function ghsearch() {
-  sha="$1";
-
-  if [[ -z "${sha}" ]]; then
-    commit=$(g log --oneline | fzf);
-
-    sha=$(echo ${commit} | cut -d " " -f1);
-  fi
-
-  echo "Searching: ${commit:=$sha}"
-  echo "-"
-
-  template='{{range .}}{{"PR #"}}{{.number}} {{hyperlink .url .title}}{{"\n"}}{{end}}';
-  gh pr list --search "${sha}" --state merged --json number,url,title --template "${template}"
-}
-
-function gar() {
-  git add "*${1}*"
-}
-
 # Open drex as file explorer
 alias dr='nvim -c "Drex"'
 

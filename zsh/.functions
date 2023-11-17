@@ -14,10 +14,11 @@ work() {
 function doesFileExists() {
   local file=$1;
   local root_dir=$(git rev-parse --show-toplevel 2> /dev/null || pwd);
-
-  if [[ -f "$root_dir/$file" || -f "$file" ]]; then
+  local file_in_git=$(git ls-tree -r HEAD~1 --name-only | grep $file);
+  
+  if [[ $file_in_git != "" || -f "$root_dir/$file" || -f "$file" ]]; then
     echo true;
-  else
+  else 
     echo false;
   fi
 }
@@ -38,9 +39,8 @@ function y() {
     bin=npm
   else
     echo 'No known lockfile found, unable to guess package manager.'
-    echo 'You may run the install manually: e.g. $ npm install'
-    exit -1
-    return;
+    echo -n '- Which package manager? '
+    read bin
   fi
 
   local hasScript=$(jq -e ".scripts | has(\"$1\")" package.json);
@@ -75,3 +75,20 @@ function addOtp() {
     echo "Parameters missing. Usage: addOtp ~/path/to/qr_code.png otp_secret_name"
   fi
 }
+
+function find_pr() {
+  sha="$1";
+
+  if [[ -z "${sha}" ]]; then
+    commit=$(g log --oneline | fzf);
+
+    sha=$(echo ${commit} | cut -d " " -f1);
+  fi
+
+  echo "Searching: ${commit:=$sha}"
+  echo "-"
+
+  template='{{range .}}{{"PR #"}}{{.number}} {{hyperlink .url .title}}{{"\n"}}{{end}}';
+  gh pr list --search "${sha}" --state merged --json number,url,title --template "${template}"
+}
+

@@ -3,8 +3,6 @@ if not present then
   return
 end
 
-
-
 kanagawa.setup({
   dimInactive = true,
 

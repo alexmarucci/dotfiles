@@ -3,8 +3,13 @@
 # Git Aliases
 # ---------------------e
 alias g='git'
-alias ga='git add'
+# Replaced by function instead 
+# alias ga='git add'
+function ga() {
+  git add "*${1}*"
+}
 alias gaa='git add .'
+alias gap='git add -p'
 alias gb='git branch'
 alias grm='git branch -D'
 alias gc='git commit'

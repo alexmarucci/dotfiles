@@ -237,3 +237,14 @@ LFCD="$HOME/.config/lf/lfrc"                                #  pre-built binary,
 if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
+
+# Created by `pipx` on 2023-05-24 09:22:55
+export PATH="$PATH:/Users/maru85945/.local/bin"
+
+# pnpm
+export PNPM_HOME="/Users/maru85945/maru85945/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /Users/maru85945/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /Users/maru85945/.npm/_npx/6913fdfd1ea7a741/node_modules/tabtab/.completions/electron-forge.zsh
