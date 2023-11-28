@@ -28,8 +28,8 @@ function init()
     cond = not_vscode,
     event = 'BufRead',
     dependencies = {
-        'nvim-treesitter/nvim-treesitter',
-        'nvim-tree/nvim-web-devicons'     -- optional
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons'   -- optional
     },
     config = function()
       require("lspsaga").setup({
@@ -46,7 +46,7 @@ function init()
       });
     end,
   })
-    
+
   use({ 'ray-x/lsp_signature.nvim', cond = not_vscode, event = 'BufRead' })
 
   use({ 'nvim-lua/lsp_extensions.nvim', cond = not_vscode, event = 'BufRead' })
@@ -223,6 +223,17 @@ function init()
     as = 'cmp',
     cond = not_vscode,
     opt = false,
+    dependencies = {
+      -- Snippet Engine & its associated nvim-cmp source
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+
+      -- Adds LSP completion capabilities
+      'hrsh7th/cmp-nvim-lsp',
+
+      -- Adds a number of user-friendly snippets
+      'rafamadriz/friendly-snippets',
+    },
     config = function()
       require('plugins.compe')
     end,
@@ -292,7 +303,7 @@ function init()
 
   use({
     'akinsho/bufferline.nvim',
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     event = 'BufRead',
     cond = not_vscode,
     config = function()
@@ -323,7 +334,7 @@ function init()
   use {
     'theblob42/drex.nvim',
     cond = not_vscode,
-    dependencies = {'kyazdani42/nvim-web-devicons'},
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('plugins.drex')
     end,
@@ -387,4 +398,4 @@ end
 
 init()
 
-return plugin_list; 
+return plugin_list;

@@ -102,7 +102,7 @@ cmp.setup({
   },
   sources = {
     -- { name = 'luasnip', option = { use_show_condition = false } },
-    { name = "emmet_vim",   keyword_length = 1, max_item_count = 2 },
+    { name = "emmet_vim", keyword_length = 1, max_item_count = 2 },
 
     { name = 'nvim_lsp' },
     { name = 'path' },
@@ -110,9 +110,9 @@ cmp.setup({
     -- { name = 'spell' },
     { name = 'treesitter' },
 
-    { name = "buffer",      keyword_length = 5 },
+    { name = "buffer",    keyword_length = 5 },
 
-    { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
+    -- { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
     -- { name = 'rg' },
   },
   -- sorting = {

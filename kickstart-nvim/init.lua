@@ -94,24 +94,9 @@ require('lazy').setup({
     end
   },
 
-  {
-    -- Autocompletion
-    'hrsh7th/nvim-cmp',
-    dependencies = {
-      -- Snippet Engine & its associated nvim-cmp source
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-
-      -- Adds LSP completion capabilities
-      'hrsh7th/cmp-nvim-lsp',
-
-      -- Adds a number of user-friendly snippets
-      'rafamadriz/friendly-snippets',
-    },
-  },
-
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -241,12 +226,17 @@ local servers = {
   },
 }
 
--- Setup neovim lua configuration
-require('neodev').setup()
+
+
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp');
+
+if cmp_nvim_lsp_loaded then
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
 
 -- Ensure the servers above are installed
 -- local mason_lspconfig = require 'mason-lspconfig'
@@ -254,7 +244,7 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 -- mason_lspconfig.setup {
 --   ensure_installed = vim.tbl_keys(servers),
 -- }
--- 
+--
 -- mason_lspconfig.setup_handlers {
 --   function(server_name)
 --     require('lspconfig')[server_name].setup {
