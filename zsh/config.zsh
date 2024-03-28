@@ -127,6 +127,8 @@ eval "$(fnm env --shell zsh --use-on-cd)"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 export EDITOR=nvim
+export GIT_EDITOR="nvim"
+export NVIM_APPNAME=kickstart-nvim
 
 # Set tab title to current dir
 DISABLE_AUTO_TITLE="true"
@@ -176,3 +178,4 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Initialise zoxide
 eval "$(zoxide init zsh)"
 alias cd="z"
+alias d="z"

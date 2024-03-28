@@ -26,7 +26,7 @@ luasnip.filetype_extend("typescript", { "javascript" })
 
 cmp.setup({
   preselect = cmp.PreselectMode.Item,
-  experimental = { ghost_text = true },
+  experimental = { ghost_text = false },
   confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = true },
   window = {
     completion = cmp.config.window.bordered({
@@ -38,7 +38,7 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = false,
       menu = {
-        cmp_tabnine = '',
+        codeium = '',
         treesitter = '',
         path = 'path',
         -- emmet_vim = 'Em',
@@ -98,37 +98,40 @@ cmp.setup({
       end
     end, { 'i', 's' }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+    -- ['<C-l>'] = cmp.mapping.confirm({ select = true }),
   },
   sources = {
+    { name = "codeium" },
+
     -- { name = 'luasnip', option = { use_show_condition = false } },
-    { name = "emmet_vim", keyword_length = 1, max_item_count = 2 },
+    { name = "emmet_vim",  keyword_length = 1, max_item_count = 2 },
 
     { name = 'nvim_lsp' },
     { name = 'path' },
     { name = 'nvim_lua' },
     -- { name = 'spell' },
-    { name = 'treesitter' },
+    { name = 'treesitter', keyword_length = 2 },
 
-    { name = "buffer",    keyword_length = 5 },
+    { name = "buffer",     keyword_length = 5 },
+
 
     -- { name = 'cmp_tabnine', keyword_length = 1, max_item_count = 1 },
     -- { name = 'rg' },
   },
-  -- sorting = {
-  --   priority_weight = 2,
-  --   comparators = {
-  --     require('cmp_tabnine.compare'),
-  --     compare.offset,
-  --     compare.exact,
-  --     compare.score,
-  --     compare.recently_used,
-  --     compare.kind,
-  --     compare.sort_text,
-  --     compare.length,
-  --     compare.order,
-  --   },
-  -- },
+  sorting = {
+    priority_weight = 1,
+    comparators = {
+      compare.order,
+      --     require('cmp_tabnine.compare'),
+      --     compare.offset,
+      --     compare.exact,
+      --     compare.score,
+      --     compare.recently_used,
+      --     compare.kind,
+      --     compare.sort_text,
+      --     compare.length,
+    },
+  },
 })
 
 -- if present4 then

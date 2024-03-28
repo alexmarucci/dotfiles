@@ -32,6 +32,20 @@ cmd(
   false
 )
 
+-- Set common .env files as BASH
+cmd(
+  [[
+    au BufNewFile,BufRead .env,.env.* set filetype=bash
+  ]],
+  false
+)
+
+-- Set common .html files as HTML
+-- cmd("au BufNewFile,BufRead .html,.htm set filetype=html", false)
+
+
+
+
 cmd([[au BufNewFile,BufRead *.puml set filetype=plantuml]], false)
 
 cmd([[au BufNewFile,BufRead *.prisma set filetype=prisma]], false)

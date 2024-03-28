@@ -40,6 +40,10 @@ P.S. You can delete this when you're done too. It's your config now :)
 
 require('config');
 
+local not_vscode = function()
+  return vim.g.vscode == nil;
+end
+
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -77,6 +81,7 @@ require('lazy').setup({
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    cond = not_vscode,
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
@@ -230,12 +235,14 @@ local servers = {
 
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp');
+if not_vscode() then
+  local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp');
 
-if cmp_nvim_lsp_loaded then
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  if cmp_nvim_lsp_loaded then
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+  end
 end
 
 -- Ensure the servers above are installed
