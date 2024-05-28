@@ -1,6 +1,12 @@
 local on_attach = require('lsp.on_attach')
 local lsp = vim.lsp
 
+local lsp_signature_config = {
+  bind = true,
+  -- enable virtual text only
+  floating_window = false,
+}
+
 -- config that activates keymaps and enables snippet support
 local function base_config()
   local capabilities = require('cmp_nvim_lsp').default_capabilities(
@@ -17,7 +23,8 @@ local function base_config()
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
     on_attach = function(client, bufnr)
-      client.server_capabilities.hoverProvider = false
+      client.server_capabilities.hoverProvider = true
+      require('lsp_signature').on_attach(lsp_signature_config, bufnr)
 
       on_attach(client);
     end,

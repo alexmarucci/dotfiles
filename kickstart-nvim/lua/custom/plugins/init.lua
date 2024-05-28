@@ -184,7 +184,7 @@ function init()
   })
 
   use({
-    'jose-elias-alvarez/null-ls.nvim',
+    'nvimtools/none-ls.nvim',
     cond = not_vscode,
   })
 
@@ -207,6 +207,29 @@ function init()
       require('plugins.kanagawa')
     end
   })
+
+  use {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("cyberdream").setup({
+        -- Recommended - see "Configuring" below for more config options
+        transparent = false,
+        italic_comments = true,
+        hide_fillchars = true,
+        borderless_telescope = false,
+        terminal_colors = true,
+      })
+    end,
+  }
+
+  use {
+    "thallada/farout.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  }
 
   -- Treesitter
   use {

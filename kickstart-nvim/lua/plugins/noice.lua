@@ -32,6 +32,7 @@ require("noice").setup({
     view_history = "messages",   -- view for :messages
     view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
   },
+  cmdline = { enabled = false },
   -- you can enable a preset for easier configuration
   presets = {
     bottom_search = true,         -- use a classic bottom cmdline for search
@@ -42,6 +43,7 @@ require("noice").setup({
   },
   views = {
     cmdline_popup = {
+      -- uncomment to position the cmdline at the top
       position = {
         -- row = 4,
         -- col = "50%",

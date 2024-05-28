@@ -4,11 +4,11 @@ local opts = { noremap = true, silent = true }
 
 if not bufnr then bufnr = 0 end
 
-local lsp_signature_config = {
-  bind = true,
-  -- enable virtual text only
-  floating_window = false,
-}
+-- local lsp_signature_config = {
+--   bind = true,
+--   -- enable virtual text only
+--   floating_window = false,
+-- }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
@@ -50,7 +50,7 @@ local config = {
       client.config.flags.allow_incremental_sync = true
     end
 
-    require('lsp_signature').on_attach(lsp_signature_config, bufnr)
+    -- require('lsp_signature').on_attach(lsp_signature_config, bufnr)
 
     local ts_utils = require('typescript')
     local commands = require('typescript.commands')
