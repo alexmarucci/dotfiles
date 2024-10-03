@@ -94,7 +94,7 @@ map('o', 'H', [[^]], opts)
 -- Escape to exit to normal mode in terminal
 -- map('t', '<Esc>', [[<C-\><C-n>]], opts)
 map('t', '<C-e>', [[<C-\><C-n>]], opts)
-map('n', '<leader>q', [[:<C-u>execute ":".v:count."TermExec cmd=\"tmux && exit\" direction=float"<CR>]], opts)
+map('n', '<leader>q', [[:<C-u>execute ":".v:count."ToggleTerm direction=float"<CR>]], opts)
 map('n', '<C-q>q', [[:<C-u>execute ":".v:count."ToggleTerm direction=float"<CR>]], opts)
 map('n', '<C-q>j', [[:<C-u>execute ":".v:count."ToggleTerm direction=horizontal size=30"<CR>]], opts)
 map('n', '<C-q>l', [[:<C-u>execute ":".v:count."ToggleTerm direction=vertical"<CR>]], opts)
@@ -245,14 +245,15 @@ map(
 
 -- Format
 map('n', '<leader>f', '<cmd>lua require("telescope.builtin").resume()<cr>')
-map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
+-- map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
 -- map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
 map('n', '<leader>fd', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
+map('n', '<M-f>', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
 map('n', '<leader>fx', '<cmd>lua require("telescope").extensions.search_dir_picker.search_dir_picker()<cr>')
 
-for index, keybind in ipairs({ '<leader>F', '<leader>ff' }) do
+for index, keybind in ipairs({ '<leader>F', '<leader>ff', '<M-s>' }) do
   vim.keymap.set('n', keybind, function()
-    require("telescope.builtin").live_grep({
+    require("telescope").extensions.live_grep_args.live_grep_args({
       attach_mappings = function(_, map)
         map('i', '<C-y>', function(prompt_bufnr)
           print('performing yank...')
@@ -307,11 +308,10 @@ map('i', '<C-e>', '<Esc><Esc>', opts);
 -- map('n', '@', '2', opts);
 
 -- Native LSP diagnostic
-local error = { severity = vim.diagnostic.severity.ERROR, }
+local error = vim.diagnostic.severity.ERROR;
 local float_win_opts = {
   border = 'single',
   max_width = 100,
-  severity = vim.diagnostic.severity.ERROR,
 };
 
 vim.keymap.set("n", "[d", function()
@@ -340,13 +340,24 @@ map('t', '<S-space>', [[<space>]], opts)
 
 -- LSP Server
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
--- vim.api.nvuf_set_keymap('n', 'gd', '<cmd>Telescope lsp_implementations<CR>', opts)
+vim.api.nvim_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
 vim.api.nvim_set_keymap('n', '<leader>hl', '<cmd>Telescope git_bcommits<CR>', opts)
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>Lspsaga hover_doc<CR>', opts)
 -- vim.api.nvuf_set_keymap('n', '<leader>rn', [[:lua vim.lsp.buf.rename()<CR>]], opts)
 vim.api.nvim_set_keymap('n', '<leader>rn', [[<cmd>lua require('renamer').rename()<cr>]], opts)
+map('n', '<M-t>', ':vertical term<cr>', opts)
 
 
 map('n', ',', '<Plug>LineLetters', opts)
 map('v', ',', '<Plug>LineLetters', opts)
+
+
+vim.keymap.set('n', '<leader>m', function()
+  local buf = vim.api.nvim_get_current_buf()
+  local ft = vim.api.nvim_buf_get_option(buf, 'filetype')
+
+  if ft == 'markdown' then
+    require("render-markdown").toggle();
+  end
+end, { noremap = true });

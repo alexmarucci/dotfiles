@@ -45,9 +45,9 @@ set_sign('Error', '')
 lsp.set_log_level('error')
 
 lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-  underline = { severity_limit = 'Warning' },
-  virtual_text = { prefix = '●', spacing = 2, severity_limit = 'Warning' },
-  signs = { severity_limit = 'Warning' },
+  underline = { severity = {min = vim.diagnostic.severity.WARN} },
+  virtual_text = { prefix = '●', spacing = 2, severity = {min = vim.diagnostic.severity.WARN} },
+  signs = { severity = {min = vim.diagnostic.severity.WARN} },
 })
 
 return base_config

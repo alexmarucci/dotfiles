@@ -6,7 +6,7 @@ g['python3_host_prog']              = vim.env.HOME .. '/.asdf/installs/python/3.
 g['copilot_no_tab_map']             = true
 g['copilot_assume_mapped']          = true
 
-g.did_load_filetypes                = true
+-- g.did_load_filetypes                = true
 g.undotree_HighlightChangedWithSign = 0
 
 

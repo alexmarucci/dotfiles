@@ -158,8 +158,44 @@ function init()
     config = function()
       require('neoclip').setup();
       require "telescope".load_extension("neoclip")
+      local handlers = require('neoclip.handlers');
+      local storage = require('neoclip.storage');
+
+      -- yank previous selection and paste it
+      vim.keymap.set('n', '<leader>p', function()
+        local storage_type = 'yanks';
+        local yanks = storage.get()[storage_type];
+
+        local entry = yanks[2];
+
+        vim.print(entry)
+        if entry then
+          storage.set_as_most_recent(storage_type, entry)
+          handlers.paste(entry, 'p')
+        end
+        -- local entry = { contents= 'example', regtype= '"' };
+        -- yank
+
+        -- paste
+
+      end, { noremap = true });
     end,
   }
+
+  use {
+    "nvim-telescope/telescope-fzy-native.nvim",
+    config = function()
+      require "telescope".load_extension('fzy_native')
+    end,
+  }
+
+  use { 
+    "nvim-telescope/telescope-live-grep-args.nvim" ,
+    -- This will not install any breaking changes.
+    -- For major updates, this must be adjusted manually.
+    version = "^1.0.0",
+  }
+
   use {
     "smilovanovic/telescope-search-dir-picker.nvim",
     config = function()
@@ -185,7 +221,7 @@ function init()
 
   use({
     'nvimtools/none-ls.nvim',
-    cond = not_vscode,
+    cond = not_vscode
   })
 
   use({
@@ -431,6 +467,31 @@ function init()
   use 'Oldenborg/vim-px-to-rem'
 
   use({
+    'MeanderingProgrammer/render-markdown.nvim',
+    opts = {
+       sign = { enabled = false },
+       heading = {
+         position = 'inline',
+         -- icons = { "#", "##", "###", "#x4", "#####", "######" },
+         icons = { "h₁", "h₂ ", "h₃  ", "h₄   ", "h₅    ", "h₆     " },
+
+      },
+      code = {
+        left_pad = 1,
+        right_pad = 1,
+        style = 'normal',
+        width = 'block',
+      },
+      dash = {
+        width = 50 
+      }
+    },
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+  })
+
+  use({
     "folke/noice.nvim",
     config = function()
       require('plugins.noice');
@@ -444,8 +505,6 @@ function init()
       "rcarriga/nvim-notify",
     }
   })
-
-  use({ 'nathom/filetype.nvim' })
 end
 
 init()

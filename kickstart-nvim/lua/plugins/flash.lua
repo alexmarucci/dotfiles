@@ -6,8 +6,12 @@ end
 flash.setup({
   modes = {
     char = {
+      labels = "beghjklmnoqrsuwz",
+
       config = function(opts)
-        local isOperator = vim.fn.mode(true):find 'no' and (vim.v.operator == 'y' or vim.v.operator == 'd');
+        local isOperatorChar = (vim.v.operator == 'y' or vim.v.operator == 'd' or vim.v.operator == 'c');
+        local isOperator = vim.fn.mode(true):find 'no' and isOperatorChar;
+
         -- autohide flash when in operator-pending mode
         opts.autohide = isOperator;
 

@@ -1,10 +1,5 @@
 local cmd = vim.api.nvim_exec
 
-vim.cmd('silent! command PackerCompile lua require(\'plugins\') require(\'packer\').compile()')
-vim.cmd('silent! command PackerInstall lua require(\'plugins\') require(\'packer\').install()')
-vim.cmd('silent! command PackerStatus lua require(\'plugins\') require(\'packer\').status()')
-vim.cmd('silent! command PackerSync lua require(\'plugins\') require(\'packer\').sync()')
-vim.cmd('silent! command PackerUpdate lua require(\'plugins\') require(\'packer\').update()')
 vim.cmd([[silent! command Neogen lua require('neogen').generate()]])
 
 -- -- Run macro over selected rows using @
@@ -25,30 +20,17 @@ cmd(
 cmd([[autocmd BufEnter * set formatoptions-=o]], false)
 
 -- Set common config files as JSON
-cmd(
-  [[
-    au BufNewFile,BufRead .eslintrc,.babelrc,.prettierrc,.nycrc set filetype=json
-  ]],
-  false
-)
+cmd([[au BufNewFile,BufRead .eslintrc,.babelrc,.prettierrc,.nycrc set filetype=json]], false)
 
 -- Set common .env files as BASH
-cmd(
-  [[
-    au BufNewFile,BufRead .env,.env.* set filetype=bash
-  ]],
-  false
-)
+cmd([[ au BufNewFile,BufRead .env,.env.* set filetype=bash ]], false)
 
 -- Set common .html files as HTML
 -- cmd("au BufNewFile,BufRead .html,.htm set filetype=html", false)
-
-
-
-
 cmd([[au BufNewFile,BufRead *.puml set filetype=plantuml]], false)
-
 cmd([[au BufNewFile,BufRead *.prisma set filetype=prisma]], false)
+cmd([[au BufNewFile,BufRead Dockerfile* set filetype=dockerfile]], false)
+cmd([[au BufNewFile,BufRead .schema set filetype=sql]], false)
 
 vim.cmd([[
   function! RangeSearch(direction)

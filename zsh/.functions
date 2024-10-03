@@ -54,17 +54,6 @@ function y() {
   fi
 }
 
-function img() {
-  case $1 in
-    'clone')
-      local repo_name=$(gh repo list IMGARENA | cut -f1 | fzf -f ${2:-''} | fzf);
-
-      git clone "https://github.com/$repo_name";
-      cd ${repo_name#*/};
-      ;;
-  esac
-}
-
 function addOtp() {
   local QR_CODE=$1; 
   local OTP_NAME=$2; 

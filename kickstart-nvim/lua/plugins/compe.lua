@@ -24,7 +24,22 @@ luasnip.filetype_extend("typescriptreact", { "typescript", "javascript" })
 -- Use tsx and js snippets in ts
 luasnip.filetype_extend("typescript", { "javascript" })
 
+
+local DISABLED_COMMAND = {
+  IncRename = true
+}
+
+
 cmp.setup({
+  enabled = function()
+    local buftype = vim.api.nvim_buf_get_option(0, "buftype")
+    local is_floating = vim.api.nvim_win_get_config(0).relative ~= ""
+    local is_prompt = buftype == "prompt";
+
+    local is_disable = is_prompt or is_floating;
+
+    return not is_disable;
+  end,
   preselect = cmp.PreselectMode.Item,
   experimental = { ghost_text = false },
   confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = true },
