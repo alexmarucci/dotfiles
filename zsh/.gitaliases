@@ -57,5 +57,9 @@ alias gfa='git fetch --all --prune'
 # ----------------------
 # Git PS Aliases
 # ---------------------e
-alias p='git ps'
+# https://github.com/drewdeponte/git-ps-rs
+alias p='gps'
+alias mrc='glab mr create'
+alias mr='go - && mrc && go -'
+alias wip="gcm wip -n"
 

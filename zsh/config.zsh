@@ -114,6 +114,7 @@ source $HOME/.config/zsh/.gitaliases
 source $HOME/.config/zsh/.functions
 
 # Yarn scripts auto-completion
+# Requires "pnpm install -g yarn-completion"
 if [ -f $HOME/.config/zsh/.yarn-completion.bash ]; then
     source $HOME/.config/zsh/.yarn-completion.bash;
     __yarn_completion_complete y;
