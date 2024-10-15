@@ -1,0 +1,11 @@
+default_mode "locked"
+pane_frames false
+theme "kanagawa"
+default_layout "compact"
+on_force_close "quit"
+
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}

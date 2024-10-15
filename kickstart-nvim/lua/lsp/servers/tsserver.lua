@@ -21,7 +21,7 @@ local tsserver_plugins = {
   -- },
   {
     name = '@styled/typescript-styled-plugin',
-    location = '/Users/maru85945/.config/yarn/global/node_modules/@styled/typescript-styled-plugin'
+    location = '/Users/alessio/Library/pnpm/global/5/node_modules/@styled/typescript-styled-plugin/'
   },
 };
 
@@ -30,7 +30,7 @@ local config = {
     hostInfo = "neovim",
     plugins = tsserver_plugins,
     tsserver = {
-      path = '/Users/maru85945/.config/yarn/global/node_modules/typescript/lib/tsserver.js',
+      path = '/Users/alessio/Library/pnpm/tsserver',
     },
   },
   capabilities = capabilities,
@@ -43,7 +43,7 @@ local config = {
     -- there is a workaround to link lsp tokens groups to treesitter groups
     -- Follow updates here @see
     -- https://www.reddit.com/r/neovim/comments/12g5qk3/comment/jfld8ec/?utm_source=share&utm_medium=web3x
-    client.server_capabilities.semanticTokensProvider = nil
+    -- client.server_capabilities.semanticTokensProvider = nil
 
 
     if client.config.flags then

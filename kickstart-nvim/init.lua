@@ -235,15 +235,15 @@ local servers = {
 
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-if not_vscode() then
-  local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp');
-
-  if cmp_nvim_lsp_loaded then
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-  end
-end
+-- if not_vscode() then
+--   local cmp_nvim_lsp_loaded, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp');
+--
+--   if cmp_nvim_lsp_loaded then
+--     local capabilities = vim.lsp.protocol.make_client_capabilities()
+--
+--     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+--   end
+-- end
 
 -- Ensure the servers above are installed
 -- local mason_lspconfig = require 'mason-lspconfig'

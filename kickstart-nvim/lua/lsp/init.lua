@@ -7,6 +7,7 @@ if not (present1 or present2 or present3 or present4) then
   return
 end
 
+-- local coq = require "coq"
 require('mason').setup()
 require('mason-lspconfig').setup()
 
@@ -56,7 +57,11 @@ local function run_servers_config()
     local serverLspConfig = lspconfig[server_name];
 
     if serverLspConfig then
-      lspconfig[server_name].setup(config or base_config())
+      lspconfig[server_name].setup(
+        -- coq.lsp_ensure_capabilities(
+          config or base_config()
+        -- )
+      )
     else
       error("Could not find lsp-config for " .. server_name);
     end

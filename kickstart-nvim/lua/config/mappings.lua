@@ -93,11 +93,6 @@ map('o', 'H', [[^]], opts)
 -- Terminal
 -- Escape to exit to normal mode in terminal
 -- map('t', '<Esc>', [[<C-\><C-n>]], opts)
-map('t', '<C-e>', [[<C-\><C-n>]], opts)
-map('n', '<leader>q', [[:<C-u>execute ":".v:count."ToggleTerm direction=float"<CR>]], opts)
-map('n', '<C-q>q', [[:<C-u>execute ":".v:count."ToggleTerm direction=float"<CR>]], opts)
-map('n', '<C-q>j', [[:<C-u>execute ":".v:count."ToggleTerm direction=horizontal size=30"<CR>]], opts)
-map('n', '<C-q>l', [[:<C-u>execute ":".v:count."ToggleTerm direction=vertical"<CR>]], opts)
 
 -- Allow clipboard copy paste in neovide
 if is_gui then

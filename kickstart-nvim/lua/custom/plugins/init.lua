@@ -110,7 +110,8 @@ function init()
   use({
     'akinsho/toggleterm.nvim',
     cond = not_vscode,
-    cmd = { 'TermExec', 'ToggleTerm' },
+    event = 'BufRead',
+    -- cmd = { 'TermExec', 'ToggleTerm' },
     config = function()
       require('plugins.toggleterm')
     end,
@@ -181,6 +182,17 @@ function init()
       end, { noremap = true });
     end,
   }
+
+  use  {
+        "sontungexpt/witch",
+        priority = 1000,
+        lazy = false,
+        config = function()
+            require("witch").setup({
+              theme = { enabled = true }
+            })
+        end,
+    }
 
   use {
     "nvim-telescope/telescope-fzy-native.nvim",
@@ -379,6 +391,69 @@ function init()
   })
   -- end "cmp" dependencies
 
+  -- experimental coq.nvim
+  -- use({
+  --    'ms-jpq/coq_nvim', -- REQUIRED: for native Neovim LSP integration
+  --   lazy = false, -- REQUIRED: tell lazy.nvim to start this plugin at startup
+  --   branch = "coq",
+  --   dependencies = {
+  --     -- 9000+ Snippets
+  --     { "ms-jpq/coq.artifacts", branch = "artifacts" },
+  --
+  --     -- lua & third party sources -- See https://github.com/ms-jpq/coq.thirdparty
+  --     -- Need to **configure separately**
+  --     { 'ms-jpq/coq.thirdparty', branch = "3p" }
+  --   },
+  --   init = function()
+  --     vim.g.coq_settings = {
+  --       auto_start = true, -- if you want to start COQ at startup
+  --       -- Your COQ settings here
+  --       display = {
+  --         pum = { fast_close = false },
+  --         ghost_text = { enabled = false },
+  --         preview = {
+  --           border = 'single',
+  --           positions = { north= 2, south= 3, west= 1, east= 4 },
+  --         }
+  --       },
+  --       match = { max_results = 10 },
+  --       keymap = {
+  --         pre_select = true,
+  --       }
+  --       -- completion = {
+  --         -- preselect = true,
+  --       -- }
+  --     };
+  --     vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+  --   end,
+  --   config = function()
+  --     -- Your LSP settings here
+  --     require("coq_3p") {
+  --       { src = "codeium", short_name = "COD" },
+  --       { src = "nvimlua", short_name = "nLUA" },
+  --       { src = "vimtex",  short_name = "vTEX" },
+  --     }
+  --
+  --     -- it works, now convert to lua
+  --     -- vim.api.nvim_set_keymap(
+  --     --   "i",
+  --     --   "<Space>",
+  --     --   [[pumvisible() ? (complete_info().selected == -1 ? "\<C-e><Space><Space>" : "\<C-y><Space>") : "\<Space><Space>"]],
+  --     --   { expr = true, silent = true }
+  --     -- )
+  --     -- local fuck_tab = function()
+  --     --   if vim.fn.pumvisible() ~= 0 and
+  --     --      vim.fn.complete_info({ "selected" }).selected == -1 then
+  --     --       return "<c-n><CR><c-e>"
+  --     --   else
+  --     --     return "<C-j>"
+  --     --   end
+  --     -- end
+  --     --
+  --     -- vim.keymap.set("i", "<C-]>", fuck_tab, { expr = true, noremap = false })
+  --   end,
+  -- })
+
   use({
     'windwp/nvim-autopairs',
     cond = not_vscode,
@@ -401,6 +476,9 @@ function init()
 
   use({ 'ton/vim-bufsurf', cond = not_vscode, event = 'BufRead' })
 
+  -- diffs
+  -- ]x [x navigate through conflict markers
+  -- ct, co, cb (Accept theirs, ours, or both)
   use({
     cond = not_vscode,
     'rhysd/conflict-marker.vim',
