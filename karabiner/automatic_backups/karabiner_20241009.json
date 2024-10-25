@@ -216,8 +216,7 @@
                     "from": { "key_code": "non_us_backslash" },
                     "to": [{ "key_code": "left_shift" }]
                 }
-            ],
-            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+            ]
         }
     ]
 }
