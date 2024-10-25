@@ -249,25 +249,6 @@ map('n', '<leader>fx', '<cmd>lua require("telescope").extensions.search_dir_pick
 for index, keybind in ipairs({ '<leader>F', '<leader>ff', '<M-s>' }) do
   vim.keymap.set('n', keybind, function()
     require("telescope").extensions.live_grep_args.live_grep_args({
-      attach_mappings = function(_, map)
-        map('i', '<C-y>', function(prompt_bufnr)
-          print('performing yank...')
-          local actions = require('telescope.actions');
-          local action_state = require('telescope.actions.state');
-          local entry = action_state.get_selected_entry();
-
-          if (entry.text) then
-            vim.fn.setreg('"', entry.text .. "\n");
-            actions.close(prompt_bufnr);
-            vim.schedule(function()
-              vim.cmd 'norm p'
-            end)
-          end
-        end);
-
-
-        return true;
-      end,
       search_dirs = { ".", ".github" }
     })
   end, { desc = 'Live Grep' });

@@ -3,8 +3,10 @@ if not present then
   return
 end
 
-toggleterm.setup({ 
-  cmd = "zellij --config ~/.config/zellij/neovim_config.kdl && exit",
+local cmd = 'zellij --layout nvim'
+
+toggleterm.setup({
+  shell = 'zsh -c "' .. cmd .. '"',
   open_mapping = [[<c-\>]],
   insert_mappings = false,
   start_in_insert = false,
@@ -14,22 +16,24 @@ toggleterm.setup({
   shade_terminals = false
 })
 
-print('setup')
-
 local Terminal = require('toggleterm.terminal').Terminal
 
-function createZellij(opts) 
+function createZellij(opts)
   opts = opts or {};
- 
+  local direction = opts.direction or "float";
+  local size = opts.size or nil;
+
+  vim.print(direction)
+
   local zellij = Terminal:new({
-    cmd = "zellij --config ~/.config/zellij/neovim_config.kdl",
-    count = vim.v.count > 0 and vim.v.count or nil,
+    cmd = cmd,
+    count = vim.v.count > 0 and vim.v.count or 1,
     dir = "git_dir",
-    direction = opts.direction or "float",
-    size = opts.size or nil,
+    direction = direction,
+    size = size,
   });
-  
-  zellij:toggle()
+
+  zellij:toggle(size, direction)
 end
 
 local opts = { noremap = true, silent = true }

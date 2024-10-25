@@ -21,8 +21,6 @@ local eslintFormattingConfig = {
   cwd = lookForPackageJson,
 }
 
-print('eslint initialised')
-
 m.eslintConfig = eslintConfig
 m.eslintFormattingConfig = eslintFormattingConfig
 

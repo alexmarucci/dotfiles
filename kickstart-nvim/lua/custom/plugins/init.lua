@@ -26,6 +26,7 @@ function init()
   })
 
   use({
+    -- note this is ".vim", the one above is for auto completion
     "Exafunction/codeium.vim",
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -169,30 +170,26 @@ function init()
 
         local entry = yanks[2];
 
-        vim.print(entry)
         if entry then
           storage.set_as_most_recent(storage_type, entry)
-          handlers.paste(entry, 'p')
+          text = table.concat(entry.contents, "\n");
+          vim.fn.setreg('"', text);
+
+          vim.schedule(function() vim.cmd 'norm p' end)
         end
-        -- local entry = { contents= 'example', regtype= '"' };
-        -- yank
-
-        -- paste
-
       end, { noremap = true });
     end,
   }
 
-  use  {
-        "sontungexpt/witch",
-        priority = 1000,
-        lazy = false,
-        config = function()
-            require("witch").setup({
-              theme = { enabled = true }
-            })
-        end,
-    }
+  -- use {
+  --   "sontungexpt/witch",
+  --   lazy = true,
+  --   config = function()
+  --     require("witch").setup({
+  --       theme = { enabled = true }
+  --     })
+  --   end,
+  -- }
 
   use {
     "nvim-telescope/telescope-fzy-native.nvim",
@@ -201,8 +198,8 @@ function init()
     end,
   }
 
-  use { 
-    "nvim-telescope/telescope-live-grep-args.nvim" ,
+  use {
+    "nvim-telescope/telescope-live-grep-args.nvim",
     -- This will not install any breaking changes.
     -- For major updates, this must be adjusted manually.
     version = "^1.0.0",
@@ -274,8 +271,7 @@ function init()
 
   use {
     "thallada/farout.nvim",
-    lazy = false,
-    priority = 1000,
+    lazy = true,
     opts = {},
   }
 
@@ -500,6 +496,7 @@ function init()
   use {
     'theblob42/drex.nvim',
     cond = not_vscode,
+    cmd = { 'Drex', 'DrexDrawerToggle', 'DrexDrawerFindFileAndFocus' },
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('plugins.drex')
@@ -546,12 +543,13 @@ function init()
 
   use({
     'MeanderingProgrammer/render-markdown.nvim',
+    filetypes = { 'markdown' },
     opts = {
-       sign = { enabled = false },
-       heading = {
-         position = 'inline',
-         -- icons = { "#", "##", "###", "#x4", "#####", "######" },
-         icons = { "h₁", "h₂ ", "h₃  ", "h₄   ", "h₅    ", "h₆     " },
+      sign = { enabled = false },
+      heading = {
+        position = 'inline',
+        -- icons = { "#", "##", "###", "#x4", "#####", "######" },
+        icons = { "h₁", "h₂ ", "h₃  ", "h₄   ", "h₅    ", "h₆     " },
 
       },
       code = {
@@ -561,7 +559,7 @@ function init()
         width = 'block',
       },
       dash = {
-        width = 50 
+        width = 50
       }
     },
     -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
@@ -569,20 +567,124 @@ function init()
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
   })
 
+  -- reinstate debugger
   use({
-    "folke/noice.nvim",
+    "mfussenegger/nvim-dap",
+    lazy = true,
+    keys = "<leader>d",
+    dependencies = { "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+      "mxsdev/nvim-dap-vscode-js",
+      "williamboman/mason.nvim",
+    },
     config = function()
-      require('plugins.noice');
+      require('plugins.nvim-dap')
     end,
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    }
   })
+
+  use {
+    "microsoft/vscode-js-debug",
+    opt = true,
+    run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+  }
+
+  use({
+    'nvim-neotest/neotest',
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      'nvim-neotest/neotest-jest',
+    },
+    keys = {
+      { "<leader>t",  "",                                                                                 desc = "+test" },
+      { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "Run File" },
+      { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end,                            desc = "Run All Test Files" },
+      { "<leader>tr", function() require("neotest").run.run() end,                                        desc = "Run Nearest" },
+      { "<leader>tl", function() require("neotest").run.run_last() end,                                   desc = "Run Last" },
+      { "<leader>ts", function() require("neotest").summary.toggle() end,                                 desc = "Toggle Summary" },
+      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
+      { "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc = "Toggle Output Panel" },
+      { "<leader>tS", function() require("neotest").run.stop() end,                                       desc = "Stop" },
+      { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end,                 desc = "Toggle Watch" },
+    },
+    config = function()
+      require('plugins.neotest')
+    end
+  })
+
+  use {
+    'gmr458/cold.nvim',
+    lazy = true,
+    config = function()
+      require('cold').setup({
+        custom_dark_background = '#1F1F28',
+        custom_statusline_dark_background = '#16161D',
+      })
+    end
+  }
+
+  use 'stevearc/dressing.nvim'
+
+  use {
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    enabled = false,
+    lazy = false,
+    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+    build = "make",
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      {
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = {
+              insert_mode = true,
+            },
+          },
+        },
+      },
+    },
+    config = function()
+      require('plugins.avante')
+    end
+  }
+
+  use {
+    "ariel-frischer/bmessages.nvim",
+    event = "CmdlineEnter",
+    opts = {}
+  }
+
+  -- use({
+  --   "folke/noice.nvim",
+  --   enabled = false,
+  --   config = function()
+  --     require('plugins.noice');
+  --   end,
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- })
 end
 
 init()

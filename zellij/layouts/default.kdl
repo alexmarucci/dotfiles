@@ -1,9 +1,49 @@
 layout {
-    pane size=1 borderless=true {
-        plugin location="tab-bar"
+    tab { 
+      pane
     }
-    pane
-    pane size=2 borderless=true {
-        plugin location="status-bar"
+
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                hide_frame_for_single_pane "true"
+
+                mode_normal        "#[fg=#DCD7BA,bold,bg=#1F1F28] N "
+                mode_locked        "#[fg=black,bg=#1F1F28] 🔓 "
+                mode_resize        "#[fg=black,bg=#FF9E3B] {name} "
+                mode_pane          "#[fg=black,bg=#7FB4CA] P "
+                mode_tab           "#[fg=black,bg=#7E9CD8] T "
+                mode_scroll        "#[fg=black,bg=#FF9E3B] S "
+                mode_enter_search  "#[fg=black,bg=#FFA066] 🔍 "
+                mode_search        "#[fg=black,bg=#FFA066] 🔍 "
+                mode_rename_tab    "#[fg=fg,bold,bg=#7E9CD8] {name} "
+                mode_rename_pane   "#[fg=fg,bold,bg=#7FB4CA] {name} "
+                mode_session       "#[fg=black,bg=#76946A] {name} "
+                mode_move          "#[fg=black,bg=#FFA066] {name} "
+                mode_prompt        "#[fg=black,bg=#957FB8] {name} "
+                mode_tmux          "#[fg=black,bg=#FF9E3B] {name} "
+                 mode_default_to_mode "tmux"
+
+                format_left  "{mode}#[fg=#77ee99,bg=#16161D,bold] {session} "
+                format_center  "{tabs}"
+                format_space "#[bg=#16161D]"
+                format_right " {notifications}"
+
+                notification_format_unread           "#[fg=#89B4FA,bg=#181825,blink]  #[fg=#89B4FA,bg=#181825] {message} "
+                notification_format_no_notifications "#[fg=#89B4FA,bg=#181825,dim]   "
+                notification_show_interval           "2"
+
+                tab_normal               "#[fg=#717C7C,bg=#16161d] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+                tab_active               "#[fg=#DCD7BA,bg=#1F1F28,bold,italic] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}"
+                tab_fullscreen_indicator "□ "
+                tab_sync_indicator       "  "
+                tab_floating_indicator   "󰉈 "
+
+                command_pwd_command     "zsh -c 'basename $(pwd)'"
+                command_pwd_format    "{stdout}"
+                command_pwd_interval  "2"
+            }
+        }
+        children
     }
 }

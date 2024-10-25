@@ -1,8 +1,23 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
     normal {
-        // uncomment this and adjust key if using copy_on_select=false
-        // bind "Alt c" { Copy; }
+        unbind "Ctrl h"
+        bind "Alt m" { SwitchToMode "Move"; }
+
+        // AltGr v
+        bind "√" {
+            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
+                floating true
+            };
+            SwitchToMode "Normal"
+        }
+        // bind "Ctrl y" {
+        //     LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
+        //         floating true
+        //         ignore_case true
+        //         quick_jump true
+        //     }
+        // }
     }
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -38,7 +53,8 @@ keybinds {
         bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
     }
     move {
-        bind "Ctrl h" { SwitchToMode "Normal"; }
+        unbind "Ctrl h"
+        bind "Alt m" { SwitchToMode "Normal"; }
         bind "n" "Tab" { MovePane; }
         bind "p" { MovePaneBackwards; }
         bind "h" "Left" { MovePane "Left"; }
@@ -178,7 +194,7 @@ keybinds {
         bind "Ctrl t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
-        bind "Ctrl h" { SwitchToMode "Move"; }
+        bind "Ctrl m" { SwitchToMode "Move"; }
     }
     shared_except "tmux" "locked" {
         bind "Ctrl b" { SwitchToMode "Tmux"; }
@@ -187,16 +203,16 @@ keybinds {
 
 plugins {
     tab-bar location="zellij:tab-bar"
-    // status-bar location="zellij:status-bar"
-    strider location="zellij:strider"
-    compact-bar location="zellij:compact-bar"
+    status-bar location="zellij:status-bar"
+    // strider location="zellij:strider"
+    // compact-bar location="zellij:compact-bar"
     session-manager location="zellij:session-manager"
     welcome-screen location="zellij:session-manager" {
         welcome_screen true
     }
-    filepicker location="zellij:strider" {
-        cwd "/"
-    }
+    // filepicker location="zellij:strider" {
+    //     cwd "/"
+    // }
 }
 
 ui {
@@ -304,7 +320,7 @@ theme "kanagawa"
 //   - true (default)
 //   - false
 //
-// mouse_mode false
+mouse_mode false
 
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back

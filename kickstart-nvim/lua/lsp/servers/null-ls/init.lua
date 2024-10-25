@@ -35,17 +35,16 @@ local on_attach = function(client, bufnr)
 end
 
 null_ls.setup({
-  debug = true,
+  debug = false,
   sources = {
     null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.eslintd,
     -- null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.black,
     flake8,
     -- null_ls.builtins.formatting.terraform_fmt,
     -- null_ls.builtins.formatting.trim_whitespace,
     -- null_ls.builtins.formatting.shfmt,
-    --[[ null_ls.builtins.formatting.stylua.with(styluaConfig), ]]
+    --[ null_ls.builtins.formatting.stylua.with(styluaConfig), ]
     --[[ null_ls.builtins.diagnostics.luacheck.with(luaCheckConfig), ]]
     -- null_ls.builtins.diagnostics.shellcheck,
     -- null_ls.builtins.diagnostics.hadolint,

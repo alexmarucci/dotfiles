@@ -65,4 +65,16 @@ function M.merge_table(t1, t2)
   return t1
 end
 
+function M.apply_keybindings(mode, keys, userOpts)
+  local opts = { noremap = true, silent = true };
+
+  M.merge_table(opts, userOpts or {})
+
+  for _, keybinding in pairs(keys) do
+    opts.desc = keybinding.desc
+
+    vim.keymap.set(mode, keybinding[1], keybinding[2], opts)
+  end
+end
+
 return M
