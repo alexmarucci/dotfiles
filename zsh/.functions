@@ -1,14 +1,11 @@
+#!/bin/sh
+
 killProcessOnPort() {
   if [[ $1 -eq 0 ]]; then
         echo " [x] Usage: killProcessOnPort :port";
   else
     kill -9 $(lsof -t -i :$1) 2> /dev/null || echo " - No process is running on port "$1
   fi;
-}
-
-# Create or attach tmux session
-work() {
-  tmux new-session -A -s $1
 }
 
 function doesFileExists() {
@@ -79,5 +76,78 @@ function find_pr() {
 
   template='{{range .}}{{"PR #"}}{{.number}} {{hyperlink .url .title}}{{"\n"}}{{end}}';
   gh pr list --search "${sha}" --state merged --json number,url,title --template "${template}"
+}
+
+function pgadmin() {
+  local email='PGADMIN_DEFAULT_EMAIL=alessio.marucci@doxy.me'
+  local pass='PGADMIN_DEFAULT_PASSWORD=pass'
+  local no_server_mode='PGADMIN_CONFIG_SERVER_MODE=False'
+  local nopass='PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False'
+  local cwd=$HOME/.config/zsh
+
+  docker run --name pgadmin -p 82:80 -e $email -e $pass -e $no_server_mode -e $nopass \
+    -v $cwd/pgadmin_servers.json:/pgadmin4/servers.json \
+    -v $cwd/pgpass:/pgpass \
+    -d dpage/pgadmin4
+}
+
+function aws-refresh() {
+  node ~/projects/hacks/aws-refresh-token/index.js
+}
+
+function usedoxy() {
+  PROMPT="%B%F{80}>%f%b "
+  clear
+}
+
+function zr () { 
+  zellij run --name "$*" --in-place -- zsh -ic "$*";
+  # remove from history
+  history -d $((HISTCMD-1))
+}
+
+function zrf () { 
+  zellij run --name "$*" --floating -- zsh -ic "$*";
+  history -d $((HISTCMD-1))
+}
+
+function ghost () {
+  zellij plugin --in-place --configuration "shell=zsh,shell_flag=-ic,cwd=$(pwd)" -- "file:$HOME/.config/zellij/plugins/ghost.wasm"
+  history -d $((HISTCMD-1))
+}
+
+function work () {
+  local current_folder_name="${PWD##*/}" 
+  local name="${1:-$current_folder_name}"
+
+  local session_exists=$(zellij list-sessions | grep "$name")
+
+  if [[ "$session_exists" == *"$name"* ]]; then
+    zellij attach "$name"
+  else
+    zellij --session "$name"
+  fi
+}
+
+# Use lf to switch directories and bind it to ctrl-o
+function lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+
+# Open drex as file explorer
+alias dr='nvim -c "Drex"'
+function nav() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
 
