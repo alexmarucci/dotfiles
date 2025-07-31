@@ -1,21 +1,27 @@
+export NODE_TLS_REJECT_UNAUTHORIZED=0
 # Enable colors and change prompt:
 autoload -U colors && colors
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don\'t record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don\'t record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don\'t write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
 zstyle ':vcs_info:git:*' formats '%F{240}(%b)%r%f'
 zstyle ':vcs_info:*' enable git
 
-# export AWS_PROFILE=developers-ephemeral
-export OG_API_ROOT="$HOME/projects/doxyme-api"
-
+# Variables 
 # Neovide multigrid
 export NEOVIDE_FRAME='buttoless'
 export NEOVIDE_MULTIGRID=true
-
-source ~/.config/zsh/plugins/git.zh
-source ~/.config/zsh/themes/bira.zsh
+export EDITOR=nvim
+export GIT_EDITOR="nvim"
+export NVIM_APPNAME=kickstart-nvim
 
 # History in cache directory:
 HISTSIZE=10000
@@ -55,6 +61,13 @@ bindkey -M viins '\e.' insert-last-word
 # Auto suggestions binding
 bindkey '^K' clear-screen
 
+# Use lf to switch directories and bind it to ctrl-o
+bindkey -s '^o' 'lfcd\n'
+bindkey -s '^n' 'nvim\n'
+
+# Open zsh config with ctrl-z
+bindkey -s '^z' 'cd ~/.config/zsh && nvim\n'
+
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
@@ -76,28 +89,6 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-# Use lf to switch directories and bind it to ctrl-o
-function lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-
-# Use lf to switch directories and bind it to ctrl-o
-bindkey -s '^o' 'lfcd\n'
-
-bindkey -s '^n' 'nvim\n'
-
-# Open zsh config with ctrl-z
-bindkey -s '^z' 'cd ~/.config/zsh && nvim\n'
-
-# Provide smartlog fn
-alias sl=$HOME/projects/hacks/smartlog/smartlog.mjs
-alias plover=/Applications/Plover.app/MacOS/Plover
 
 # Alias for neovide
 # alias neo="open -n $HOME/Applications/Neovide.app/ --args --multigrid --frame buttonless"
@@ -151,10 +142,6 @@ eval "$(fnm env --shell zsh --use-on-cd)"
 # export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-export EDITOR=nvim
-export GIT_EDITOR="nvim"
-export NVIM_APPNAME=kickstart-nvim
-
 # Set tab title to current dir
 DISABLE_AUTO_TITLE="true"
 
@@ -177,11 +164,23 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
-# export PNPM_HOME="$HOME/maru85945/Library/pnpm"
-# export PATH="$PNPM_HOME:$PATH"
 
-source .secrets
+# yarn or static
+local yarn_dir="$(yarn global dir > /dev/null 2>&1)";
+local static_yarn_dir="$HOME/.config/yarn/global/";
+local yarn_global_bin="${yarn_dir:-$static_yarn_dir}/node_modules/.bin/";
+PATH="$yarn_global_bin:$PATH"
+PATH="/Users/alessio/.local/bin:$PATH"
+RUSTUP_PATH=$(brew --prefix rustup)/bin
+PATH="$RUSTUP_PATH:$PATH"
+
+# pyenv python version
+PATH=$(pyenv root)/shims:$PATH
+
+# pnpm end
+# local YARN_GLOBAL_DIR="$(yarn global dir)/node_modules/.bin/";
+# export PATH="$YARN_GLOBAL_DIR:$PATH"
+
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
@@ -192,6 +191,8 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Plugins
+source ~/.config/zsh/plugins/git.zh
+source ~/.config/zsh/themes/bira.zsh
 source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" 2>/dev/null
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey -M viins '^L' autosuggest-accept
@@ -212,34 +213,6 @@ bindkey -M vicmd 'j' history-substring-search-down
 eval "$(zoxide init zsh)"
 alias cd="z"
 alias d="z"
-function zr () { 
-  zellij run --name "$*" --in-place -- zsh -ic "$*";
-  # remove from history
-  history -d $((HISTCMD-1))
-}
-
-function zrf () { 
-  zellij run --name "$*" --floating -- zsh -ic "$*";
-  history -d $((HISTCMD-1))
-}
-
-function ghost () {
-  zellij plugin --in-place --configuration "shell=zsh,shell_flag=-ic,cwd=$(pwd)" -- "file:$HOME/.config/zellij/plugins/ghost.wasm"
-  history -d $((HISTCMD-1))
-}
-
-function work () {
-  local current_folder_name="${PWD##*/}" 
-  local name="${1:-$current_folder_name}"
-
-  local session_exists=$(zellij list-sessions | grep "$name")
-
-  if [[ "$session_exists" == *"$name"* ]]; then
-    zellij attach "$name"
-  else
-    zellij --session "$name"
-  fi
-}
 
 # Docker Login 
 local is_logged_in=$(grep 'registry.gitlab.com' ~/.docker/config.json)
@@ -248,5 +221,3 @@ if [ -z "$is_logged_in" ]; then
   gitlab_username=alessio.marucci1
   echo $GITLAB_NPM_TOKEN | docker login registry.gitlab.com -u $gitlab_username --password-stdin >> /dev/null
 fi
-
-
