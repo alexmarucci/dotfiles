@@ -3,7 +3,9 @@ if not present then
   return
 end
 
-local cmd = 'zellij --layout nvim'
+local cwd = vim.fn.getcwd()
+
+local cmd = 'cd ' .. cwd .. ' && zellij --layout nvim'
 
 toggleterm.setup({
   shell = 'zsh -c "' .. cmd .. '"',

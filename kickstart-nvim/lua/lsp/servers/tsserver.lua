@@ -21,7 +21,7 @@ local tsserver_plugins = {
   -- },
   {
     name = '@styled/typescript-styled-plugin',
-    location = '/Users/alessio/Library/pnpm/global/5/node_modules/@styled/typescript-styled-plugin/'
+    location = '/Users/alessio/.config/yarn/global/node_modules/@styled/typescript-styled-plugin'
   },
 };
 
@@ -30,7 +30,7 @@ local config = {
     hostInfo = "neovim",
     plugins = tsserver_plugins,
     tsserver = {
-      path = '/Users/alessio/Library/pnpm/tsserver',
+      path = '/Users/alessio/.config/yarn/global/node_modules/.bin/tsserver',
     },
   },
   capabilities = capabilities,
@@ -73,7 +73,7 @@ local config = {
 
     -- no default maps, so you may want to define some here
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gstypescript', ':TSLspOrganize<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>fr', ':TypescriptRenameFile<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>if', ':TypescriptRenameFile<CR>', opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', [[:call CocActionAsync("jumpDefinition")<cr>]], opts)
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', [[:call CocActionAsync("jumpReferences")<cr>]], opts)
     vim.keymap.set('n', '<leader>ia', ts_utils.actions.addMissingImports, {

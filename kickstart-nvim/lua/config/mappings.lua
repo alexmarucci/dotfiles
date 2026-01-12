@@ -8,6 +8,9 @@ g.mapleader = ' '
 local opts = { noremap = true, silent = true }
 local is_gui = vim.g.neovide or vim.g.gonvim_running;
 
+vim.keymap.set("n", "<leader>o", "<cmd>Portal jumplist backward<cr>")
+vim.keymap.set("n", "<leader>i", "<cmd>Portal jumplist forward<cr>")
+
 -- guifont resize
 if is_gui then
   -- new Neovide instance
@@ -239,14 +242,15 @@ map(
 -- map('x', '<leader>ff', '<cmd>lua require("fzf-lua").grep()<CR>')
 
 -- Format
-map('n', '<leader>f', '<cmd>lua require("telescope.builtin").resume()<cr>')
+map('n', '<leader>fr', '<cmd>lua require("telescope.builtin").resume()<cr>')
 -- map('n', '<leader><space>', '<cmd>lua require("telescope.builtin").git_files()<cr>')
 -- map('n', '<leader>fd', '<cmd>lua require("telescope.builtin").find_files()<cr>')
-map('n', '<leader>fd', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
-map('n', '<M-f>', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
+map('n', '<leader><space>', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
+map('n', '`', '<cmd>lua require("telescope").extensions.smart_open.smart_open({cwd_only = true})<cr>')
 map('n', '<leader>fx', '<cmd>lua require("telescope").extensions.search_dir_picker.search_dir_picker()<cr>')
 
-for index, keybind in ipairs({ '<leader>F', '<leader>ff', '<M-s>' }) do
+-- Fuzzy find
+for index, keybind in ipairs({ '<leader>F', '<leader>f', '<leader>ff', '\'' }) do
   vim.keymap.set('n', keybind, function()
     require("telescope").extensions.live_grep_args.live_grep_args({
       search_dirs = { ".", ".github" }

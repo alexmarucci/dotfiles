@@ -13,8 +13,8 @@ require('mason-lspconfig').setup()
 
 local base_config = require('lsp.config')
 local configs = require('lsp.servers')
-local mason_to_lspconfig = mason_lspconfig.get_mappings().mason_to_lspconfig;
-local lspconfig_to_mason = mason_lspconfig.get_mappings().lspconfig_to_mason;
+local mason_to_lspconfig = mason_lspconfig.get_mappings().package_to_lspconfig;
+local lspconfig_to_mason = mason_lspconfig.get_mappings().lspconfig_to_package;
 
 local required_servers = {
   'bashls',
@@ -34,7 +34,7 @@ local required_servers = {
   'elixirls',
   'dockerls',
   'stylelint_lsp',
-  'eslint',
+  -- 'eslint',
 }
 
 local function auto_install_servers()

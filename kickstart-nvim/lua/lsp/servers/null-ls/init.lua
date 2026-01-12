@@ -38,6 +38,7 @@ null_ls.setup({
   debug = false,
   sources = {
     null_ls.builtins.formatting.prettierd,
+    -- null_ls.builtins.formatting.eslintd,
     -- null_ls.builtins.formatting.rustfmt,
     null_ls.builtins.formatting.black,
     flake8,

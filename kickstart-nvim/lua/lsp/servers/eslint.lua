@@ -8,6 +8,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 return {
   bin = 'eslint_d',
   capabilities = capabilities,
+  enable = false,
   apply_on_save = {
     enable = true,
     types = { "directive", "problem", "suggestion", "layout" },

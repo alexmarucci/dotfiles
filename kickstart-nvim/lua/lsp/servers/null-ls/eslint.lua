@@ -11,9 +11,9 @@ local eslintConfig = {
   use_cache = true,
   condition = function(utils)
     return utils.root_has_file('.eslintrc')
-      or utils.root_has_file('.eslintrc.json')
-      or utils.root_has_file('.eslintrc.yaml')
-      or utils.root_has_file('.eslintrc.js')
+        or utils.root_has_file('.eslintrc.json')
+        or utils.root_has_file('.eslintrc.yaml')
+        or utils.root_has_file('.eslintrc.js')
   end,
 }
 
@@ -21,7 +21,7 @@ local eslintFormattingConfig = {
   cwd = lookForPackageJson,
 }
 
-m.eslintConfig = eslintConfig
+-- m.eslintConfig = eslintConfig
 m.eslintFormattingConfig = eslintFormattingConfig
 
 return m

@@ -13,12 +13,11 @@ require("dapui").setup({
   },
 })
 
--- do not know how to get this
-local runtime_dir = '/Users/alessio/.local/share/kickstart-nvim';
+local runtime_dir = vim.fn.stdpath 'data';
 
 dapVsCode.setup({
   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
-  debugger_path = runtime_dir .. "/lazy/vscode-js-debug",                                      -- Path to vscode-js-debug installation.
+  debugger_path = vim.fn.resolve(runtime_dir .. '/lazy/vscode-js-debug'),                      -- Path to vscode-js-debug installation.
   -- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
   adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' }, -- which adapters to register in nvim-dap
 })
@@ -54,6 +53,59 @@ if not dap.adapters["chrome"] then
   end
 end
 
+
+for _, language in ipairs({ "typescriptreact", "typescript", "javascript" }) do
+  dap.configurations[language] = {
+    -- {
+    --   name = "TS-Node",
+    --   type = "pwa-node",
+    --   request = "launch",
+    --   runtimeExecutable = "node",
+    --   runtimeArgs = { "--nolazy", "-r", "ts-node/register/transpile-only" },
+    --   program = "${file}",
+    --   cwd = "${workspaceFolder}",
+    --   internalConsoleOptions = "openOnSessionStart",
+    --   skipFiles = { "<node_internals>/**", "node_modules/**" }
+    -- },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach node process",
+      processId = require 'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+
+    -- attach to chrome
+    {
+      type = "chrome",
+      request = "attach",
+      name = "Attach to Chrome",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+      -- use vim.ui.input to select port
+      -- port = vim.fn.input("Port: ", "9222", "input"),
+      port = function()
+        return vim.fn.input("Port: ", "9222")
+      end,
+      webRoot = "${workspaceFolder}",
+      sourceMaps = true,
+    },
+
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "PNPM",
+      cwd = "${workspaceFolder}",
+      runtimeExecutable = "pnpm",
+      runtimeArgs = {
+        "debug",
+      }
+    },
+
+    { type = '', name = '----- launch.json configs -----', request = 'launch' }
+  }
+end
 
 require("nvim-dap-virtual-text").setup {
   -- This just tries to mitigate the chance that I leak tokens here.
