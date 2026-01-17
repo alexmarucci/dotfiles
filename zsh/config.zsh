@@ -1,4 +1,3 @@
-export NODE_TLS_REJECT_UNAUTHORIZED=0
 # Enable colors and change prompt:
 autoload -U colors && colors
 autoload -Uz vcs_info
@@ -107,21 +106,12 @@ function neo() {
     echo "${PROJECT_DIR} does not exists."
   fi
 }
-# Open drex as file explorer
-alias dr='nvim -c "Drex"'
-function nav() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 # User configuration
 source $HOME/.config/zsh/.gitaliases
 source $HOME/.config/zsh/.dockeraliases
 source $HOME/.config/zsh/.functions
+source $HOME/.config/zsh/.secrets
 
 # Yarn scripts auto-completion
 # Requires "pnpm install -g yarn-completion"
@@ -174,6 +164,13 @@ PATH="/Users/alessio/.local/bin:$PATH"
 RUSTUP_PATH=$(brew --prefix rustup)/bin
 PATH="$RUSTUP_PATH:$PATH"
 
+# Local scripts
+LOCAL_SCRIPTS_PATH=$HOME/bin
+PATH="$LOCAL_SCRIPTS_PATH:$PATH"
+
+CURSOR_AI_CLI_PATH=$HOME/.local/bin
+PATH="$CURSOR_AI_CLI_PATH:$PATH"
+
 # pyenv python version
 PATH=$(pyenv root)/shims:$PATH
 
@@ -188,7 +185,6 @@ bindkey '^e' edit-command-line
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
-[ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 # Plugins
 source ~/.config/zsh/plugins/git.zh
@@ -211,7 +207,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 
 # Initialise zoxide
 eval "$(zoxide init zsh)"
-alias cd="z"
+# alias cd="z"
 alias d="z"
 
 # Docker Login 
@@ -221,3 +217,12 @@ if [ -z "$is_logged_in" ]; then
   gitlab_username=alessio.marucci1
   echo $GITLAB_NPM_TOKEN | docker login registry.gitlab.com -u $gitlab_username --password-stdin >> /dev/null
 fi
+
+# Disably annoying Nx terminal UI
+export NX_TUI=false
+export TF_TOKEN_gitlab_com=$GITLAB_NPM_TOKEN
+
+nvm use v22
+
+# Allow ripgrep to always search .claude files
+RIPGREP_CONFIG_PATH=$HOME/.ripgreprc

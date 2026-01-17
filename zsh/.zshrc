@@ -94,6 +94,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 source $HOME/.config/zsh/.gitaliases
+source $HOME/.config/zsh/.dockeraliases
 source $HOME/.config/zsh/.functions
 
 # Yarn scripts auto-completion

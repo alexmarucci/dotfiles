@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Doxy.me PostgreSQL",
+      "Group": "Servers",
+      "Port": 5555,
+      "Username": "postgres",
+      "Host": "host.docker.internal",
+      "SSLMode": "prefer",
+      "PassFile": "/pgpass",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}

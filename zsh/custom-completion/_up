@@ -1,0 +1,16 @@
+#compdef docker
+
+function _docker {
+    local line
+
+    case $line[1] in
+        up)
+            _core_loudly
+        ;;
+    esac
+}
+
+function _core_loudly {
+    _arguments \
+        "--repeat=[Repat the <message> any number of times]"
+}

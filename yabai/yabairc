@@ -18,6 +18,7 @@ yabai -m rule --add app='^System Information$' manage=off
 yabai -m rule --add app='^System Preferences$' manage=off
 yabai -m rule --add title='Preferences$' manage=off
 yabai -m rule --add title='Pop$' manage=off
+yabai -m rule --add title='Grammarly$' manage=off
 yabai -m rule --add title='Slack$' window_border_blur=off
 yabai -m config window_border_blur off
 

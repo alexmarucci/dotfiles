@@ -113,9 +113,11 @@ fn - l : skhd -k "right"
 # :: your_mode # or :: your_mode : script
 # :: bookmark_mode
 # alt - b ; bookmark_mode
-# bookmark_mode < a :  open -n /Applications/iTerm.app --args "nvim $HOME/.local/share/bookmark/list"
-# bookmark_mode < b : $HOME/.local/share/bookmark/select.sh
+# bookmark_mode < a : $HOME/.config/zsh/bookmark.sh add
+# bookmark_mode < b : $HOME/.config/zsh/bookmark.sh copy
 # bookmark_mode < alt - b ; default
+alt - o : ~/.config/zsh/bookmark.sh add
+alt - space : ~/.config/zsh/bookmark.sh copy
 
 # Disables skhd
 :: passthrough
@@ -132,11 +134,9 @@ ctrl + alt - w : skhd --key "ctrl - up"
 ctrl + alt - s : skhd --key "ctrl - down"
 
 ## Applications
-alt - o : pass otp -c okta
-alt - space : pass otp -c `echo "atlassian, github, microsoft, npm, okta, totp-secret" | tr , '\n' | dmenu-mac`
 
 # Ctrl + .
-ctrl - 0x2B : /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle
+# ctrl - 0x2B : /Applications/Plover.app/Contents/MacOS/Plover -s plover_send_command toggle
 
 # focus window
 # alt - h : yabai -m window --focus west

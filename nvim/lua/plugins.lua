@@ -40,13 +40,13 @@ return packer.startup(function()
       require('plugins.lualine')
     end,
   })
-  use({
-    'luukvbaal/stabilize.nvim',
-    cond = not_vscode,
-    config = function()
-      require('stabilize').setup()
-    end,
-  })
+  -- use({
+  --   'luukvbaal/stabilize.nvim',
+  --   cond = not_vscode,
+  --   config = function()
+  --     require('stabilize').setup()
+  --   end,
+  -- })
 
   -- -- Does not actually indent... adds vertical lines on indentation
   use({

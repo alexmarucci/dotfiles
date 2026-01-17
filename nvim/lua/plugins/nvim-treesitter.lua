@@ -1,8 +1,6 @@
 local present, treesitter = pcall(require, 'nvim-treesitter.configs')
 local present2, styledComponents = pcall(require, 'plugins.styled-components');
 
-print(styledComponents)
-
 if not present or not present2 then
   return
 end

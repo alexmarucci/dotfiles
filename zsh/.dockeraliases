@@ -1,0 +1,151 @@
+#!/bin/zsh
+
+# alias up='docker compose up'
+# alias down='docker compose down -v'
+
+function get_monorepo_path() {
+  local git_repo_path=$(git rev-parse --show-toplevel 2> /dev/null);
+
+  if [[ "$git_repo_path" ]]; then
+     local git_repo_name=$(basename $git_repo_path);
+  
+     if [[ "$git_repo_name" =~ "doxyme-core" ]]; then
+       echo $git_repo_path
+     fi
+  fi
+}
+
+function dock() {
+  local is_monorepo=$(get_monorepo_path);
+
+  if [[ "$is_monorepo" ]]; then
+      pnpm local docker $@
+  else
+      docker $@
+  fi
+}
+
+function up() {
+  # is in core repo
+  # y docker up
+
+  local git_repo_path=$(git rev-parse --show-toplevel 2> /dev/null);
+
+  # if is git repo
+  if [[ "$git_repo_path" ]]; then
+     local git_repo_name=$(basename $git_repo_path);
+  
+     if [[ "$git_repo_name" == "doxyme-core" ]]; then
+       y docker up
+     else
+       docker compose up
+     fi
+  else
+     docker compose up
+  fi
+}
+
+function it() {
+  local container=$1;
+
+  if [[ -z "$container" ]]; then
+    local container=$(docker container ls --format="{{.Names}}" | fzf);
+  fi
+
+
+  
+  docker exec -it $container /bin/bash
+}
+
+function compose_cmd_list() {
+  # skip first line from grep
+  cmd_list=$(docker compose --help | grep Commands -A 30 | tail -n +2);
+
+  selected_cmd=$(echo $cmd_list | fzf);
+
+  echo $selected_cmd;
+}
+
+function __get_services_with_cache() {
+  # make tmp file with todays date
+  tmp_cached_def="/tmp/compose-services.json"
+
+  # if the file is younger than 1 day
+  if [[ "$(find "$tmp_cached_def" -mtime -1 -print 2> /dev/null)" ]]; then
+    compose_files=$(cat $tmp_cached_def)
+  else
+    compose_files=$(fd '^docker-compose.*yml$');
+    echo $compose_files > $tmp_cached_def
+  fi
+
+  echo $compose_files
+}
+
+function cache() {
+  # replace space with dash
+  cmd=$@
+  tmp_cache="/tmp/${cmd// /-}"
+
+  is_not_stale=$(find "$tmp_cache" -mtime -1 -print 2> /dev/null)
+
+  if [[ "$is_not_stale" ]]; then
+    cat $tmp_cache
+  else
+    $cmd > $tmp_cache
+  fi
+}
+
+function compose() {
+  tmp_services_cache="/tmp/compose-services.txt"
+  tmp_compose_args_cache="/tmp/compose-services_args.txt"
+
+  command=${1:-$(compose_cmd_list)};
+
+  if [[ "$command" == "refresh" ]]; then
+    rm $tmp_services_cache $tmp_compose_args_cache 2> /dev/null
+  fi
+
+  is_cache_fresh=$(find "$tmp_services_cache" -mtime -1 -print 2> /dev/null)
+
+
+  if [[ "$is_cache_fresh" ]]; then
+    services=$(cat $tmp_services_cache)
+    compose_files_args=$(cat $tmp_compose_args_cache)
+  else
+    compose_files=$(fd '^docker-compose.*yml$');
+    services=$(echo $compose_files | xargs -n1 yq '.services | keys | .[]' 2> /dev/null);
+    compose_files_args=$(echo $compose_files | xargs -n1 echo -f | tr '\n' ' ');
+
+    echo $services > $tmp_services_cache
+    echo $compose_files_args > $tmp_compose_args_cache
+  fi
+
+  service=${2:-$(echo $services | fzf)};
+
+  compose_cmd="docker compose -p doxyme $compose_files_args $command $service"
+
+  #first word only
+  echo "Running :: ${command%% *} \"$service\""
+
+  #run command
+  echo $=compose_cmd
+}
+
+function dup() {
+  service=$(get_services | fzf);
+
+  if [[ "$service" ]]; then
+    docker compose up -d $service
+  fi
+}
+
+
+function dow() {
+  service=$(get_services | fzf);
+
+  if [[ "$service" ]]; then
+    docker compose down $service
+  fi
+}
+
+

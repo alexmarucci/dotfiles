@@ -1,5 +1,21 @@
 #!/bin/sh
 
+function ask() {
+  w3m \"https://lite.duckduckgo.com/lite/?q=$@\"
+}
+
+alias \?=ask
+
+function gclone() {
+  if [[ $1 == "" ]]; then 
+    echo " [x] Usage: gclone <url>";
+  fi
+
+  ssh_url=$(echo $1 | sed -E 's~https://gitlab.com/(.+)~git@gitlab.com:\1.git~');
+
+  git clone $ssh_url
+}
+
 killProcessOnPort() {
   if [[ $1 -eq 0 ]]; then
         echo " [x] Usage: killProcessOnPort :port";
@@ -151,3 +167,17 @@ function nav() {
 	rm -f -- "$tmp"
 }
 
+function brew() {
+  
+
+  # Include all commands that should do a brew dump
+  local dump_commands=('install' 'uninstall' 'tap' 'untap' 'upgrade' 'cask' 'mas')
+
+  local main_command="${1}"
+
+  /opt/homebrew/bin/brew ${@}
+
+  for command in "${dump_commands[@]}"; do
+    [[ "${command}" == "${main_command}" ]] && /opt/homebrew/bin/brew bundle dump --file="${HOME}/.Brewfile" --force
+  done
+}
