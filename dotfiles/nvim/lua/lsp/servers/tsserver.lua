@@ -17,11 +17,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(
 local tsserver_plugins = {
   -- {
   --   name = 'typescript-styled-plugin',
-  --   location = '/Users/maru85945/.config/yarn/global/node_modules/typescript-styled-plugin'
+  --   location = vim.fn.expand('~/.config/yarn/global/node_modules/typescript-styled-plugin')
   -- },
   {
     name = '@styled/typescript-styled-plugin',
-    location = '/Users/maru85945/.config/yarn/global/node_modules/@styled/typescript-styled-plugin'
+    location = vim.fn.expand('~/.config/yarn/global/node_modules/@styled/typescript-styled-plugin')
   },
 };
 
@@ -30,7 +30,7 @@ local config = {
     hostInfo = "neovim",
     plugins = tsserver_plugins,
     tsserver = {
-      path = '/Users/maru85945/.config/yarn/global/node_modules/typescript/lib/tsserver.js',
+      path = vim.fn.expand('~/.config/yarn/global/node_modules/typescript/lib/tsserver.js'),
     },
   },
   capabilities = capabilities,
