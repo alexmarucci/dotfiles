@@ -53,7 +53,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     brew bundle --file=$HOME/.config/Brewfile
 fi
 
-
 # does zsh exists
 if command -v zsh &> /dev/null
 then

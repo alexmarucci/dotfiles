@@ -111,6 +111,7 @@ function neo() {
 source $HOME/.config/zsh/.gitaliases
 source $HOME/.config/zsh/.dockeraliases
 source $HOME/.config/zsh/.functions
+source $HOME/.config/zsh/secrets.enc.env
 
 # Yarn scripts auto-completion
 # Requires "pnpm install -g yarn-completion"
