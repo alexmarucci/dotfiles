@@ -168,8 +168,6 @@ function nav() {
 }
 
 function brew() {
-  
-
   # Include all commands that should do a brew dump
   local dump_commands=('install' 'uninstall' 'tap' 'untap' 'upgrade' 'cask' 'mas')
 
@@ -178,6 +176,6 @@ function brew() {
   /opt/homebrew/bin/brew ${@}
 
   for command in "${dump_commands[@]}"; do
-    [[ "${command}" == "${main_command}" ]] && /opt/homebrew/bin/brew bundle dump --file="${HOME}/.Brewfile" --force
+    [[ "${command}" == "${main_command}" ]] && /opt/homebrew/bin/brew bundle dump --file="${HOME}/.config/Brewfile" --force
   done
 }

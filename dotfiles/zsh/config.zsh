@@ -111,7 +111,6 @@ function neo() {
 source $HOME/.config/zsh/.gitaliases
 source $HOME/.config/zsh/.dockeraliases
 source $HOME/.config/zsh/.functions
-source $HOME/.config/zsh/.secrets
 
 # Yarn scripts auto-completion
 # Requires "pnpm install -g yarn-completion"
@@ -123,7 +122,6 @@ fi
 function nx() {
     npx nx "$@"
 }
-source ~/.config/zsh/plugins/zsh-nx-completion/nx-completion.plugin.zsh;
 
 # Load better nvm
 alias nvm=fnm
@@ -189,17 +187,15 @@ bindkey '^e' edit-command-line
 # Plugins
 source ~/.config/zsh/plugins/git.zh
 source ~/.config/zsh/themes/bira.zsh
-source "$HOME/.config/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" 2>/dev/null
+source "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" 2>/dev/null
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey -M viins '^L' autosuggest-accept
 
-source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
 # Load zsh-syntax-highlighting; should be last.
-source "$HOME/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # Load after highlight enabled
-source "$HOME/.config/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh"
+source "$HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
 bindkey "^[[B" history-substring-search-down # Arrow up
 bindkey "^[[A" history-substring-search-up # Arrow down
 bindkey -M vicmd 'k' history-substring-search-up
@@ -226,3 +222,6 @@ nvm use v22
 
 # Allow ripgrep to always search .claude files
 RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
+# Activate Mise
+eval "$(mise activate zsh)"
