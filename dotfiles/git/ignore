@@ -1,0 +1,7 @@
+**/.claude
+CLAUDE.md
+
+.ignore
+.trees
+
+**/.claude/settings.local.json
