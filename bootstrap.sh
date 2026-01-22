@@ -63,3 +63,27 @@ else
     exit 1
 fi
 
+read -p "Should we link your claude-code config ? (y/N) " -n 1 -r
+echo
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Symlinking .claude/... files"
+    for folder in claude/*; do
+        target="$HOME/.claude/$(basename "$folder")"
+
+        # want to override target
+        if [[ -e "$target" ]]; then
+            read -p "$target already exists, override? (y/N) " -n 1 -r
+            echo
+
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                rm -rf "$target"
+            else
+                continue
+            fi
+        fi
+
+        ln -sf "$(pwd)/$folder" "$target"
+        echo "Linked: $folder -> $target"
+    done
+fi

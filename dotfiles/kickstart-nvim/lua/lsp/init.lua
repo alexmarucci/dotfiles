@@ -9,7 +9,9 @@ end
 
 -- local coq = require "coq"
 require('mason').setup()
-require('mason-lspconfig').setup()
+require('mason-lspconfig').setup({
+  automatic_enable = false
+})
 
 local base_config = require('lsp.config')
 local configs = require('lsp.servers')

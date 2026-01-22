@@ -1,0 +1,48 @@
+{
+  "apiKeyHelper": "export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic",
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "f3a53dd6b51d4e358f82954589c5095f.bUIA3Xf2OkFADEyv",
+    "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7",
+    "API_TIMEOUT_MS": "3000000",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(terraform validate:*)",
+      "Bash(terraform fmt:*)",
+      "Bash(ls:*)",
+      "Read(./.env.sample)",
+      "Bash(claude rename:*)",
+      "WebFetch(domain:gitlab.com)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./config/credentials.json)",
+      "Read(./build)"
+    ],
+    "defaultMode": "acceptEdits"
+  },
+  "enabledPlugins": {
+    "superpowers@superpowers-marketplace": true,
+    "typescript-lsp@claude-plugins-official": true
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "excludedCommands": [
+      "git",
+      "jest",
+      "glab",
+      "docker",
+      "terraform"
+    ],
+    "excludedDomains": [
+      "gitlab.com"
+    ]
+  }
+}

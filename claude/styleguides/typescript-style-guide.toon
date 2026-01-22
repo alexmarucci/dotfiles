@@ -1,0 +1,282 @@
+// TOON (Token Oriented Object Notation) - Google TypeScript Style Guide
+// Optimized representation preserving all rules without information loss
+
+{
+  meta: {src:"Google TS Style Guide",rfc:2119,terms:{must:"mandatory",should:"prefer",may:"optional"}},
+  
+  source_basics: {
+    encoding: "UTF-8",
+    whitespace: {allowed:"0x20+newline",escape_seq:["\\'",'\\","\\\\","\\b","\\f","\\n","\\r","\\t","\\v"],no_octal:true},
+    non_ascii: {use_actual_char:true,except:"non-printable→use_hex_with_comment"}
+  },
+  
+  file_structure: {
+    order: ["copyright","fileoverview","imports","code"],
+    copyright: {optional:true,format:"/**\n * @fileoverview\n * @license\n */"},
+    fileoverview: {desc:"high-level_description",avoid_redundant:true},
+    imports: {
+      module_vs_destructure: "prefer_named_imports",
+      namespaces: {rename_if_conflict:true,long_form_ok:"lodash→import*as _"},
+      side_effects: {allow:"import'./register';"},
+      renaming: {prefer_original:true,allow_if:"conflict|clarity"}
+    },
+    exports: {
+      named_preferred: true,
+      default_exports: "avoid",
+      export_from: "allowed",
+      container_classes: "disallowed",
+      visibility: {use_ts_not_closure:true,export_only_public:true}
+    },
+    import_export_type: {use_type_keyword:"for_type_only_imports",syntax:"import type{T}"}
+  },
+  
+  language_features: {
+    variables: {
+      use: ["const","let"],
+      never: "var",
+      const_preferred: true,
+      scope: "minimal",
+      one_per_declaration: true
+    },
+    
+    arrays: {
+      trailing_comma: "required_multiline",
+      spread: "preferred_over_Array.from",
+      type: "T[]_preferred_over_Array<T>",
+      empty_init: "T[]_not_Array<T>()"
+    },
+    
+    objects: {
+      constructor: "{}",
+      never: "new Object()",
+      computed_keys: "allowed_inline",
+      quote_keys: "only_if_needed",
+      spread: {use:"preferred_over_Object.assign",order:"spread_first_then_overrides"},
+      shorthand: "required_when_possible"
+    },
+    
+    classes: {
+      constructors: {super_first:true,init_before_use:true},
+      fields: {init_preferred:"in_declaration_or_constructor",no_#private_js:true},
+      properties: {use_getters_setters:"sparingly",computed_ok:true},
+      static: "allowed",
+      visibility: {default:"public",explicit:"private|protected|readonly"},
+      this: {arrow_funcs_preserve:true,explicit_bind:false,standalone_banned:true}
+    },
+    
+    functions: {
+      prefer: "arrow_functions",
+      expressions_named: "optional",
+      terminology: {func_decl:"function foo(){}",func_expr:"const f=function(){}",arrow:"()=>{}"},
+      params: {default_vals:"allowed",rest:"preferred_over_arguments",spread:"preferred"},
+      returns: {explicit_type:"required_if_not_obvious",void_functions:"return_undefined_not_void"},
+      generators: {syntax:"function*",async_generators:"allowed"},
+      this_rebinding: "use_arrow_not_bind"
+    },
+    
+    control: {
+      for_of: "default_choice",
+      for_in: "only_for_dict_keys",
+      exceptions: {throw_only_Error:true,custom_extend_Error:true,catch_narrow:true},
+      switch: {default_required:true,fallthrough_requires_comment:true,braces_per_case:true},
+      equality: {use:"===_!==",never:"==_!=",exception:"==null_checks_both"}
+    },
+    
+    primitives: {
+      string_literals: "prefer_single_quotes",
+      template_literals: {use_for:"concatenation|multiline",interpolation:"${expr}",no_unnecessary:true},
+      number_literals: {hex:"0xDEAD",binary:"0b0101",octal:"0o777",sci_notation:"1e5"},
+      type_coercion: {explicit_only:true,methods:["String()","Boolean()","Number()"],no_plus_string:true}
+    },
+    
+    decorators: {
+      use: "allowed",
+      call_syntax: "@decorator()",
+      no_at_prefix: "on_impl",
+      jsdoc_before: true
+    }
+  },
+  
+  disallowed: {
+    wrapper_objects: ["String","Boolean","Number"],
+    automatic_semicolon: "do_not_rely_on_ASI",
+    const_enums: true,
+    debugger: "except_tests",
+    with: true,
+    dynamic_code_eval: ["eval","Function_constructor"],
+    non_null_assertions: "minimize_use",
+    code_comments: "sparingly_for_suppressions_only"
+  },
+  
+  naming: {
+    format: {
+      identifiers: "ASCII_letters_digits_$__",
+      abbrev: {ok:"acronyms_count_as_one:XMLHttpRequest",hungarian:"forbidden"},
+      dollar_sign: "avoid_except_generated_code"
+    },
+    
+    rules_by_type: {
+      module: {namespace:"lowerCamelCase",filename:"lowercase_with_dashes.ts"},
+      class_interface_type_enum: "UpperCamelCase",
+      method_param_prop_var_field: "lowerCamelCase",
+      constant: "CONSTANT_CASE",
+      enum_member: "CONSTANT_CASE_preferred",
+      global_const: "lower_or_UPPER_based_on_mutability",
+      aliases: "preserve_case_of_original",
+      template_param: "T_or_UpperCamelCase",
+      private_fields: "no_trailing_underscore",
+      imports: {preserve_original:true,rename_if:"conflict|long"}
+    }
+  },
+  
+  type_system: {
+    inference: {
+      prefer: "explicit_when_not_obvious",
+      required: ["exports","unclear_literals"],
+      omit: "when_obvious_from_init"
+    },
+    
+    null_undefined: {
+      prefer_undefined: "for_absent_values",
+      nullable: {syntax:"T|null",use:"explicit_over_implicit"},
+      optional: "use_?_not_|undefined",
+      nullish_coalesce: "??_preferred_over_||_for_defaults"
+    },
+    
+    structural: {
+      default: "structural_not_nominal",
+      prefer_interfaces: "over_type_aliases",
+      literal_types: "allowed_for_unions",
+      callable: {syntax:"interface{(x:T):R}",vs_arrow:"use_arrow_for_simple"}
+    },
+    
+    interfaces: {
+      extend: "allowed",
+      vs_type: {prefer:"interface",type_for:"unions|mapped|conditional"},
+      empty: "avoid_{}_use_Record<K,V>",
+      indexable: {syntax:"{[k:string]:T}",prefer_Record:"Record<K,V>"}
+    },
+    
+    arrays: {
+      syntax: "T[]",
+      readonly: "ReadonlyArray<T>_or_readonly_T[]",
+      vs_Array: "prefer_T[]"
+    },
+    
+    mapped_conditional: {
+      use: "sparingly",
+      complexity: "minimize",
+      builtin: "Partial_Required_Readonly_Pick_etc"
+    },
+    
+    any: {
+      avoid: true,
+      alternatives: ["unknown","specific_type"],
+      suppress: "@ts-ignore_only_with_reason"
+    },
+    
+    tuples: {
+      syntax: "[T,U,V]",
+      readonly: "readonly[T,U,V]",
+      use: "for_fixed_length_heterogeneous"
+    },
+    
+    wrapper_types: {
+      forbidden: ["String","Boolean","Number"],
+      use_primitives: ["string","boolean","number"]
+    },
+    
+    return_type_generics: {
+      avoid: true,
+      issue: "no_inference_at_call_site",
+      solution: "explicit_param_or_cast"
+    }
+  },
+  
+  toolchain: {
+    compiler: {
+      flags: "strict_mode_enabled",
+      required: ["noImplicitAny","strictNullChecks"],
+      target: "ES2015+",
+      module: "commonjs_or_es2015"
+    },
+    conformance: {
+      patterns: "enforce_via_tooling",
+      custom_rules: "allowed"
+    }
+  },
+  
+  comments_docs: {
+    jsdoc_form: {
+      syntax: "/** */",
+      single_line: "/** desc */",
+      multiline: {start:"/**",middle:" *",end:" */"},
+      markdown: "supported_in_jsdoc",
+      line_wrap: "at_column_80"
+    },
+    
+    tags: {
+      allowed: ["@param","@return","@throws","@deprecated","@see","@template"],
+      disallowed: ["@type","@private","@override","@enum","@implements"],
+      reason: "TS_has_native_syntax"
+    },
+    
+    requirements: {
+      top_level_exports: "must_document",
+      exception: "tooling_only_symbols",
+      classes: "describe_usage_and_caveats",
+      methods: "verb_phrase_third_person",
+      params: "only_if_adds_info",
+      properties: "if_non_obvious"
+    },
+    
+    param_properties: {
+      doc_with: "@param",
+      example: "constructor(private readonly foo:Foo)",
+      shows_in: "constructor_calls_and_property_access"
+    },
+    
+    quality: {
+      avoid_redundant: "no_restating_name_and_type",
+      add_value: true,
+      call_site_comments: {format:"/* param= */ value",when:"unclear_from_name"}
+    },
+    
+    placement: "before_decorators_not_between"
+  },
+  
+  policies: {
+    consistency: {
+      priority: "file>directory>Google_style",
+      new_files: "must_use_Google_style",
+      existing: "can_match_file_if_not_Google"
+    },
+    
+    reformatting: {
+      not_required: "unless_major_changes",
+      separate_cl: "for_style_only_changes"
+    },
+    
+    deprecation: {
+      mark: "@deprecated",
+      must_include: "clear_migration_path"
+    },
+    
+    generated_code: {
+      exempt: true,
+      identifiers: "must_follow_naming_rules",
+      underscores: "allowed_in_generated"
+    }
+  },
+  
+  style_guide_goals: {
+    defaults: "leave_choice_to_engineers",
+    exceptions: [
+      "avoid_known_problem_patterns",
+      "consistency_across_projects",
+      "long_term_maintainability",
+      "focus_reviews_on_quality_not_arbitrary_rules"
+    ],
+    automation: "preferred_over_manual_enforcement"
+  }
+}

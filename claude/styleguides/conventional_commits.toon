@@ -1,0 +1,208 @@
+conventionalCommits: {
+  meta: {
+    name: "Conventional Commits",
+    version: "1.0.0",
+    relatedSpecs: ["SemVer", "RFC2119"]
+  },
+
+  summary: {
+    purpose: [
+      "Lightweight convention for commit messages",
+      "Enables automated tooling",
+      "Aligns commit history with Semantic Versioning"
+    ],
+    semverMapping: {
+      fix: "PATCH",
+      feat: "MINOR",
+      breakingChange: "MAJOR"
+    },
+    messageFormat: {
+      header: "<type>[optional scope][!]: <description>",
+      body: "optional, starts after blank line",
+      footers: "optional, starts after blank line"
+    }
+  },
+
+  structuralElements: {
+    types: {
+      fix: {
+        meaning: "Bug fix",
+        semver: "PATCH"
+      },
+      feat: {
+        meaning: "New feature",
+        semver: "MINOR"
+      },
+      breakingChange: {
+        indicators: ["! in header", "BREAKING CHANGE footer"],
+        semver: "MAJOR",
+        allowedWithAnyType: true
+      },
+      additionalTypes: {
+        allowed: true,
+        examples: [
+          "build","chore","ci","docs","style",
+          "refactor","perf","test"
+        ],
+        semverEffect: "none unless breaking"
+      }
+    },
+    scope: {
+      allowed: true,
+      syntax: "(noun)",
+      purpose: "Provide contextual information"
+    },
+    footers: {
+      allowed: true,
+      format: "git trailer style",
+      breakingChangeToken: ["BREAKING CHANGE", "BREAKING-CHANGE"]
+    }
+  },
+
+  examples: {
+    breakingChangeFooter: {
+      header: "feat: allow provided config object to extend other configs",
+      footer: "BREAKING CHANGE: extends key now used for extending other config files"
+    },
+    breakingChangeBang: {
+      header: "feat!: send an email to the customer when a product is shipped"
+    },
+    breakingChangeScopeBang: {
+      header: "feat(api)!: send an email to the customer when a product is shipped"
+    },
+    bangAndFooter: {
+      header: "chore!: drop support for Node 6",
+      footer: "BREAKING CHANGE: use JS features not available in Node 6"
+    },
+    noBody: {
+      header: "docs: correct spelling of CHANGELOG"
+    },
+    withScope: {
+      header: "feat(lang): add Polish language"
+    },
+    multiParagraphBody: {
+      header: "fix: prevent racing of requests",
+      body: [
+        "Introduce request id and reference to latest request",
+        "Dismiss outdated responses",
+        "Remove obsolete timeouts"
+      ],
+      footers: {
+        "Reviewed-by": "Z",
+        "Refs": "#123"
+      }
+    }
+  },
+
+  specification: {
+    keywords: "RFC2119",
+    rules: {
+      typePrefix: {
+        must: true,
+        format: "type[(scope)][!]: "
+      },
+      featRequiredForFeatures: true,
+      fixRequiredForBugfixes: true,
+      scope: {
+        may: true,
+        format: "(noun)"
+      },
+      description: {
+        must: true,
+        position: "immediately after colon",
+        purpose: "short summary"
+      },
+      body: {
+        may: true,
+        spacing: "blank line after description",
+        paragraphs: "unlimited"
+      },
+      footers: {
+        may: true,
+        spacing: "blank line after body",
+        tokenFormat: "word-token + (: | #)",
+        tokenHyphenation: true,
+        valueMultiline: true
+      },
+      breakingChanges: {
+        mustBeIndicated: true,
+        headerBang: {
+          syntax: "!",
+          descriptionSource: "commit description"
+        },
+        footer: {
+          token: "BREAKING CHANGE",
+          format: "BREAKING CHANGE: description"
+        }
+      },
+      typeFlexibility: {
+        additionalTypesAllowed: true
+      },
+      caseSensitivity: {
+        types: "case-insensitive",
+        breakingChange: "MUST be uppercase"
+      },
+      breakingChangeAliases: {
+        "BREAKING-CHANGE": "BREAKING CHANGE"
+      }
+    }
+  },
+
+  rationale: {
+    benefits: [
+      "Automatic changelog generation",
+      "Automatic semantic versioning",
+      "Clear communication of changes",
+      "CI/CD triggering",
+      "Lower contributor friction"
+    ]
+  },
+
+  faq: {
+    initialDevelopment: {
+      guidance: "Act as if users already depend on the software"
+    },
+    casing: {
+      allowed: "any",
+      recommendation: "be consistent"
+    },
+    multipleTypes: {
+      guidance: "Split into multiple commits"
+    },
+    rapidDevelopment: {
+      stance: "discourages disorganized speed, enables long-term velocity"
+    },
+    typeLimitationConcern: {
+      response: "Custom types encouraged"
+    },
+    semverRelation: {
+      fix: "PATCH",
+      feat: "MINOR",
+      breakingChange: "MAJOR"
+    },
+    extensionsVersioning: {
+      recommendation: "Use SemVer"
+    },
+    wrongTypeUsed: {
+      correctType: {
+        beforeRelease: "git rebase -i",
+        afterRelease: "tool/process dependent"
+      },
+      invalidType: {
+        impact: "ignored by spec-based tools"
+      }
+    },
+    contributorRequirement: {
+      required: false,
+      mitigation: "squash workflow with maintainer-authored messages"
+    },
+    revertCommits: {
+      explicitlyDefined: false,
+      recommendation: {
+        type: "revert",
+        footer: "Refs: <sha list>"
+      }
+    }
+  }
+}
+
