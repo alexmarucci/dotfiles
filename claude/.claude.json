@@ -1,38 +1,62 @@
 {
-  "numStartups": 12,
+  "numStartups": 58,
+  "hasSeenTasksHint": true,
   "tipsHistory": {
     "new-user-warmup": 7,
-    "plan-mode-for-complex-tasks": 1,
-    "terminal-setup": 12,
-    "memory-command": 1,
-    "theme-command": 2,
-    "colorterm-truecolor": 2,
-    "status-line": 2,
+    "plan-mode-for-complex-tasks": 58,
+    "terminal-setup": 53,
+    "memory-command": 49,
+    "theme-command": 42,
+    "colorterm-truecolor": 32,
+    "status-line": 27,
     "stickers-command": 2,
     "prompt-queue": 2,
-    "enter-to-steer-in-relatime": 2,
-    "todo-list": 2,
-    "install-github-app": 12,
-    "install-slack-app": 12,
-    "drag-and-drop-images": 2,
-    "double-esc-code-restore": 2,
-    "continue": 2,
-    "shift-tab": 2,
-    "image-paste": 2,
+    "enter-to-steer-in-relatime": 42,
+    "todo-list": 43,
+    "install-github-app": 53,
+    "install-slack-app": 53,
+    "drag-and-drop-images": 53,
+    "double-esc-code-restore": 53,
+    "continue": 53,
+    "shift-tab": 54,
+    "image-paste": 43,
     "ultrathink-keyword": 2,
-    "web-app": 2,
-    "mobile-app": 2,
-    "custom-agents": 6,
-    "permissions": 11,
-    "rename-conversation": 11,
-    "custom-commands": 12
+    "web-app": 50,
+    "mobile-app": 50,
+    "custom-agents": 51,
+    "permissions": 51,
+    "rename-conversation": 57,
+    "custom-commands": 57,
+    "frontend-design-plugin": 50,
+    "default-permission-mode-config": 41,
+    "agent-flag": 45,
+    "feedback-command": 46,
+    "ide-upsell-external-terminal": 53,
+    "git-worktrees": 51
   },
-  "promptQueueUseCount": 10,
+  "promptQueueUseCount": 82,
+>>>>>>> 27304d3 (claude: clean up folder)
   "cachedStatsigGates": {
     "tengu_prompt_suggestion": false
   },
-  "changelogLastFetched": 1000000000000,
-  "primaryApiKey": "f3a53dd6b51d4e358f82954589c5095f.bUIA3Xf2OkFADEyv",
+  "cachedGrowthBookFeatures": {
+    "tengu_1p_event_batch_config": {
+      "scheduledDelayMillis": 10000,
+      "maxExportBatchSize": 400,
+      "maxQueueSize": 8192
+    },
+    "tengu_mcp_tool_search": false,
+    "tengu_scratch": false,
+    "tengu_brass_pebble": false,
+    "tengu_disable_bypass_permissions_mode": false,
+    "tengu_event_sampling_config": {},
+    "tengu_tool_pear": false,
+    "tengu_log_segment_events": false,
+    "tengu_log_datadog_events": true,
+    "tengu_keybinding_customization": false,
+    "tengu_thinkback": false
+  },
+  "changelogLastFetched": 1775123679931,
   "isQualifiedForDataSharing": false,
   "hasCompletedOnboarding": true,
   "maxSubscriptionNoticeCount": 0,
@@ -41,9 +65,12 @@
   "sonnet45MigrationComplete": true,
   "opus45MigrationComplete": true,
   "thinkingMigrationComplete": true,
-  "bypassPermissionsModeAccepted": true,
   "userID": "4c249f2d8172d1748e5a8e5dd3664e6a3baf56a9e65c894d04e818880da0d01c",
+<<<<<<< HEAD
   "lastReleaseNotesSeen": "2.1.7",
+=======
+  "lastReleaseNotesSeen": "2.1.90",
+>>>>>>> 27304d3 (claude: clean up folder)
   "projects": {
     "/workspace": {
       "allowedTools": [],
@@ -51,16 +78,22 @@
       "mcpServers": {},
       "enabledMcpjsonServers": [],
       "disabledMcpjsonServers": [],
-      "hasTrustDialogAccepted": false,
+      "hasTrustDialogAccepted": true,
       "projectOnboardingSeenCount": 4,
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
       "exampleFiles": [
         "generator.js",
         "docker.ts",
+<<<<<<< HEAD
         "aws.ts",
         "index.ts",
         "s3migrator.ts"
+=======
+        "docker.spec.ts",
+        "aws.ts",
+        "project.json"
+>>>>>>> 27304d3 (claude: clean up folder)
       ],
       "reactVulnerabilityCache": {
         "detected": false,
@@ -69,6 +102,7 @@
         "version": null,
         "packageManager": null
       },
+<<<<<<< HEAD
       "exampleFilesGeneratedAt": 1768222275318,
       "lastCost": 0.2208399,
       "lastAPIDuration": 216681,
@@ -94,6 +128,51 @@
       },
       "lastSessionId": "e5bd0920-ad8d-453a-b064-66fe2c033184",
       "hasCompletedProjectOnboarding": true
+=======
+      "exampleFilesGeneratedAt": 1775044948417,
+      "lastCost": 0.452121,
+      "lastAPIDuration": 267320,
+      "lastAPIDurationWithoutRetries": 267275,
+      "lastToolDuration": 86,
+      "lastDuration": 1290583,
+      "lastLinesAdded": 157,
+      "lastLinesRemoved": 29,
+      "lastTotalInputTokens": 60290,
+      "lastTotalOutputTokens": 3039,
+      "lastTotalCacheCreationInputTokens": 0,
+      "lastTotalCacheReadInputTokens": 149392,
+      "lastTotalWebSearchRequests": 0,
+      "lastModelUsage": {
+        "glm-5-turbo": {
+          "inputTokens": 251,
+          "outputTokens": 13,
+          "cacheReadInputTokens": 16,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.0015879999999999998
+        },
+        "glm-5.1[1m]": {
+          "inputTokens": 60039,
+          "outputTokens": 3026,
+          "cacheReadInputTokens": 149376,
+          "cacheCreationInputTokens": 0,
+          "webSearchRequests": 0,
+          "costUSD": 0.45053299999999996
+        }
+      },
+      "lastSessionId": "15d312ba-f92d-47fd-8a12-d3786807ef0d",
+      "hasCompletedProjectOnboarding": true,
+      "lastSessionMetrics": {
+        "frame_duration_ms_count": 56,
+        "frame_duration_ms_min": 0.05070799999975861,
+        "frame_duration_ms_max": 33.24358299999949,
+        "frame_duration_ms_avg": 1.7564874642856634,
+        "frame_duration_ms_p50": 0.783916999999974,
+        "frame_duration_ms_p95": 3.744676999999527,
+        "frame_duration_ms_p99": 20.9060291999998
+      },
+      "lastFpsAverage": 3.55,
+      "lastFpsLow1Pct": 30.08
     }
   },
   "officialMarketplaceAutoInstallAttempted": true,
@@ -123,6 +202,14 @@
     "pickup_handoff": {
       "usageCount": 1,
       "lastUsedAt": 1768407032960
+    },
+    "orc": {
+      "usageCount": 2,
+      "lastUsedAt": 1775138171782
+    },
+    "aletheia": {
+      "usageCount": 8,
+      "lastUsedAt": 1775744646395
     }
   },
   "opusProMigrationComplete": true,
@@ -130,6 +217,23 @@
   "githubRepoPaths": {
     "21st-dev/1code": [
       "/workspace"
+    ],
+    "edrlab/thorium-reader": [
+      "/workspace"
+    ],
+    "jackchen-me/open-multi-agent": [
+      "/workspace"
     ]
-  }
+  },
+  "sonnet1m45MigrationComplete": true,
+  "migrationVersion": 11,
+  "opus1mMergeNoticeSeenCount": 6,
+  "showSpinnerTree": false,
+  "metricsStatusCache": {
+    "enabled": false,
+    "timestamp": 1775744929586
+  },
+  "subscriptionNoticeCount": 0,
+  "hasAvailableSubscription": false,
+  "lastOnboardingVersion": "2.1.90"
 }

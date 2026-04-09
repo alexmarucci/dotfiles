@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitLab Address Comments"
+  short_description: Address comments in a GitLab MR review"
+  default_prompt: "Address all actionable GitLab MR review comments in this branch and summarise the updates."

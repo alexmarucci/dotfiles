@@ -1,5 +1,4 @@
 {
-  "apiKeyHelper": "export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic",
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "f3a53dd6b51d4e358f82954589c5095f.bUIA3Xf2OkFADEyv",
     "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
@@ -9,23 +8,38 @@
     "API_TIMEOUT_MS": "3000000",
     "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
   },
-  "permissions": {
-    "allow": [
-      "Bash(terraform validate:*)",
-      "Bash(terraform fmt:*)",
-      "Bash(ls:*)",
-      "Read(./.env.sample)",
-      "Bash(claude rename:*)",
-      "WebFetch(domain:gitlab.com)"
+  "includeCoAuthoredBy": false,
+  "model": "opus[1m]",
+  "hooks": {
+    "PostToolUseFailure": [
+      {
+        "matcher": "Read|Write|Edit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/nono-hook.sh"
+          }
+        ]
+      }
     ],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(./secrets/**)",
-      "Read(./config/credentials.json)",
-      "Read(./build)"
+    "PreToolUse": [],
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
     ],
-    "defaultMode": "acceptEdits"
+    "PermissionRequest": [],
+    "Stop": []
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "input=$(cat); used=$(echo \"$input\" | jq -r '.context_window.used_percentage // empty'); [ -n \"$used\" ] && printf \"ctx: %.0f%%\" \"$used\" || echo \"\""
   },
   "enabledPlugins": {
     "superpowers@superpowers-marketplace": true,
@@ -44,5 +58,20 @@
     "excludedDomains": [
       "gitlab.com"
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "autoMode": {
+    "environment": [],
+    "allow": [
+      "Allow any read-only tools and commands, all commands that retrieve data are allowed, any commands that write files in the current directory are allowed, any commands are deem safe if anchillary to the task being performed. Any script executions inside my .claude/skills that I authored are safe to execute."
+    ],
+    "soft_deny": [
+      "Deny any command that attempt to send data to the internet, including git push, terraform apply and so on. All commands that attempt to send data remotely are strictly disallowed and NOT allowed."
+    ],
+    "twoStageClassifier": true
+  },
+  "skipAutoPermissionPrompt": true
 }

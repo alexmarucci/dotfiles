@@ -1,1 +1,17 @@
+node_modules
 .nvimlog
+claude/teams
+claude/tasks
+claude/shell-snapshots
+claude/statsig
+claude/sessions
+claude/projects
+claude/plugins
+claude/plans
+claude/paste-cache
+claude/graveyard
+claude/file-history
+claude/docs
+claude/debug
+claude/backups
+claude/cache

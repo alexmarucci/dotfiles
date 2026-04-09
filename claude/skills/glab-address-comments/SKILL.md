@@ -1,8 +1,15 @@
 ---
-description: Fixes MR comments by fetching, analysing, and creating actionable plans for each comment
+name: glab-address-comments
+description: Help address review/issue comments on the open GitLab MR for the current branch using glab CLI;
+metadata:
+  short-description: Address comments in a GitLab MR review
 ---
 
-# Fix MR Comments Workflow
+# MR Comment Handler
+
+Guide to find the open MR for the current branch and address its comments with glab CLI. Run all `glab` commands with elevated network access.
+
+Prereq: If sandboxing blocks `glab` commands, rerun it with `sandbox_permissions=require_escalated`.
 
 ## Step 1: Get MR Details
 Ask user for the MR ID if not provided in the command:
@@ -13,11 +20,11 @@ Ask user for the MR ID if not provided in the command:
 Execute the following command to fetch human comments (excluding bots and system notes):
 
 ```bash
-glab mr view {MR_ID} --unresolved -F json | jq '[.Discussions[] | .notes[] | select(
+glab mr view {MR_ID} -c -F json | jq '.Notes | map(select(
     ((.author.username // "" | test("bot"; "i") | not) or (.author.email // "" | length > 0)) and
     (.system // false | not) and
     (.type | IN("DiffNote", "DiscussionNote"))
-  )]' > {MR_ID}_comments.json
+  ))' > {MR_ID}_comments.json
 ```
 
 ## Step 3: Analyse Comments
@@ -55,12 +62,8 @@ Would you like me to proceed with implementing these changes?"
 Only after confirmation, use superpowers:receiving-code-review skill for implementing
 the changes. 
 
-Use team agents. If the user confirmed, only then Spawn teammates for each comment. 
-use the general-purpose agent with the superpowers:receiving-code-review skill for implementing the tasks. 
-Each agent is responsible for one Comment only.
-
-Keep a maximum of 2 agents in parallel, wait for their completion before
-continuing.
+If the user confirmed, only then Spawn parallel sub-tasks for each comment. 
+use the general-purpose agent with the superpowers:receiving-code-review skill for implementing the tasks. Each agent is responsible for one Comment only.
 
 ## Notes:
 - Skip comments that are:

@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "lastComputedDate": "2026-03-31",
+  "dailyActivity": [
+    {
+      "date": "2026-01-23",
+      "messageCount": 324,
+      "sessionCount": 1,
+      "toolCallCount": 80
+    },
+    {
+      "date": "2026-01-29",
+      "messageCount": 285,
+      "sessionCount": 2,
+      "toolCallCount": 52
+    },
+    {
+      "date": "2026-01-30",
+      "messageCount": 25,
+      "sessionCount": 2,
+      "toolCallCount": 5
+    },
+    {
+      "date": "2026-02-05",
+      "messageCount": 564,
+      "sessionCount": 1,
+      "toolCallCount": 20
+    },
+    {
+      "date": "2026-02-09",
+      "messageCount": 961,
+      "sessionCount": 2,
+      "toolCallCount": 54
+    },
+    {
+      "date": "2026-02-16",
+      "messageCount": 172,
+      "sessionCount": 1,
+      "toolCallCount": 29
+    },
+    {
+      "date": "2026-02-17",
+      "messageCount": 441,
+      "sessionCount": 2,
+      "toolCallCount": 99
+    },
+    {
+      "date": "2026-02-20",
+      "messageCount": 336,
+      "sessionCount": 1,
+      "toolCallCount": 22
+    },
+    {
+      "date": "2026-02-23",
+      "messageCount": 108,
+      "sessionCount": 1,
+      "toolCallCount": 42
+    },
+    {
+      "date": "2026-02-24",
+      "messageCount": 67,
+      "sessionCount": 1,
+      "toolCallCount": 20
+    },
+    {
+      "date": "2026-03-02",
+      "messageCount": 2770,
+      "sessionCount": 10,
+      "toolCallCount": 573
+    },
+    {
+      "date": "2026-03-04",
+      "messageCount": 364,
+      "sessionCount": 4,
+      "toolCallCount": 84
+    },
+    {
+      "date": "2026-03-19",
+      "messageCount": 295,
+      "sessionCount": 1,
+      "toolCallCount": 50
+    },
+    {
+      "date": "2026-03-24",
+      "messageCount": 88,
+      "sessionCount": 3,
+      "toolCallCount": 11
+    },
+    {
+      "date": "2026-03-31",
+      "messageCount": 1258,
+      "sessionCount": 3,
+      "toolCallCount": 295
+    }
+  ],
+  "dailyModelTokens": [
+    {
+      "date": "2026-03-02",
+      "tokensByModel": {
+        "glm-5": 17353
+      }
+    },
+    {
+      "date": "2026-03-31",
+      "tokensByModel": {
+        "glm-5.1": 173107
+      }
+    }
+  ],
+  "modelUsage": {
+    "glm-4.7": {
+      "inputTokens": 0,
+      "outputTokens": 0,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0,
+      "contextWindow": 0,
+      "maxOutputTokens": 0
+    },
+    "glm-5": {
+      "inputTokens": 17290,
+      "outputTokens": 63,
+      "cacheReadInputTokens": 155904,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0,
+      "contextWindow": 0,
+      "maxOutputTokens": 0
+    },
+    "glm-5.1": {
+      "inputTokens": 169033,
+      "outputTokens": 4074,
+      "cacheReadInputTokens": 287424,
+      "cacheCreationInputTokens": 0,
+      "webSearchRequests": 0,
+      "costUSD": 0,
+      "contextWindow": 0,
+      "maxOutputTokens": 0
+    }
+  },
+  "totalSessions": 35,
+  "totalMessages": 8058,
+  "longestSession": {
+    "sessionId": "3b80f1a0-0496-40b1-9011-8eaa758711be",
+    "duration": 435867302,
+    "messageCount": 324,
+    "timestamp": "2026-01-23T14:56:34.354Z"
+  },
+  "firstSessionDate": "2026-01-23T14:56:34.354Z",
+  "hourCounts": {
+    "9": 1,
+    "10": 1,
+    "11": 2,
+    "12": 2,
+    "13": 1,
+    "14": 3,
+    "15": 6,
+    "16": 4,
+    "17": 7,
+    "18": 2,
+    "21": 5,
+    "22": 1
+  }
+}
