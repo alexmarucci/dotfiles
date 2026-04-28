@@ -63,6 +63,7 @@ Keep a maximum of 2 agents in parallel, wait for their completion before
 continuing.
 
 ## Notes:
+- NEVER commit or push changes or comments to the MR
 - Skip comments that are:
   - Acknowledgements ("Thanks!", "LGTM")
   - Questions already answered

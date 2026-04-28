@@ -1,0 +1,6 @@
+# Managed by pi-less-yolo — do not edit by hand.
+# Source repo: /Users/alessio/projects/hacks/pi-less-yolo
+# Re-run `mise run install` from that directory to update this path.
+
+[task_config]
+includes = ["/Users/alessio/projects/hacks/pi-less-yolo/tasks"]

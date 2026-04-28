@@ -2,14 +2,18 @@
   "env": {
     "ANTHROPIC_AUTH_TOKEN": "f3a53dd6b51d4e358f82954589c5095f.bUIA3Xf2OkFADEyv",
     "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-4.5-air",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-4.7",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-4.7",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "glm-5-turbo",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "glm-5.1",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "glm-5.1",
     "API_TIMEOUT_MS": "3000000",
-    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
   },
   "includeCoAuthoredBy": false,
-  "model": "opus[1m]",
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "sonnet[1m]",
   "hooks": {
     "PostToolUseFailure": [
       {
@@ -34,8 +38,39 @@
         ]
       }
     ],
-    "PermissionRequest": [],
-    "Stop": []
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Blow.aiff"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/alessio/projects/hacks/cc-echo/claude-notify/hooks/permission-hook.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /Users/alessio/projects/hacks/cc-echo/claude-notify/hooks/notify.sh Stop"
+          }
+        ]
+      }
+    ]
   },
   "statusLine": {
     "type": "command",
@@ -60,18 +95,14 @@
     ]
   },
   "skipDangerousModePermissionPrompt": true,
-  "permissions": {
-    "defaultMode": "auto"
-  },
+  "skipAutoPermissionPrompt": true,
   "autoMode": {
-    "environment": [],
     "allow": [
       "Allow any read-only tools and commands, all commands that retrieve data are allowed, any commands that write files in the current directory are allowed, any commands are deem safe if anchillary to the task being performed. Any script executions inside my .claude/skills that I authored are safe to execute."
     ],
     "soft_deny": [
       "Deny any command that attempt to send data to the internet, including git push, terraform apply and so on. All commands that attempt to send data remotely are strictly disallowed and NOT allowed."
     ],
-    "twoStageClassifier": true
-  },
-  "skipAutoPermissionPrompt": true
+    "environment": []
+  }
 }

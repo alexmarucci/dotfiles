@@ -210,6 +210,12 @@ eval "$(zoxide init zsh)"
 # alias cd="z"
 alias d="z"
 
+# Alias go lang
+alias golang=/usr/local/go/bin/go
+
+# Go libraries
+PATH="$(golang env GOPATH)/bin:$PATH"
+
 # Docker Login 
 local is_logged_in=$(grep 'registry.gitlab.com' ~/.docker/config.json)
 

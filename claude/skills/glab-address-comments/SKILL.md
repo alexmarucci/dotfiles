@@ -20,11 +20,11 @@ Ask user for the MR ID if not provided in the command:
 Execute the following command to fetch human comments (excluding bots and system notes):
 
 ```bash
-glab mr view {MR_ID} -c -F json | jq '.Notes | map(select(
+glab mr view {MR_ID} -c -F json | jq '[.Discussions[] | .notes[] | select(
     ((.author.username // "" | test("bot"; "i") | not) or (.author.email // "" | length > 0)) and
     (.system // false | not) and
     (.type | IN("DiffNote", "DiscussionNote"))
-  ))' > {MR_ID}_comments.json
+  )]' > {MR_ID}_comments.json
 ```
 
 ## Step 3: Analyse Comments

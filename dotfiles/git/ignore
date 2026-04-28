@@ -2,6 +2,11 @@
 CLAUDE.md
 
 .ignore
+**/.trees
 .trees
+.leann
 
 **/.claude/settings.local.json
+
+.aletheia
+**/.aletheia

@@ -1,5 +1,6 @@
 [core]
 	pager = delta
+	excludesFile = /Users/alessio/.config/git/ignore
 
 [interactive]
     diffFilter = delta --color-only --keep-plus-minus-markers
@@ -17,3 +18,5 @@
 	email = alessio.marucci@doxy.me
 	name = Alessio Marucci
 	signingkey = 1F4B555A66319E60
+[safe]
+	directory = /Users/alessio/dyad-apps/*
