@@ -70,7 +70,7 @@ After all subagents complete, provide a summary:
 
 | Action | Command |
 |--------|---------|
-| List MRs awaiting review | `glab mr list --reviewer=@me --state=opened` |
+| List MRs awaiting review | `scripts/mr-list-awaiting-review.js` |
 | View MR details | `glab mr view <ID>` |
 | Get MR diff | `glab mr diff <ID>` |
 | Get MR comments | `glab api projects/:id/merge_requests/<IID>/notes` |

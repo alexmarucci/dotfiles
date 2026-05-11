@@ -125,21 +125,14 @@ Verify the hypothesis makes sense by reading the relevant files in the diff.
 
 3. **Run relevant tests locally** if possible before committing.
 
-## Step 4: Commit and Push
-
-Use the `/commit` skill to create a commit. Message format:
+## Step 4: Confirm to user 
+Confirm the user the fixes have been made
 
 ```
+
 fix: resolve <job-name> pipeline failure
 
 <brief description of what was wrong and what changed>
-```
-
-Then push:
-
-```bash
-git push origin $SOURCE_BRANCH
-```
 
 ## Step 5: Monitor Pipeline
 
