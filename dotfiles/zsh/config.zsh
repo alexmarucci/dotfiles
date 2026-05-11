@@ -235,3 +235,6 @@ RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Activate Mise
 eval "$(mise activate zsh)"
+
+export ZHIPU_BASE_URL="https://api.z.ai/api/coding/paas/v4"
+export USER_TYPE="ant"

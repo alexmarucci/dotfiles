@@ -13,7 +13,7 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "sonnet[1m]",
+  "model": "opus[1m]",
   "hooks": {
     "PostToolUseFailure": [
       {
@@ -27,17 +27,6 @@
       }
     ],
     "PreToolUse": [],
-    "Notification": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Blow.aiff"
-          }
-        ]
-      }
-    ],
     "Notification": [
       {
         "matcher": "*",
@@ -98,7 +87,7 @@
   "skipAutoPermissionPrompt": true,
   "autoMode": {
     "allow": [
-      "Allow any read-only tools and commands, all commands that retrieve data are allowed, any commands that write files in the current directory are allowed, any commands are deem safe if anchillary to the task being performed. Any script executions inside my .claude/skills that I authored are safe to execute."
+      "Allow any read-only tools and commands, all commands that retrieve data are allowed, any commands that write files in the current directory are allowed, any commands are deem safe if anchillary to the task being performed. Any script executions inside my .claude/skills that I authored are safe to execute. Any commands that download and fetch data are allowed"
     ],
     "soft_deny": [
       "Deny any command that attempt to send data to the internet, including git push, terraform apply and so on. All commands that attempt to send data remotely are strictly disallowed and NOT allowed."
