@@ -90,8 +90,12 @@
       "Allow any read-only tools and commands, all commands that retrieve data are allowed, any commands that write files in the current directory are allowed, any commands are deem safe if anchillary to the task being performed. Any script executions inside my .claude/skills that I authored are safe to execute. Any commands that download and fetch data are allowed"
     ],
     "soft_deny": [
-      "Deny any command that attempt to send data to the internet, including git push, terraform apply and so on. All commands that attempt to send data remotely are strictly disallowed and NOT allowed."
+      "Deny any command that attempt to send data to the internet, including git push, terraform apply and so on. All commands that attempt to send data remotely are strictly disallowed and NOT allowed. All datadog 'write' commands are denied, including any 'pip' command that writes data. Any NOT read-only pup commands are strictly forbidden."
     ],
     "environment": []
-  }
+  },
+  "editorMode": "vim",
+  "verbose": true,
+  "autoCompactEnabled": false,
+  "teammateMode": "auto"
 }

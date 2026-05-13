@@ -117,6 +117,46 @@ If FAILED, review:
 
 Verify the hypothesis makes sense by reading the relevant files in the diff.
 
+### Search Datadog Logs (when job trace is insufficient)
+
+When the failed job involves a deployment, migration, or ECS task, the GitLab job trace often only shows a high-level error (e.g. "Migration task exit code: 1"). The actual application error lives in Datadog logs.
+
+1. **Identify search parameters** from the job trace:
+   - **Service name**: from the task definition or job name (e.g. `doxyme-api-extensions-v2-migrations`)
+   - **Environment**: from the job name (e.g. `tfcdsandbox` from `deploy_api-extensions_tfcdsandbox`)
+   - **Time range**: from the job start/finish timestamps
+   - **Container ID**: the Datadog `container_id` tag format is `{task-id}-{container-id}` (e.g. `170ba971f8de4f438121db5f783a5d8e-0799205550`). The first part identifies the ECS task, the second part identifies a specific container within that task. Findable from the ECS task details in the AWS console or CLI, search for container runtime id. Use as a precise filter to isolate logs from that exact container instance. 
+
+2. **Search using the `logs` skill** (or `dd-logs`):
+
+   ```bash
+   pup logs search \
+     --query="service:<service-name> env:<environment>" \
+     --from="<job-start-time>" \
+     --to="<job-finish-time>" \
+     --limit=100
+   ```
+
+3. **If the user provides a container_id**, search with it for exact log isolation:
+   ```bash
+   pup logs search \
+     --query="container_id:<container-id>" \
+     --from="<job-start-time>" \
+     --to="<job-finish-time>"
+   ```
+
+4. **Also search AWS CloudWatch** if Datadog has no results:
+   ```bash
+   aws logs describe-log-groups --log-group-name-prefix "/ecs/<cluster-name>"
+   aws logs filter-log-events --log-group-name "<log-group>" --start-time <epoch-ms> --end-time <epoch-ms>
+   ```
+
+5. **Common failure patterns in deployment logs**:
+   - `EHOSTUNREACH` / `ECONNREFUSED` → database or service unreachable (check RDS/SG/VPC)
+   - Migration SQL errors → schema issues, check migration files in the diff
+   - OOM killed → resource limits, check container memory settings
+   - Timeout → network or dependency issues
+
 ## Step 3: Fix
 
 1. **Use `superpowers:systematic-debugging`** if the root cause isn't obvious.

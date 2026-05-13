@@ -1,11 +1,11 @@
 {
-  "numStartups": 63,
+  "numStartups": 67,
   "hasSeenTasksHint": true,
   "tipsHistory": {
     "new-user-warmup": 7,
     "plan-mode-for-complex-tasks": 63,
     "terminal-setup": 63,
-    "memory-command": 49,
+    "memory-command": 64,
     "theme-command": 62,
     "colorterm-truecolor": 62,
     "status-line": 27,
@@ -18,12 +18,12 @@
     "drag-and-drop-images": 63,
     "double-esc-code-restore": 63,
     "continue": 63,
-    "shift-tab": 54,
+    "shift-tab": 64,
     "image-paste": 63,
     "ultrathink-keyword": 2,
-    "web-app": 50,
-    "mobile-app": 50,
-    "custom-agents": 51,
+    "web-app": 65,
+    "mobile-app": 65,
+    "custom-agents": 67,
     "permissions": 61,
     "rename-conversation": 57,
     "custom-commands": 57,
@@ -34,7 +34,8 @@
     "ide-upsell-external-terminal": 53,
     "git-worktrees": 61
   },
-  "promptQueueUseCount": 100,
+  "promptQueueUseCount": 103,
+  "showExpandedTodos": true,
   "cachedStatsigGates": {
     "tengu_prompt_suggestion": false
   },
@@ -78,19 +79,6 @@
       "hasClaudeMdExternalIncludesApproved": false,
       "hasClaudeMdExternalIncludesWarningShown": false,
       "exampleFiles": [
-        "generator.js",
-        "docker.ts",
-        "aws.ts",
-        "index.ts",
-        "s3migrator.ts",
-        "docker.spec.ts",
-        "aws.ts",
-        "project.json",
-        "room.js",
-        "user.js",
-        "stripe-service.js",
-        "room.json",
-        "growthBookFeatureFlags.js",
         "DayEntry.swift",
         "CalorieStore.swift",
         "MeView.swift",
@@ -104,72 +92,33 @@
         "version": null,
         "packageManager": null
       },
-      "exampleFilesGeneratedAt": 1776680952450,
-      "lastCost": 24.09524899999998,
-      "lastAPIDuration": 5611874,
-      "lastAPIDurationWithoutRetries": 5609967,
-      "lastToolDuration": 575124,
-      "lastDuration": 72205974,
-      "lastLinesAdded": 5754,
-      "lastLinesRemoved": 715,
-      "lastTotalInputTokens": 1236905,
-      "lastTotalOutputTokens": 142250,
+      "exampleFilesGeneratedAt": 1777982947150,
+      "lastCost": 0,
+      "lastAPIDuration": 0,
+      "lastAPIDurationWithoutRetries": 0,
+      "lastToolDuration": 0,
+      "lastDuration": 14313,
+      "lastLinesAdded": 0,
+      "lastLinesRemoved": 0,
+      "lastTotalInputTokens": 0,
+      "lastTotalOutputTokens": 0,
       "lastTotalCacheCreationInputTokens": 0,
-      "lastTotalCacheReadInputTokens": 28708948,
+      "lastTotalCacheReadInputTokens": 0,
       "lastTotalWebSearchRequests": 0,
-      "lastModelUsage": {
-        "glm-5.1[1m]": {
-          "inputTokens": 711079,
-          "outputTokens": 113528,
-          "cacheReadInputTokens": 26380800,
-          "cacheCreationInputTokens": 0,
-          "webSearchRequests": 0,
-          "costUSD": 19.583994999999984
-        },
-        "glm-5-turbo": {
-          "inputTokens": 197399,
-          "outputTokens": 17046,
-          "cacheReadInputTokens": 608852,
-          "cacheCreationInputTokens": 0,
-          "webSearchRequests": 0,
-          "costUSD": 1.717571
-        },
-        "claude-opus-4-6": {
-          "inputTokens": 328427,
-          "outputTokens": 11676,
-          "cacheReadInputTokens": 1719296,
-          "cacheCreationInputTokens": 0,
-          "webSearchRequests": 0,
-          "costUSD": 2.793683
-        }
-      },
-      "lastSessionId": "1f0a3692-7def-472d-90dd-b12086e8b696",
+      "lastModelUsage": {},
+      "lastSessionId": "40c7c1a4-b148-4eda-bf8d-52315b3aaf18",
       "hasCompletedProjectOnboarding": true,
       "lastSessionMetrics": {
-        "frame_duration_ms_count": 86544,
-        "frame_duration_ms_min": 0.030584000051021576,
-        "frame_duration_ms_max": 139.74174999818206,
-        "frame_duration_ms_avg": 1.960358582918923,
-        "frame_duration_ms_p50": 1.8162505001528189,
-        "frame_duration_ms_p95": 3.5906544493511303,
-        "frame_duration_ms_p99": 5.147935909978114,
-        "pre_tool_hook_duration_ms_count": 587,
-        "pre_tool_hook_duration_ms_min": 0,
-        "pre_tool_hook_duration_ms_max": 7,
-        "pre_tool_hook_duration_ms_avg": 0.6201022146507666,
-        "pre_tool_hook_duration_ms_p50": 0,
-        "pre_tool_hook_duration_ms_p95": 3,
-        "pre_tool_hook_duration_ms_p99": 5.139999999999986,
-        "hook_duration_ms_count": 484,
-        "hook_duration_ms_min": 0,
-        "hook_duration_ms_max": 1,
-        "hook_duration_ms_avg": 0.03305785123966942,
-        "hook_duration_ms_p50": 0,
-        "hook_duration_ms_p95": 0,
-        "hook_duration_ms_p99": 1
+        "frame_duration_ms_count": 15,
+        "frame_duration_ms_min": 0.7026250000001255,
+        "frame_duration_ms_max": 39.961124999999925,
+        "frame_duration_ms_avg": 4.589352800000029,
+        "frame_duration_ms_p50": 1.5646250000008877,
+        "frame_duration_ms_p95": 19.760524999999852,
+        "frame_duration_ms_p99": 35.921004999999894
       },
-      "lastFpsAverage": 3.29,
-      "lastFpsLow1Pct": 169.81
+      "lastFpsAverage": 1.15,
+      "lastFpsLow1Pct": 25.02
     }
   },
   "officialMarketplaceAutoInstallAttempted": true,
@@ -205,8 +154,8 @@
       "lastUsedAt": 1775138171782
     },
     "aletheia": {
-      "usageCount": 23,
-      "lastUsedAt": 1777028914854
+      "usageCount": 24,
+      "lastUsedAt": 1777980484118
     }
   },
   "opusProMigrationComplete": true,
@@ -228,7 +177,7 @@
   "showSpinnerTree": false,
   "metricsStatusCache": {
     "enabled": false,
-    "timestamp": 1777026374572
+    "timestamp": 1778231611071
   },
   "subscriptionNoticeCount": 0,
   "hasAvailableSubscription": false,
