@@ -1,5 +1,6 @@
 node_modules
 .nvimlog
+claude/.claude.json
 claude/backups
 claude/cache
 claude/debug
