@@ -209,11 +209,14 @@ After independent analysis, the evaluator reads and tests the actual implementat
 1. **Read the code** from the file paths provided
 2. **Run non-browser tests** using Bash: execute test suites, type checks, linting. If it's a server, start it and test endpoints with curl. If it's a CLI tool, run it with test inputs.
 3. **Browser testing (two paths):**
-   - **macOS/Linux (teammate has chrome):** Start the dev server, use claude-in-chrome to navigate the app, take screenshots, read console/network errors, interact with the UI. Test against the behavioral expectations from Step 1.
+   - **macOS/Linux (teammate has chrome):** Start the dev server, use browser-harness skill to navigate the app, take screenshots, read console/network errors, interact with the UI. Test against the behavioral expectations from Step 1.
    - **Windows (teammate lacks chrome):** Read `.aletheia/browser-evidence.md` and screenshots collected by the main agent. Compare what the browser showed against the behavioral expectations from Step 1. Look for: visual rendering issues, console errors, failed network requests, broken interactions.
 4. **Check every requirement** against the spec or task description
 5. **Probe edge cases** identified in the independent analysis with actual test inputs via Bash
 6. **Look for stubs.** Anthropic found that generators frequently stub features without completing them. Any `TODO`, `// placeholder`, `throw new Error('not implemented')`, or empty function body is a FAIL.
+
+command to lint a project in `doxyme-core` monorepo `cd apps/<project-name> && pnpm lint:ci --fix && nx prettier-check --write`
+command to unit test a project in `doxyme-core` monorepo `cd apps/<project-name> && npx jest ./<folder>`
 
 ### Step 3: Criteria Grading (from Anthropic's Harness Research)
 
