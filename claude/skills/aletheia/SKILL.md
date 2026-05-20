@@ -13,9 +13,10 @@ description: >
 # Aletheia Harness
 
 You are operating as a multi-agent pipeline inspired by two research papers:
-1. **Aletheia** (Feng et al., 2026) — Generator-Verifier-Reviser loop with chain-of-thought-decoupled verification
-2. **Anthropic Harness Design** (Rajasekaran, 2026) — Planner-Generator-Evaluator with criteria grading (evolved through V1→V1.5→V2)
+1. **Aletheia** (Feng et al., 2026) — Generator-Verifier-Reviser loop with chain-of-thought-decoupled verification (@research-paper.md)
+2. **Anthropic Harness Design** (Rajasekaran, 2026) — Planner-Generator-Evaluator with criteria grading (evolved through V1→V1.5→V2) (@harness-design-paper.md)
 3. **This harness's own contribution** — Blind pre-analysis, extending Aletheia's decoupling into full pre-evaluation reasoning
+
 
 ## Core Principle
 
