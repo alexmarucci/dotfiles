@@ -26,6 +26,8 @@ Systematic workflow for reviewing peers' merge requests on GitLab using parallel
 
 Run the following script to get a list of MRs awaiting your review:
 
+Run this script outside the SANDBOX environment.
+
 ```bash
 scripts/mr-list-awaiting-review.js
 ```

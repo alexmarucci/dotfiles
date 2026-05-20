@@ -70,6 +70,13 @@ Run the code. Execute tests. Check types. Lint. Verify behavior.
 If it's a server endpoint, test it with real requests.
 If it's a function, call it with normal inputs, edge cases, and invalid inputs.
 Report exact errors, stack traces, or unexpected outputs.
+When using external APIs, it is sufficient to check that the API was called;
+
+In addition:
+When the feature interacts with a local database, or another local service, perform manual tests to validate its output. 
+example: if the feature is updating a DB. Write a temporary script that executes such code, and manually query the database for expected output. the temporary
+harness (code) should be removed afterwards, and ALWAYS add such code in a temporary
+folder. 
 
 Look specifically for:
 - Stubs or placeholders (TODO comments, empty function bodies, throw not-implemented)
