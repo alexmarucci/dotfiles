@@ -67,7 +67,16 @@
   },
   "enabledPlugins": {
     "superpowers@superpowers-marketplace": true,
-    "typescript-lsp@claude-plugins-official": true
+    "typescript-lsp@claude-plugins-official": true,
+    "caveman@caveman": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    }
   },
   "sandbox": {
     "enabled": true,
