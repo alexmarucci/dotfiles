@@ -4,6 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Be extremely concise. Sacrifise grammar and punctuation for the sake of clarity and conciseness.
 
+Before scheduling any CronTask, cron jobs, or scheduled task, or anything time
+related, always check the local time: Bash(date '+%H:%M %d/%m/%Y') 
+
 ## General Rules and Preferences
 
 Style guide files for different languages to follow: 

@@ -72,6 +72,9 @@ If it's a function, call it with normal inputs, edge cases, and invalid inputs.
 Report exact errors, stack traces, or unexpected outputs.
 When using external APIs, it is sufficient to check that the API was called;
 
+command to lint a project in `doxyme-core` monorepo `cd apps/<project-name> && pnpm lint:ci --fix && nx prettier-check --write`
+command to unit test a project in `doxyme-core` monorepo `cd apps/<project-name> && npx jest ./<folder>`
+
 In addition:
 When the feature interacts with a local database, or another local service, perform manual tests to validate its output. 
 example: if the feature is updating a DB. Write a temporary script that executes such code, and manually query the database for expected output. the temporary
@@ -84,6 +87,7 @@ Look specifically for:
 - Type mismatches
 - Unhandled promise rejections or uncaught exceptions
 - Logic errors that only manifest with specific inputs
+- Long tests files with over (600 lines) should be split into multiple files
 
 ## STEP 4: CRITERIA GRADING
 

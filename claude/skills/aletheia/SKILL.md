@@ -38,7 +38,8 @@ Parse `$ARGUMENTS` to determine the mode:
 This harness is designed for **Claude Code** (CLI/desktop/web) running on an Anthropic subscription, not API calls. Key implications:
 
 - **The evaluator runs as a teammate**, not a regular subagent. Teammates are independent Claude Code sessions spawned via the Agent Teams system (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS`). Unlike subagents, teammates load the same project context as a regular session — including MCP servers, CLAUDE.md, and skills.
-- **Teammates CAN access MCP tools** like `claude-in-chrome` for live browser testing. However, there is a **known Windows bug** (anthropics/claude-code#30499) where team members cannot access chrome MCP tools. On Windows, the main agent collects browser evidence and the teammate evaluates it from files. On macOS/Linux, the teammate can use chrome directly.
+- **Teammates CAN access the browser** Use `agent-browser` skill to use the
+  browser
 - **Regular subagents** (spawned via the `Agent` tool without teams) have access to Bash, Read, Write, Edit, Glob, Grep — but NOT MCP tools. Use these for focused subtasks within a phase, not for the evaluator.
 - **Context compaction** is handled automatically by Claude Code. Manual context resets are rarely needed.
 - **Teammate communication** uses the mailbox system (SendMessage) and shared files in `.aletheia/`. The evaluator teammate writes its verdict to `.aletheia/evaluation.md` and sends a summary back via mailbox.
@@ -63,6 +64,8 @@ This harness is designed for **Claude Code** (CLI/desktop/web) running on an Ant
 3. **Be ambitious about scope** but stay focused on product context and high-level design
 4. **Do NOT specify granular implementation details.** From Anthropic's research: "If the planner tried to specify granular technical details upfront and got something wrong, the errors in the spec would cascade into the downstream implementation."
 5. Write the spec to a file: `.aletheia/spec.md`
+6. User the-thinker agent to read the `.aletheia/spec.md` and challenge the plan, its role is to review the plan and provide suggestions.
+7. Implement the suggestions from @deeep, IF any.
 6. Present the spec to the user for approval before proceeding
 
 ---
@@ -353,3 +356,28 @@ Anthropic identified "context anxiety" — premature wrap-up behavior as the con
 7. **Know when to skip phases.** Simple tasks don't need the full pipeline. "Every component in a harness encodes an assumption about what the model can't do on its own." (Rajasekaran, 2026)
 
 8. **The evaluator prompt needs ongoing calibration.** Read `.aletheia/evaluation.md` outputs to identify failure patterns. Rajasekaran: "Out of the box, Claude is a poor QA agent." Adjust the evaluator's strictness and focus areas based on observed performance — this is iterative tuning, not one-shot design. See `evaluator.md` for few-shot calibration examples.
+
+## PHASE 5:
+
+After completion of this workflow, you want to spin up a teammate using the
+agent team feature. if you can assign a label, name it "indie-review"
+
+This agent will be given the original prompt, with the same docs and context,
+the only difference is that this agent will be asked to review the code that
+has been generated, rather than implementing code.
+
+Example:
+
+```
+We have implemented <feature-name>, your task is to review the code that has been generated.
+<provide specific elements to review, based on initial requirements>
+<e.g. if it's a migration, ask to compare the original code, looking for edge cases,
+and differences in functionality>
+
+Documents:
+@plan.md
+```
+
+Wait for its response, and fix anything spotted during the review,
+go back and forth until this agent approves the changes.
+
