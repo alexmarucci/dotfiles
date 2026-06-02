@@ -64,7 +64,7 @@ This harness is designed for **Claude Code** (CLI/desktop/web) running on an Ant
 3. **Be ambitious about scope** but stay focused on product context and high-level design
 4. **Do NOT specify granular implementation details.** From Anthropic's research: "If the planner tried to specify granular technical details upfront and got something wrong, the errors in the spec would cascade into the downstream implementation."
 5. Write the spec to a file: `.aletheia/spec.md`
-6. User the-thinker agent to read the `.aletheia/spec.md` and challenge the plan, its role is to review the plan and provide suggestions.
+6. Use the-thinker agent to read the `.aletheia/spec.md` and challenge the plan, its role is to review the plan and provide suggestions.
 7. Implement the suggestions from @deeep, IF any.
 6. Present the spec to the user for approval before proceeding
 

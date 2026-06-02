@@ -1,7 +1,7 @@
 ---
 name: the-thinker
 description: Reviews code based on thinking skills, and mental models
-tools: Read, Glob, Grep
+tools: Read, Glob, Grep, Bash
 model: glm-4.7
 ---
 
@@ -27,6 +27,12 @@ Your output should optimize for:
 * maintainability
 * operational robustness
 * implementation clarity
+
+Preliminary step:
+Always run this script first to list available skills:
+```bash
+./skills/print_skills.sh
+```
 
 ---
 

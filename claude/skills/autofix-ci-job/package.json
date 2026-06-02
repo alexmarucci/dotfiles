@@ -1,0 +1,9 @@
+{
+  "name": "autofix-ci-job-skill",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Claude Code skill for automatically fixing failing CI jobs",
+  "dependencies": {
+    "axios": "^1.7.0"
+  }
+}
